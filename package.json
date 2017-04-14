@@ -1,10 +1,11 @@
 {
   "name": "marksy",
-  "version": "0.2.4",
+  "version": "0.3.0",
   "description": "Convert markdown into react components",
   "main": "lib/index.js",
   "scripts": {
     "start": "webpack-dev-server --devtool eval-source-map --progress --colors --content-base build",
+    "prepublish": "npm run build",
     "build": "BABEL_ENV=production babel src/ --out-dir=lib/ -s",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -37,6 +38,7 @@
     "webpack-dev-server": "^2.4.2"
   },
   "dependencies": {
+    "babel-standalone": "^6.24.0",
     "he": "^1.1.1",
     "marked": "^0.3.6"
   }

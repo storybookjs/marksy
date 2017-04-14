@@ -4,13 +4,15 @@ import React from 'react'
 import {render} from 'react-dom'
 import marksy from 'marksy'
 
-const HalfColumn = {
-  width: '50%',
-  verticalAlign: 'top',
-  display: 'inline-block'
-};
-
 const compile = marksy({
+  components: {
+    MyComponent (props) {
+      return <div style={{color: props.color}}>{props.children}</div>
+    },
+    AnotherComponent () {
+      return <h3>Whatever</h3>
+    }
+  },
   h1 (props) {
     return <h1 style={{color: 'red'}}>{props.children}</h1>
   }
@@ -31,7 +33,11 @@ class App extends React.Component {
   render () {
     return (
       <div>
-        <div style={HalfColumn}>
+        <div style={{
+          width: '50%',
+          verticalAlign: 'top',
+          display: 'inline-block'
+        }}>
           {this.state.tree}
         </div>
         <textarea

@@ -11,7 +11,7 @@ module.exports = {
   },
   resolve: {
     alias: {
-      'marksy': sourcePath
+      // 'marksy': sourcePath
     }
   },
   module: {

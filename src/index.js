@@ -1,10 +1,14 @@
 import React from 'react';
 import marked from 'marked';
 import he from 'he';
+import {transform} from 'babel-standalone';
 import CodeComponent from './CodeComponent';
+
 const renderer = new marked.Renderer();
 
 export function marksy (options = {}) {
+  options.components = options.components || {};
+
   let inlineIds = 0;
   let keys = 0;
   let inlines = {};
@@ -64,13 +68,18 @@ export function marksy (options = {}) {
   };
 
   renderer.html = function (html) {
-      result.push(React.createElement(options.html || function (props) {
-        return (
-          <div dangerouslySetInnerHTML={{__html: props.html}} />
-        )
-      }, {
-          html: html
-      }));
+      try {
+        const code = transform(html, {
+          presets: ['react']
+        }).code;
+        const components = Object.keys(options.components).map(function (key) {
+          return options.components[key];
+        });
+
+        result.push(React.createElement(function () {
+          return new Function('React', ...Object.keys(options.components), `return ${code}`)(React, ...components);
+        }));
+      } catch (e) {}
   };
 
   renderer.heading = function (text, level) {
