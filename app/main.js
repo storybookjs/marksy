@@ -6,23 +6,36 @@ import marksy from 'marksy'
 
 const compile = marksy({
   components: {
-    MyComponent (props) {
-      return <div style={{color: props.color}}>{props.children}</div>
+    Row ({children}) {
+      return <div style={{display: 'flex'}}>{children}</div>
     },
-    AnotherComponent () {
-      return <h3>Whatever</h3>
+    Col ({children}) {
+      return <div style={{flex: '1', padding: '10px', backgroundColor: '#DADADA', border: '1px solid #333'}}>{children}</div>
     }
   },
   h1 (props) {
-    return <h1 style={{color: 'red'}}>{props.children}</h1>
+    return <h1 style={{textDecoration: 'underline'}}>{props.children}</h1>
   }
 })
+
+const demo = `
+# Some blog title
+
+Just need to show you some code first:
+
+${'```js \nconst foo = "bar"\n```'}
+
+<Row>
+  <Col>Need to tell you something over here</Col>
+  <Col>And over here</Col>
+</Row>
+`
 
 class App extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      tree: null
+      tree: compile(demo).tree
     };
   }
   onTextareaChange (event) {
@@ -33,16 +46,19 @@ class App extends React.Component {
   render () {
     return (
       <div>
+        <h1 style={{textAlign: 'center'}}>Marksy demo (a blog service)</h1>
         <div style={{
           width: '50%',
           verticalAlign: 'top',
-          display: 'inline-block'
+          display: 'inline-block',
+          padding: '0 20px'
         }}>
           {this.state.tree}
         </div>
         <textarea
-          style={{width: 500, height: 500}}
+          style={{width: 500, height: 500, border: '1px dashed #DADADA', outline: 'none', padding: '10px'}}
           onChange={(event) => this.onTextareaChange(event)}
+          value={demo}
         ></textarea>
       </div>
     );
