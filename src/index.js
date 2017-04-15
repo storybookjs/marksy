@@ -23,9 +23,9 @@ export function marksy (options = {}) {
       if (inline) {
         return inlines[inline[1]];
       } else {
-  			if (text != '') {
-        	return he.decode(text);
-  			}
+        if (text != '') {
+          return he.decode(text);
+        }
       }
     });
 
