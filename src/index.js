@@ -4,236 +4,88 @@ import he from 'he';
 import {transform} from 'babel-standalone';
 import CodeComponent from './CodeComponent';
 
-const renderer = new marked.Renderer();
-
 export function marksy (options = {}) {
   options.components = options.components || {};
 
-  let inlineIds = 0;
-  let keys = 0;
-  let inlines = {};
-  let result = [];
-  let toc = [];
+  const renderer = new marked.Renderer();
+  const tree = [];
+  const elements = {};
+  let nextElementId = 0;
 
-  // Converts inline IDs to actual elements
-  function createBlockContent (content) {
-    var textWithInlines = content.split(/(\{\{.*?\}\})/);
-    content = textWithInlines.map(function (text) {
-      var inline = text.match(/\{\{(.*)\}\}/);
-      if (inline) {
-        return inlines[inline[1]];
-      } else {
-  			if (text != '') {
-        	return he.decode(text);
-  			}
+function populateInlineContent (content) {
+    const contentArray = content.split(/(\{\{.*?\}\})/);
+    const extractedElements = contentArray.map(function (text) {
+      const elementIdMatch = text.match(/\{\{(.*)\}\}/);
+      if (elementIdMatch) {
+        return elements[elementIdMatch[1]];
+      } else if (text != '') {
+        return he.decode(text);
       }
+
+      return null;
     });
 
-    return content;
+    return extractedElements;
   }
 
-  function getTocPosition (toc, level) {
-    var currentLevel = toc.children;
-    while (true) {
-      if (!currentLevel.length || currentLevel[currentLevel.length - 1].level === level) {
-        return currentLevel;
-      } else {
-        currentLevel = currentLevel[currentLevel.length - 1].children;
-      }
-    }
+  function addElement (tag, props = {}, children = '') {
+    const elementId = nextElementId++;
+
+    elements[elementId] = React.createElement(tag, Object.assign({
+      key: elementId
+    }, props), populateInlineContent(children));
+
+    tree.push(elements[elementId]);
+
+    return `{{${elementId}}}`;
   }
 
-  renderer.code = function (code, language) {
-    var props = {
-      key: keys++,
-      language: language,
-      code: code
-    };
-
-    if (options.code) {
-      result.push(React.createElement(options.code, props));
-    } else {
-      result.push(React.createElement(CodeComponent, props));
-    }
-  };
-
-  renderer.blockquote = function (text) {
-    var count = text.split(/(\{\{.*?\}\})/).filter(function(n){ return n != ""});
-
-    count.forEach(function(){
-      result.pop();
-    });
-
-    result.push(React.createElement(options.blockquote || 'blockquote', {key: keys++}, createBlockContent(text)));
-  };
-
+  renderer.code = (code, language) => addElement('code', {language, code});
+  
   renderer.html = function (html) {
-      try {
-        const code = transform(html, {
-          presets: ['react']
-        }).code;
-        const components = Object.keys(options.components).map(function (key) {
-          return options.components[key];
-        });
-
-        result.push(React.createElement(function () {
-          return new Function('React', ...Object.keys(options.components), `return ${code}`)(React, ...components);
-        }));
-      } catch (e) {}
-  };
-
-  renderer.heading = function (text, level) {
-    var type = 'h' + level;
-    type = options[type] || type;
-    var id = text.replace(/\s/g, '-').toLowerCase();
-    var lastToc = toc[toc.length -1];
-    if (!lastToc || lastToc.level > level) {
-      toc.push({
-        id: id,
-        title: text,
-        level: level,
-        children: []
+    try {
+      const code = transform(html, {
+        presets: ['react']
+      }).code;
+      const components = Object.keys(options.components).map(function (key) {
+        return options.components[key];
       });
-    } else {
-      var tocPosition = getTocPosition(lastToc, level);
-      tocPosition.push({
-        id: id,
-        title: text,
-        level: level,
-        children: []
-      });
-    }
-    var inId = inlineIds++;
-    inlines[inId] = React.createElement(type, {
-      key: keys++,
-      id: id
-    },
-      createBlockContent(text));
-    result.push(inlines[inId]);
-    return '{{' + inId + '}}';
-  };
 
-  renderer.hr = function () {
-    result.push(React.createElement(options.hr || 'hr', {key: keys++}));
+      result.push(React.createElement(function () {
+        return new Function('React', ...Object.keys(options.components), `return ${code}`)(React, ...components);
+      }));
+    } catch (e) {}
   };
+  
+  renderer.paragraph = (text) => addElement('p', null, text);
+  
+  renderer.blockquote = (text) => addElement('blockquote', null, text);
+  
+  renderer.link = (href, title, text) => addElement('a', {href, title}, text);
+  
+  renderer.br = () => addElement('br');
+  
+  renderer.hr = () => addElement('hr');
+  
+  renderer.strong = (text) => addElement('strong', null, text);
+  
+  renderer.del = (text) => addElement('del', null, text);
+  
+  renderer.em = (text) => addElement('em', null, text);
 
-  renderer.list = function (body, ordered) {
-    var id = inlineIds++;
-    inlines[id] = React.createElement(ordered ? options.ol || 'ol' : options.ul || 'ul', {key: keys++}, createBlockContent(body));
-    result.push(inlines[id]);
-    return '{{' + id + '}}';
+  renderer.heading = (text, level) => {
+    const id = text.replace(/\s/g, '-').toLowerCase();
 
-  };
-
-  renderer.listitem = function (text) {
-    var id = inlineIds++;
-    inlines[id] = React.createElement(options.li || 'li', {key: keys++}, createBlockContent(text));
-    return '{{' + id + '}}';
-  };
-
-  renderer.paragraph = function (text) {
-    var id = inlineIds++;
-    inlines[id] = React.createElement(options.p || 'p', {key: keys++}, createBlockContent(text));
-    result.push(inlines[id]);
-    return '{{' + id + '}}';
-  };
-
-  renderer.table = function (header, body) {
-    var id = inlineIds++;
-    inlines[id] =  React.createElement(options.table || 'table', {key: keys++},
-      React.createElement(options.thead || 'thead', null, createBlockContent(header)),
-      React.createElement(options.tbody || 'tbody', null, createBlockContent(body))
-    );
-    result.push(inlines[id]);
-    return '{{' + id + '}}';
-  };
-
-  renderer.thead = function (content) {
-    var id = inlineIds++;
-    inlines[id] = React.createElement(options.thead || 'thead', {key: keys++}, createBlockContent(content));
-    return '{{' + id + '}}';
-  };
-
-  renderer.tbody = function (content) {
-    var id = inlineIds++;
-    inlines[id] = React.createElement(options.tbody || 'tbody', {key: keys++}, createBlockContent(content));
-    return '{{' + id + '}}';
-  };
-
-  renderer.tablerow = function (content) {
-    var id = inlineIds++;
-    inlines[id] = React.createElement(options.tr || 'tr', {key: keys++}, createBlockContent(content));
-    return '{{' + id + '}}';
-  };
-
-  renderer.tablecell = function (content, flags) {
-    var id = inlineIds++;
-    var props =  flags.align ? {className: 'text-' + flags.align} : {key: keys++};
-    inlines[id] = React.createElement(flags.header ? options.th || 'th' : options.td || 'td', props, createBlockContent(content));
-    return '{{' + id + '}}';
-  };
-
-  renderer.link = function (href, title, text) {
-    var id = inlineIds++;
-    inlines[id] = React.createElement(options.a || 'a', {
-      href: href,
-      title: title,
-      key: keys++,
-      target: 'new'
-    }, createBlockContent(text));
-    return '{{' + id + '}}';
-  };
-
-  renderer.strong = function (text) {
-    var id = inlineIds++;
-    inlines[id] = React.createElement(options.strong || 'strong', {key: keys++}, createBlockContent(text));
-    return '{{' + id + '}}';
-  };
-
-  renderer.em = function (text) {
-    var id = inlineIds++;
-    inlines[id] = React.createElement(options.em || 'em', {key: keys++}, createBlockContent(text));
-    return '{{' + id + '}}';
-  };
-
-  renderer.codespan = function (text) {
-    var id = inlineIds++;
-    inlines[id] = React.createElement(options.codespan || 'code', {key: keys++}, he.decode(text));
-    return '{{' + id + '}}';
-  };
-
-  renderer.br = function () {
-    var id = inlineIds++;
-    inlines[id] = React.createElement(options.br || 'br', {key: keys++});
-    return '{{' + id + '}}';
-  };
-
-  renderer.del = function (text) {
-    var id = inlineIds++;
-    inlines[id] = React.createElement(options.del || 'del', {key: keys++}, he.decode(text));
-    return '{{' + id + '}}';
-  };
-
-  renderer.image = function (href, title, text) {
-    var id = inlineIds++;
-    inlines[id] = React.createElement(options.img || 'img', {src: href, alt: title, key: keys++});
-    return '{{' + id + '}}';
-  };
+    return addElement(`h${level}`, {id}, text);
+  }
 
   return function compile (content) {
-    result = [];
-    toc = [];
-    inlines = {};
-    keys = 0;
-
     marked(content, {renderer: renderer, smartypants: true});
 
-    return {
-      tree: result,
-      toc: toc
-    };
+    return {tree};
   };
 }
+
 
 export default function (options) {
   return marksy(options)

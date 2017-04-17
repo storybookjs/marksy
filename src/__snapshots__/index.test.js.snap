@@ -1,0 +1,81 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should be able to compile headers 1`] = `
+<div>
+  <h1
+    id="header1"
+  >
+    header1
+  </h1>
+  <h2
+    id="header2"
+  >
+    header2
+  </h2>
+  <h3
+    id="header3"
+  >
+    header3
+  </h3>
+  <h4
+    id="header4"
+  >
+    header4
+  </h4>
+</div>
+`;
+
+exports[`should be able to compile italic text 1`] = `
+<div>
+  <p>
+    hello 
+    <em>
+      there
+    </em>
+  </p>
+</div>
+`;
+
+exports[`should be able to compile links 1`] = `
+<div>
+  <p>
+    <a
+      href="http://example.com"
+      target="new"
+      title={null}
+    >
+      my link
+    </a>
+  </p>
+</div>
+`;
+
+exports[`should be able to compile strong text 1`] = `
+<div>
+  <p>
+    hello 
+    <strong>
+      there
+    </strong>
+  </p>
+</div>
+`;
+
+exports[`should be able to compile strong text 2`] = `
+<div>
+  <p>
+    hello 
+    <strong>
+      there
+    </strong>
+  </p>
+</div>
+`;
+
+exports[`should be able to compile text 1`] = `
+<div>
+  <p>
+    hello
+  </p>
+</div>
+`;
