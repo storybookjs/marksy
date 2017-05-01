@@ -216,7 +216,7 @@ export function marksy (options = {}) {
 
   renderer.image = function (href, title, text) {
     var id = inlineIds++;
-    inlines[id] = React.createElement(options.img || 'img', {src: href, alt: title, key: keys++});
+    inlines[id] = React.createElement(options.img || 'img', {src: href, alt: text, title: title, key: keys++});
     return '{{' + id + '}}';
   };
 
