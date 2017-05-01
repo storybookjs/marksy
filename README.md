@@ -33,7 +33,7 @@ const compile = marksy({
   em ({children}) {},
   br () {},
   del ({children}) {},
-  img ({src, alt}) {},
+  img ({src, alt, title}) {},
   code ({language, code}) {},
   codespan ({children}) {}
 })
