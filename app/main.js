@@ -35,12 +35,14 @@ class App extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      tree: compile(demo).tree
+      tree: compile(demo).tree,
+      value: demo
     };
   }
   onTextareaChange (event) {
     this.setState({
-      tree: compile(event.target.value).tree
+      tree: compile(event.target.value).tree,
+      value: event.target.value
     });
   }
   render () {
@@ -58,7 +60,7 @@ class App extends React.Component {
         <textarea
           style={{width: 500, height: 500, border: '1px dashed #DADADA', outline: 'none', padding: '10px'}}
           onChange={(event) => this.onTextareaChange(event)}
-          value={demo}
+          value={this.state.value}
         ></textarea>
       </div>
     );
