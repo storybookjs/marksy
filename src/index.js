@@ -12,11 +12,12 @@ export function marksy (options = {}) {
   const elements = {};
   let nextElementId = 0;
 
-function populateInlineContent (content) {
+function populateInlineContent (content = '') {
     const contentArray = content.split(/(\{\{.*?\}\})/);
     const extractedElements = contentArray.map(function (text) {
       const elementIdMatch = text.match(/\{\{(.*)\}\}/);
       if (elementIdMatch) {
+        tree.splice(elements[elementIdMatch[1]], 1)
         return elements[elementIdMatch[1]];
       } else if (text != '') {
         return he.decode(text);
@@ -33,15 +34,21 @@ function populateInlineContent (content) {
 
     elements[elementId] = React.createElement(tag, Object.assign({
       key: elementId
-    }, props), populateInlineContent(children));
+    }, props), Array.isArray(children) ? children.map(populateInlineContent) : populateInlineContent(children));
 
     tree.push(elements[elementId]);
 
     return `{{${elementId}}}`;
   }
 
-  renderer.code = (code, language) => addElement('code', {language, code});
-  
+  renderer.code = (code, language) => {
+    if (language === 'marksy') {
+      return renderer.html(code)
+    } else {
+      return addElement('code', {language, code})
+    }
+  };
+
   renderer.html = function (html) {
     try {
       const code = transform(html, {
@@ -51,36 +58,76 @@ function populateInlineContent (content) {
         return options.components[key];
       });
 
-      result.push(React.createElement(function () {
+      tree.push(React.createElement(function () {
         return new Function('React', ...Object.keys(options.components), `return ${code}`)(React, ...components);
-      }));
+      }, {key: nextElementId++}));
     } catch (e) {}
   };
-  
-  renderer.paragraph = (text) => addElement('p', null, text);
-  
+
+  renderer.paragraph = (text) => addElement('p', null, text)
+
   renderer.blockquote = (text) => addElement('blockquote', null, text);
-  
+
   renderer.link = (href, title, text) => addElement('a', {href, title}, text);
-  
+
   renderer.br = () => addElement('br');
-  
+
   renderer.hr = () => addElement('hr');
-  
+
   renderer.strong = (text) => addElement('strong', null, text);
-  
+
   renderer.del = (text) => addElement('del', null, text);
-  
+
   renderer.em = (text) => addElement('em', null, text);
 
   renderer.heading = (text, level) => {
     const id = text.replace(/\s/g, '-').toLowerCase();
 
-    return addElement(`h${level}`, {id}, text);
+    return addElement(`h${level}`, null, text);
   }
 
-  return function compile (content) {
-    marked(content, {renderer: renderer, smartypants: true});
+  renderer.list = (body, ordered) => {
+    return addElement(ordered ? 'ol' : 'ul', null, body);
+  }
+
+  renderer.listitem = (text) => {
+    return addElement('li', null, text);
+  }
+
+  renderer.table = (header, body) => {
+    return addElement('table', null, [
+      addElement('thead', null, header),
+      addElement('tbody', null, body)
+    ]);
+  }
+
+  renderer.thead = (content) => {
+    return addElement('thead', null, content)
+  }
+
+  renderer.tbody = (content) => {
+    return addElement('tbody', null, content)
+  }
+
+  renderer.tablerow = (content) => {
+    return addElement('tr', null, content)
+  }
+
+  renderer.tablecell = (content, flag) => {
+    const tag = flag.header ? 'th' : 'td'
+    return addElement('tr', {className: flag.align ? `text-${flag.align}` : undefined}, content)
+  }
+
+  renderer.codespan = (text) => {
+    return addElement('code', null, text)
+  }
+
+  renderer.image = (href, title, text) => {
+    return addElement('img', {href, alt: text})
+  }
+
+  return function compile (content, markedOptions = {}) {
+    marked(content, Object.assign({renderer: renderer, smartypants: true}, markedOptions));
 
     return {tree};
   };

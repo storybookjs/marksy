@@ -1,27 +1,65 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`should be able to compile codespans 1`] = `
+<div>
+  <p>
+    install with 
+    <code>
+      $ npm install
+    </code>
+  </p>
+</div>
+`;
+
+exports[`should be able to compile components 1`] = `
+<div>
+  <div>
+    mip
+  </div>
+</div>
+`;
+
+exports[`should be able to compile components using marksy language 1`] = `
+<div>
+  <div>
+    mip
+  </div>
+</div>
+`;
+
 exports[`should be able to compile headers 1`] = `
 <div>
-  <h1
-    id="header1"
-  >
+  <h1>
     header1
   </h1>
-  <h2
-    id="header2"
-  >
+  <h2>
     header2
   </h2>
-  <h3
-    id="header3"
-  >
+  <h3>
     header3
   </h3>
-  <h4
-    id="header4"
-  >
+  <h4>
     header4
   </h4>
+</div>
+`;
+
+exports[`should be able to compile html 1`] = `
+<div>
+  <div>
+    hello
+  </div>
+</div>
+`;
+
+exports[`should be able to compile image 1`] = `
+<div>
+  <p>
+    <img
+      alt="test"
+      href="http://some.com/image.png"
+    />
+  </p>
 </div>
 `;
 
@@ -41,12 +79,66 @@ exports[`should be able to compile links 1`] = `
   <p>
     <a
       href="http://example.com"
-      target="new"
       title={null}
     >
       my link
     </a>
   </p>
+</div>
+`;
+
+exports[`should be able to compile list 1`] = `
+<div>
+  <ul>
+    <li>
+      foo
+    </li>
+    <li>
+      bar
+    </li>
+  </ul>
+</div>
+`;
+
+exports[`should be able to compile nested lists 1`] = `
+<div>
+  <ul>
+    <li>
+      Colors
+      <ul>
+        <li>
+          Red
+        </li>
+        <li>
+          Blue
+        </li>
+      </ul>
+    </li>
+    <li>
+      Shape
+      <ul>
+        <li>
+          Triangle
+        </li>
+        <li>
+          Rectangle
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+`;
+
+exports[`should be able to compile ordered list 1`] = `
+<div>
+  <ol>
+    <li>
+      foo
+    </li>
+    <li>
+      bar
+    </li>
+  </ol>
 </div>
 `;
 
@@ -69,6 +161,85 @@ exports[`should be able to compile strong text 2`] = `
       there
     </strong>
   </p>
+</div>
+`;
+
+exports[`should be able to compile tables 1`] = `
+<div>
+  <table>
+    <thead>
+      <tr>
+        <tr
+          className={undefined}
+        >
+          Tables
+        </tr>
+        <tr
+          className="text-center"
+        >
+          Are
+        </tr>
+        <tr
+          className="text-right"
+        >
+          Cool
+        </tr>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <tr
+          className={undefined}
+        >
+          col 3 is
+        </tr>
+        <tr
+          className="text-center"
+        >
+          right-aligned
+        </tr>
+        <tr
+          className="text-right"
+        >
+          $1600
+        </tr>
+      </tr>
+      <tr>
+        <tr
+          className={undefined}
+        >
+          col 2 is
+        </tr>
+        <tr
+          className="text-center"
+        >
+          centered
+        </tr>
+        <tr
+          className="text-right"
+        >
+          $12
+        </tr>
+      </tr>
+      <tr>
+        <tr
+          className={undefined}
+        >
+          zebra stripes
+        </tr>
+        <tr
+          className="text-center"
+        >
+          are neat
+        </tr>
+        <tr
+          className="text-right"
+        >
+          $1
+        </tr>
+      </tr>
+    </tbody>
+  </table>
 </div>
 `;
 

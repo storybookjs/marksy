@@ -38,7 +38,9 @@ const compile = marksy({
   codespan ({children}) {}
 })
 
-const compiled = compile('# hello')
+const compiled = compile('# hello', {
+  // Options passed to "marked" (https://www.npmjs.com/package/marked)
+})
 
 compiled.tree // The React tree of components
 compiled.toc // The table of contents, based on usage of headers
@@ -59,6 +61,13 @@ const compile = marksy({
 /* MARKDOWN:
   # Just a test
   <MyCustomComponent>some text</MyCustomComponent>
+*/
+
+/* WITH LANGUAGE FOR GENERIC SUPPORT:
+  # Just a test
+  ```marksy
+  <MyCustomComponent>some text</MyCustomComponent>
+  ```
 */
 ```
 
