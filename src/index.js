@@ -12,7 +12,7 @@ export function marksy (options = {}) {
   const elements = {};
   let nextElementId = 0;
 
-function populateInlineContent (content = '') {
+  function populateInlineContent (content = '') {
     const contentArray = content.split(/(\{\{.*?\}\})/);
     const extractedElements = contentArray.map(function (text) {
       const elementIdMatch = text.match(/\{\{(.*)\}\}/);
