@@ -28,12 +28,17 @@ export function marksy (options = {}) {
     return extractedElements;
   }
 
-  function addElement (tag, props = {}, children = '') {
+  function addElement (tag, props = {}, children) {
     const elementId = nextElementId++;
+    let inlineContent = null;
+
+    if (children) {
+      inlineContent = Array.isArray(children) ? children.map(populateInlineContent) : populateInlineContent(children)
+    }
 
     elements[elementId] = React.createElement(tag, Object.assign({
       key: elementId
-    }, props), Array.isArray(children) ? children.map(populateInlineContent) : populateInlineContent(children));
+    }, props), inlineContent);
 
     tree.push(elements[elementId]);
 
@@ -133,7 +138,7 @@ export function marksy (options = {}) {
   }
 
   renderer.image = (href, title, text) => {
-    return addElement('img', {href, alt: text})
+    return addElement('img', {src: href, alt: text})
   }
 
   return function compile (content, markedOptions = {}) {

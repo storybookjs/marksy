@@ -73,7 +73,7 @@ exports[`should be able to compile image 1`] = `
   <p>
     <img
       alt="test"
-      href="http://some.com/image.png"
+      src="http://some.com/image.png"
     />
   </p>
 </div>
