@@ -65,9 +65,9 @@ const compile = marksy({
 
 /* WITH LANGUAGE FOR GENERIC SUPPORT:
   # Just a test
-  ```marksy
+  \`\`\`marksy
   <MyCustomComponent>some text</MyCustomComponent>
-  ```
+  \`\`\`
 */
 ```
 
