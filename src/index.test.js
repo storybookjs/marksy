@@ -197,3 +197,19 @@ it('should be able to compile nested lists', () => {
 
   expect(tree).toMatchSnapshot();
 });
+
+it('should be able to combine in compilation', () => {
+  const compile = marksy();
+  const compiled = compile(`
+# hey
+
+- foo
+
+-bar
+  `)
+  const tree = renderer.create(
+    <TestComponent>{compiled.tree}</TestComponent>
+  ).toJSON();
+
+  expect(tree).toMatchSnapshot();
+});

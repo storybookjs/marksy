@@ -1,6 +1,7 @@
 var path = require('path');
 
 var sourcePath = path.resolve('src', 'index.js');
+var libPath = path.resolve('lib', 'index.js');
 var appPath = path.resolve('app', 'main.js');
 
 module.exports = {
@@ -11,12 +12,13 @@ module.exports = {
   },
   resolve: {
     alias: {
-      // 'marksy': sourcePath
+      'marksy': libPath
     }
   },
   module: {
     loaders: [{
       test: /\.js/,
+      include: [path.resolve('app')],
       use: [{
         loader: require.resolve('babel-loader'),
         options: {

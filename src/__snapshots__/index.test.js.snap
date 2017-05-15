@@ -1,5 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`should be able to combine in compilation 1`] = `
+<div>
+  <h1>
+    hey
+  </h1>
+  <ul>
+    <li>
+      foo
+    </li>
+  </ul>
+  <p>
+    -bar
+  </p>
+</div>
+`;
+
 exports[`should be able to compile codespans 1`] = `
 <div>
   <p>

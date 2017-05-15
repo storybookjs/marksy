@@ -4,13 +4,15 @@ import React from 'react'
 import {render} from 'react-dom'
 import marksy from 'marksy'
 
+let id = 0
+
 const compile = marksy({
   components: {
     Row ({children}) {
-      return <div style={{display: 'flex'}}>{children}</div>
+      return <div style={{display: 'flex'}} key={id++}>{children}</div>
     },
     Col ({children}) {
-      return <div style={{flex: '1', padding: '10px', backgroundColor: '#DADADA', border: '1px solid #333'}}>{children}</div>
+      return <div style={{flex: '1', padding: '10px', backgroundColor: '#DADADA', border: '1px solid #333'}} key={id++}>{children}</div>
     }
   },
   h1 (props) {

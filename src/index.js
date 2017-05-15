@@ -2,14 +2,13 @@ import React from 'react';
 import marked from 'marked';
 import he from 'he';
 import {transform} from 'babel-standalone';
-import CodeComponent from './CodeComponent';
 
 export function marksy (options = {}) {
   options.components = options.components || {};
 
   const renderer = new marked.Renderer();
-  const tree = [];
-  const elements = {};
+  let tree = [];
+  let elements = {};
   let nextElementId = 0;
 
   function populateInlineContent (content = '') {
@@ -17,7 +16,7 @@ export function marksy (options = {}) {
     const extractedElements = contentArray.map(function (text) {
       const elementIdMatch = text.match(/\{\{(.*)\}\}/);
       if (elementIdMatch) {
-        tree.splice(elements[elementIdMatch[1]], 1)
+        tree.splice(tree.indexOf(elements[elementIdMatch[1]]), 1)
         return elements[elementIdMatch[1]];
       } else if (text != '') {
         return he.decode(text);
@@ -45,7 +44,18 @@ export function marksy (options = {}) {
     if (language === 'marksy') {
       return renderer.html(code)
     } else {
-      return addElement('code', {language, code})
+      const elementId = nextElementId++;
+
+      elements[elementId] = React.createElement('pre', {
+        key: elementId,
+        className: `language-${language}`
+      }, React.createElement('code', {
+        className: `language-${language}`
+      }, code));
+
+      tree.push(elements[elementId]);
+
+      return `{{${elementId}}}`
     }
   };
 
@@ -127,6 +137,9 @@ export function marksy (options = {}) {
   }
 
   return function compile (content, markedOptions = {}) {
+    tree = [];
+    elements = {};
+    nextElementId = 0;
     marked(content, Object.assign({renderer: renderer, smartypants: true}, markedOptions));
 
     return {tree};
