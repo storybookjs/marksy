@@ -213,3 +213,16 @@ it('should be able to combine in compilation', () => {
 
   expect(tree).toMatchSnapshot();
 });
+
+it('should produce TOC', () => {
+  const compile = marksy();
+  const compiled = compile(`
+# foo
+
+## bar
+
+### baz
+  `)
+
+  expect(JSON.stringify(compiled.toc, null, 2)).toMatchSnapshot();
+});

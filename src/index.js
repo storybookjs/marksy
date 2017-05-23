@@ -7,9 +7,21 @@ export function marksy (options = {}) {
   options.components = options.components || {};
 
   const renderer = new marked.Renderer();
-  let tree = [];
-  let elements = {};
-  let nextElementId = 0;
+  let tree = null;
+  let elements = null;
+  let nextElementId = null;
+  let toc = null;
+
+  function getTocPosition (toc, level) {
+    var currentLevel = toc.children;
+    while (true) {
+      if (!currentLevel.length || currentLevel[currentLevel.length - 1].level === level) {
+        return currentLevel;
+      } else {
+        currentLevel = currentLevel[currentLevel.length - 1].children;
+      }
+    }
+  }
 
   function populateInlineContent (content = '') {
     const contentArray = content.split(/(\{\{.*?\}\})/);
@@ -97,6 +109,25 @@ export function marksy (options = {}) {
 
   renderer.heading = (text, level) => {
     const id = text.replace(/\s/g, '-').toLowerCase();
+    const lastToc = toc[toc.length - 1];
+
+    if (!lastToc || lastToc.level > level) {
+      toc.push({
+        id: id,
+        title: text,
+        level: level,
+        children: []
+      });
+    } else {
+      const tocPosition = getTocPosition(lastToc, level);
+
+      tocPosition.push({
+        id: id,
+        title: text,
+        level: level,
+        children: []
+      });
+    }
 
     return addElement(`h${level}`, null, text);
   }
@@ -144,10 +175,11 @@ export function marksy (options = {}) {
   return function compile (content, markedOptions = {}) {
     tree = [];
     elements = {};
+    toc = [];
     nextElementId = 0;
     marked(content, Object.assign({renderer: renderer, smartypants: true}, markedOptions));
 
-    return {tree};
+    return {tree, toc};
   };
 }
 
