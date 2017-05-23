@@ -266,3 +266,28 @@ exports[`should be able to compile text 1`] = `
   </p>
 </div>
 `;
+
+exports[`should produce TOC 1`] = `
+"[
+  {
+    \\"id\\": \\"foo\\",
+    \\"title\\": \\"foo\\",
+    \\"level\\": 1,
+    \\"children\\": [
+      {
+        \\"id\\": \\"bar\\",
+        \\"title\\": \\"bar\\",
+        \\"level\\": 2,
+        \\"children\\": [
+          {
+            \\"id\\": \\"baz\\",
+            \\"title\\": \\"baz\\",
+            \\"level\\": 3,
+            \\"children\\": []
+          }
+        ]
+      }
+    ]
+  }
+]"
+`;
