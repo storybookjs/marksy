@@ -48,7 +48,7 @@ export function marksy (options = {}) {
       inlineContent = Array.isArray(children) ? children.map(populateInlineContent) : populateInlineContent(children)
     }
 
-    elements[elementId] = React.createElement(tag, Object.assign({
+    elements[elementId] = React.createElement(options[tag] || tag, Object.assign({
       key: elementId
     }, props), inlineContent);
 

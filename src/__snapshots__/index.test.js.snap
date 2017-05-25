@@ -291,3 +291,11 @@ exports[`should produce TOC 1`] = `
   }
 ]"
 `;
+
+exports[`should produce custom tags 1`] = `
+<div>
+  <div>
+    foo
+  </div>
+</div>
+`;

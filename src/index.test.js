@@ -226,3 +226,20 @@ it('should produce TOC', () => {
 
   expect(JSON.stringify(compiled.toc, null, 2)).toMatchSnapshot();
 });
+
+it('should produce custom tags', () => {
+  const compile = marksy({
+    h1 (props) {
+      return <div>{props.children}</div>
+    }
+  });
+  const compiled = compile(`
+# foo
+  `)
+
+  const tree = renderer.create(
+    <TestComponent>{compiled.tree}</TestComponent>
+  ).toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
