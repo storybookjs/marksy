@@ -1,6 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 import marksy from './'
+import marksyComponents from './components'
 
 class TestComponent extends React.Component {
   render () {
@@ -149,8 +150,18 @@ it('should be able to compile html', () => {
   expect(tree).toMatchSnapshot();
 });
 
+it('should be able to compile html as React components', () => {
+  const compile = marksyComponents();
+  const compiled = compile(`<div>hello</div>`)
+  const tree = renderer.create(
+    <TestComponent>{compiled.tree}</TestComponent>
+  ).toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
 it('should be able to compile components', () => {
-  const compile = marksy({
+  const compile = marksyComponents({
     components: {
       Test() {
         return <div>mip</div>
@@ -166,7 +177,7 @@ it('should be able to compile components', () => {
 });
 
 it('should be able to compile components using marksy language', () => {
-  const compile = marksy({
+  const compile = marksyComponents({
     components: {
       Test() {
         return <div>mip</div>

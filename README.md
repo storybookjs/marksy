@@ -47,9 +47,11 @@ compiled.toc // The table of contents, based on usage of headers
 ```
 
 ### Custom components
-You can also add your own custom components:
+You can also add your own custom components. You do this by importing `marksy/components`. This build of marksy includes babel transpiler which will convert any HTML to React elements and allow for custom components:
 
 ```js
+import marksy from 'marksy/components'
+
 const compile = marksy({
   components: {
     MyCustomComponent (props) {
@@ -68,7 +70,7 @@ const compile = marksy({
   '''marksy
   <MyCustomComponent>some text</MyCustomComponent>
   '''
-  PS! Use backticks, Github weirdness parsing example
+  PS! Use backticks, Github weirdness when parsing example
 */
 ```
 

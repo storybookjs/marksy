@@ -1,7 +1,7 @@
 var path = require('path');
 
 var sourcePath = path.resolve('src', 'index.js');
-var libPath = path.resolve('lib', 'index.js');
+var libPath = path.resolve('lib');
 var appPath = path.resolve('app', 'main.js');
 
 module.exports = {
