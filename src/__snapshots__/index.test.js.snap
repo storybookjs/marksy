@@ -2,7 +2,9 @@
 
 exports[`should be able to combine in compilation 1`] = `
 <div>
-  <h1>
+  <h1
+    id="hey"
+  >
     hey
   </h1>
   <ul>
@@ -45,16 +47,24 @@ exports[`should be able to compile components using marksy language 1`] = `
 
 exports[`should be able to compile headers 1`] = `
 <div>
-  <h1>
+  <h1
+    id="header1"
+  >
     header1
   </h1>
-  <h2>
+  <h2
+    id="header2"
+  >
     header2
   </h2>
-  <h3>
+  <h3
+    id="header3"
+  >
     header3
   </h3>
-  <h4>
+  <h4
+    id="header4"
+  >
     header4
   </h4>
 </div>

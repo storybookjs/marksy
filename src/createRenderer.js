@@ -130,7 +130,9 @@ export default function createRenderer (tracker, options, overrides = {}) {
       });
     }
 
-    return addElement(`h${level}`, null, text);
+    return addElement(`h${level}`, {
+      id
+    }, text);
   }
 
   renderer.list = overrides.list || function (body, ordered) {
