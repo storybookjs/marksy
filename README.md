@@ -78,7 +78,7 @@ This will be converted to the component above. You can pass in any kind of props
 
 
 ## Code highlighting
-To enable code highlighting the [Prism](http://prismjs.com/) project needs to be available on window.
+To enable code highlighting the [Prism](http://prismjs.com/) project needs to be available on window. This also works on server side. Just make sure the Prism CSS is instantly available on server side rendering.
 
 ## Developing
 1. Clone repo

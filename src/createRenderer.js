@@ -53,24 +53,8 @@ export default function createRenderer (tracker, options, overrides = {}) {
   renderer.code = overrides.code || function (code, language) {
     const elementId = tracker.nextElementId++;
 
-    class CodeComponent extends React.Component {
-      componentDidMount () {
-        if (typeof Prism === 'undefined') {
-          console.warn('You do not have Prism included as a global object');
-          return;
-        }
-        Prism.highlightElement(this.node);
-      }
-      componentDidUpdate () {
-        if (typeof Prism === 'undefined') {
-          console.warn('You do not have Prism included as a global object');
-          return;
-        }
-        Prism.highlightElement(this.node);
-      }
-      render () {
-        return <pre><code ref={node => this.node = node} className={`language-${language}`}>{code}</code></pre>
-      }
+    function CodeComponent () {
+      return <pre className={`language-${language}`}><code className={`language-${language}`} dangerouslySetInnerHTML={{__html: Prism.highlight(code, Prism.languages[language])}}></code></pre>
     }
 
     tracker.elements[elementId] = React.createElement(CodeComponent, {key: elementId})
