@@ -1,6 +1,6 @@
 {
   "name": "marksy",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Convert markdown into react components",
   "main": "lib/index.js",
   "scripts": {
