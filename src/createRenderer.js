@@ -54,7 +54,7 @@ export default function createRenderer (tracker, options, overrides = {}) {
     const elementId = tracker.nextElementId++;
 
     function CodeComponent () {
-      return <pre><code className={`${language}`} dangerouslySetInnerHTML={{__html: options.highlight ? options.highlight.highlightAuto(code).value : code}}></code></pre>
+      return <pre><code className={`hljs ${language}`} dangerouslySetInnerHTML={{__html: options.highlight ? options.highlight.highlightAuto(code).value : code}}></code></pre>
     }
 
     tracker.elements[elementId] = React.createElement(CodeComponent, {key: elementId});
