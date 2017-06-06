@@ -1,12 +1,16 @@
-import './prism.css'
-import './prism.js'
+import 'highlight.js/styles/github.css';
+import hljs from 'highlight.js/lib/highlight';
+import hljsJavascript from 'highlight.js/lib/languages/javascript';
 import React from 'react'
 import {render} from 'react-dom'
-import marksy from 'marksy'
+import marksy from 'marksy/components'
+
+hljs.registerLanguage('javascript', hljsJavascript);
 
 let id = 0
 
 const compile = marksy({
+  highlight: hljs,
   components: {
     Row ({children}) {
       return <div style={{display: 'flex'}} key={id++}>{children}</div>
