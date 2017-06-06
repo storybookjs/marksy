@@ -163,7 +163,7 @@ export default function createRenderer (tracker, options, overrides = {}) {
 
   renderer.tablecell = overrides.tablecell || function (content, flag) {
     const tag = flag.header ? 'th' : 'td'
-    return addElement('tr', {className: flag.align ? `text-${flag.align}` : undefined}, content)
+    return addElement(tag, {className: flag.align ? `text-${flag.align}` : undefined}, content)
   }
 
   renderer.codespan = overrides.codespan || function (text) {
