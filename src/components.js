@@ -33,12 +33,11 @@ export function marksy (options = {}) {
       } else {
         const elementId = tracker.nextElementId++;
 
-        tracker.elements[elementId] = React.createElement('pre', {
-          key: elementId,
-          className: `language-${language}`
-        }, React.createElement('code', {
-          className: `language-${language}`
-        }, code));
+        function CodeComponent () {
+          return <pre><code className={`hljs ${language}`} dangerouslySetInnerHTML={{__html: options.highlight ? options.highlight.highlightAuto(code).value : code}}></code></pre>
+        }
+
+        tracker.elements[elementId] = React.createElement(CodeComponent, {key: elementId});
 
         tracker.tree.push(tracker.elements[elementId]);
 

@@ -54,10 +54,10 @@ export default function createRenderer (tracker, options, overrides = {}) {
     const elementId = tracker.nextElementId++;
 
     function CodeComponent () {
-      return <pre className={`language-${language}`}><code className={`language-${language}`} dangerouslySetInnerHTML={{__html: Prism.highlight(code, Prism.languages[language])}}></code></pre>
+      return <pre><code className={`hljs ${language}`} dangerouslySetInnerHTML={{__html: options.highlight ? options.highlight.highlightAuto(code).value : code}}></code></pre>
     }
 
-    tracker.elements[elementId] = React.createElement(CodeComponent, {key: elementId})
+    tracker.elements[elementId] = React.createElement(CodeComponent, {key: elementId});
 
     tracker.tree.push(tracker.elements[elementId]);
 

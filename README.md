@@ -78,7 +78,22 @@ This will be converted to the component above. You can pass in any kind of props
 
 
 ## Code highlighting
-To enable code highlighting the [Prism](http://prismjs.com/) project needs to be available on window. This also works on server side. Just make sure the Prism CSS is instantly available on server side rendering.
+To enable code highlighting the [Highlight.js](https://highlightjs.org/) project needs to be passed in as an option. It can be a good idea to register only necessary languages you need:
+
+```js
+import 'highlight.js/styles/github.css';
+import hljs from 'highlight.js/lib/highlight';
+import hljsJavascript from 'highlight.js/lib/languages/javascript';
+import marksy from 'marksy/components'
+
+hljs.registerLanguage('javascript', hljsJavascript);
+
+const compile = marksy({
+  highlight: hljs
+})
+```
+
+This can also be used on server side.
 
 ## Developing
 1. Clone repo
