@@ -1,9 +1,13 @@
-import React from 'react';
+import React, {createElement, Component} from 'react';
+import Preact from 'preact';
+import preactRenderToString from 'preact-render-to-string';
+import {renderToString as infernoRenderToString} from 'inferno-server';
+import infernoCreateElement from 'inferno-create-element';
 import renderer from 'react-test-renderer';
 import marksy from './'
 import marksyComponents from './components'
 
-class TestComponent extends React.Component {
+class TestComponent extends Component {
   render () {
     return (
       <div>
@@ -14,7 +18,7 @@ class TestComponent extends React.Component {
 }
 
 it('should be able to compile text', () => {
-  const compile = marksy();
+  const compile = marksy({createElement});
   const compiled = compile(`hello`);
   const tree = renderer.create(
     <TestComponent>{compiled.tree}</TestComponent>
@@ -24,7 +28,7 @@ it('should be able to compile text', () => {
 });
 
 it('should be able to compile strong text', () => {
-  const compile = marksy();
+  const compile = marksy({createElement});
   const compiled = compile(`hello **there**`);
   const tree = renderer.create(
     <TestComponent>{compiled.tree}</TestComponent>
@@ -34,7 +38,7 @@ it('should be able to compile strong text', () => {
 });
 
 it('should be able to compile strong text', () => {
-  const compile = marksy();
+  const compile = marksy({createElement});
   const compiled = compile(`hello **there**`);
   const tree = renderer.create(
     <TestComponent>{compiled.tree}</TestComponent>
@@ -44,7 +48,7 @@ it('should be able to compile strong text', () => {
 });
 
 it('should be able to compile italic text', () => {
-  const compile = marksy();
+  const compile = marksy({createElement});
   const compiled = compile(`hello *there*`);
   const tree = renderer.create(
     <TestComponent>{compiled.tree}</TestComponent>
@@ -54,7 +58,7 @@ it('should be able to compile italic text', () => {
 });
 
 it('should be able to compile links', () => {
-  const compile = marksy();
+  const compile = marksy({createElement});
   const compiled = compile(`[my link](http://example.com)`);
   const tree = renderer.create(
     <TestComponent>{compiled.tree}</TestComponent>
@@ -64,7 +68,7 @@ it('should be able to compile links', () => {
 });
 
 it('should be able to compile headers', () => {
-  const compile = marksy();
+  const compile = marksy({createElement});
   const compiled = compile(`
 # header1
 ## header2
@@ -79,7 +83,7 @@ it('should be able to compile headers', () => {
 });
 
 it('should be able to compile ordered list', () => {
-  const compile = marksy();
+  const compile = marksy({createElement});
   const compiled = compile(`
 1. foo
 2. bar
@@ -92,7 +96,7 @@ it('should be able to compile ordered list', () => {
 });
 
 it('should be able to compile list', () => {
-  const compile = marksy();
+  const compile = marksy({createElement});
   const compiled = compile(`
 - foo
 - bar
@@ -105,7 +109,7 @@ it('should be able to compile list', () => {
 });
 
 it('should be able to compile tables', () => {
-  const compile = marksy();
+  const compile = marksy({createElement});
   const compiled = compile(`
 | Tables        | Are           | Cool  |
 | ------------- |:-------------:| -----:|
@@ -121,7 +125,7 @@ it('should be able to compile tables', () => {
 });
 
 it('should be able to compile codespans', () => {
-  const compile = marksy();
+  const compile = marksy({createElement});
   const compiled = compile('install with `$ npm install`')
   const tree = renderer.create(
     <TestComponent>{compiled.tree}</TestComponent>
@@ -131,7 +135,7 @@ it('should be able to compile codespans', () => {
 });
 
 it('should be able to compile image', () => {
-  const compile = marksy();
+  const compile = marksy({createElement});
   const compiled = compile('![test](http://some.com/image.png)')
   const tree = renderer.create(
     <TestComponent>{compiled.tree}</TestComponent>
@@ -141,7 +145,7 @@ it('should be able to compile image', () => {
 });
 
 it('should be able to compile html', () => {
-  const compile = marksy();
+  const compile = marksy({createElement});
   const compiled = compile(`<div>hello</div>`)
   const tree = renderer.create(
     <TestComponent>{compiled.tree}</TestComponent>
@@ -150,8 +154,8 @@ it('should be able to compile html', () => {
   expect(tree).toMatchSnapshot();
 });
 
-it('should be able to compile html as React components', () => {
-  const compile = marksyComponents();
+it('should be able to compile html as components', () => {
+  const compile = marksyComponents({createElement});
   const compiled = compile(`<div>hello</div>`)
   const tree = renderer.create(
     <TestComponent>{compiled.tree}</TestComponent>
@@ -162,6 +166,7 @@ it('should be able to compile html as React components', () => {
 
 it('should be able to compile components', () => {
   const compile = marksyComponents({
+    createElement,
     components: {
       Test() {
         return <div>mip</div>
@@ -178,6 +183,7 @@ it('should be able to compile components', () => {
 
 it('should be able to compile components using marksy language', () => {
   const compile = marksyComponents({
+    createElement,
     components: {
       Test() {
         return <div>mip</div>
@@ -193,7 +199,7 @@ it('should be able to compile components using marksy language', () => {
 });
 
 it('should be able to compile nested lists', () => {
-  const compile = marksy();
+  const compile = marksy({createElement});
   const compiled = compile(`
 - Colors
     - Red
@@ -210,7 +216,7 @@ it('should be able to compile nested lists', () => {
 });
 
 it('should be able to combine in compilation', () => {
-  const compile = marksy();
+  const compile = marksy({createElement});
   const compiled = compile(`
 # hey
 
@@ -226,7 +232,7 @@ it('should be able to combine in compilation', () => {
 });
 
 it('should produce TOC', () => {
-  const compile = marksy();
+  const compile = marksy({createElement});
   const compiled = compile(`
 # foo
 
@@ -240,8 +246,11 @@ it('should produce TOC', () => {
 
 it('should produce custom tags', () => {
   const compile = marksy({
-    h1 (props) {
-      return <div>{props.children}</div>
+    createElement,
+    elements: {
+      h1 (props) {
+        return <div>{props.children}</div>
+      }
     }
   });
   const compiled = compile(`
@@ -253,4 +262,36 @@ it('should produce custom tags', () => {
   ).toJSON();
 
   expect(tree).toMatchSnapshot();
+});
+
+it('should work with Preact', () => {
+  const compile = marksy({
+    createElement: Preact.h,
+    elements: {
+      h1 (props) {
+        return Preact.h('div', null, props.children)
+      }
+    }
+  });
+  const compiled = compile(`
+# foo
+  `)
+
+  expect(preactRenderToString(Preact.h('div', null, compiled.tree))).toMatchSnapshot();
+});
+
+it('should work with Inferno', () => {
+  const compile = marksy({
+    createElement: infernoCreateElement,
+    elements: {
+      h1 (props) {
+        return infernoCreateElement('div', null, props.children)
+      }
+    }
+  });
+  const compiled = compile(`
+# foo
+  `)
+
+  expect(infernoRenderToString(infernoCreateElement('div', null, compiled.tree))).toMatchSnapshot();
 });

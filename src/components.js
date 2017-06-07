@@ -1,4 +1,3 @@
-import React from 'react';
 import createRenderer from './createRenderer';
 import marked from 'marked';
 import {transform} from 'babel-standalone';
@@ -21,9 +20,10 @@ export function marksy (options = {}) {
         const components = Object.keys(options.components).map(function (key) {
           return options.components[key];
         });
+        const mockedReact = {createElement: options.createElement};
 
-        tracker.tree.push(React.createElement(function () {
-          return new Function('React', ...Object.keys(options.components), `return ${code}`)(React, ...components) || null;
+        tracker.tree.push(options.createElement(function () {
+          return new Function('React', ...Object.keys(options.components), `return ${code}`)(mockedReact, ...components) || null;
         }, {key: tracker.nextElementId++}));
       } catch (e) {}
     },
@@ -34,10 +34,13 @@ export function marksy (options = {}) {
         const elementId = tracker.nextElementId++;
 
         function CodeComponent () {
-          return <pre><code className={`hljs ${language}`} dangerouslySetInnerHTML={{__html: options.highlight ? options.highlight.highlightAuto(code).value : code}}></code></pre>
+          return options.createElement('pre', null, options.createElement('code', {
+            className: `hljs ${language}`,
+            dangerouslySetInnerHTML: {__html: options.highlight ? options.highlight.highlightAuto(code).value : code}
+          }))
         }
 
-        tracker.elements[elementId] = React.createElement(CodeComponent, {key: elementId});
+        tracker.elements[elementId] = options.createElement(CodeComponent, {key: elementId});
 
         tracker.tree.push(tracker.elements[elementId]);
 
