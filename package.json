@@ -1,6 +1,6 @@
 {
   "name": "marksy",
-  "version": "2.0.1",
+  "version": "3.0.0",
   "description": "Convert markdown into react components",
   "main": "lib/index.js",
   "scripts": {
@@ -31,9 +31,13 @@
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "css-loader": "^0.15.2",
+    "inferno-create-element": "^3.3.1",
+    "inferno-server": "^3.3.1",
     "jest": "^20.0.1",
     "json-loader": "^0.5.2",
     "node-libs-browser": "^0.5.2",
+    "preact": "^8.1.0",
+    "preact-render-to-string": "^3.6.3",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-test-renderer": "^15.5.4",

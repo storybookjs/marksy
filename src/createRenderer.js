@@ -1,4 +1,3 @@
-import React from 'react';
 import marked from 'marked';
 import he from 'he';
 
@@ -41,7 +40,7 @@ export default function createRenderer (tracker, options, overrides = {}) {
       inlineContent = Array.isArray(children) ? children.map(populateInlineContent) : populateInlineContent(children)
     }
 
-    tracker.elements[elementId] = React.createElement(options[tag] || tag, Object.assign({
+    tracker.elements[elementId] = options.createElement((options.elements && options.elements[tag]) || tag, Object.assign({
       key: elementId
     }, props), inlineContent);
 
@@ -54,10 +53,13 @@ export default function createRenderer (tracker, options, overrides = {}) {
     const elementId = tracker.nextElementId++;
 
     function CodeComponent () {
-      return <pre><code className={`hljs ${language}`} dangerouslySetInnerHTML={{__html: options.highlight ? options.highlight.highlightAuto(code).value : code}}></code></pre>
+      return options.createElement('pre', null, options.createElement('code', {
+        className: `hljs ${language}`,
+        dangerouslySetInnerHTML: {__html: options.highlight ? options.highlight.highlightAuto(code).value : code}
+      }))
     }
 
-    tracker.elements[elementId] = React.createElement(CodeComponent, {key: elementId});
+    tracker.elements[elementId] = options.createElement(CodeComponent, {key: elementId});
 
     tracker.tree.push(tracker.elements[elementId]);
 
@@ -67,7 +69,7 @@ export default function createRenderer (tracker, options, overrides = {}) {
   renderer.html = overrides.html || function (html) {
     const elementId = tracker.nextElementId++;
 
-    tracker.tree.push(React.createElement('div', {
+    tracker.tree.push(options.createElement('div', {
       key: elementId,
       dangerouslySetInnerHTML: {
         __html: html

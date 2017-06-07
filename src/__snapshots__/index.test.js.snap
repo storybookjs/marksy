@@ -82,7 +82,7 @@ exports[`should be able to compile html 1`] = `
 </div>
 `;
 
-exports[`should be able to compile html as React components 1`] = `
+exports[`should be able to compile html as components 1`] = `
 <div>
   <div>
     hello
@@ -207,74 +207,74 @@ exports[`should be able to compile tables 1`] = `
   <table>
     <thead>
       <tr>
-        <tr
+        <th
           className={undefined}
         >
           Tables
-        </tr>
-        <tr
+        </th>
+        <th
           className="text-center"
         >
           Are
-        </tr>
-        <tr
+        </th>
+        <th
           className="text-right"
         >
           Cool
-        </tr>
+        </th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <tr
+        <td
           className={undefined}
         >
           col 3 is
-        </tr>
-        <tr
+        </td>
+        <td
           className="text-center"
         >
           right-aligned
-        </tr>
-        <tr
+        </td>
+        <td
           className="text-right"
         >
           $1600
-        </tr>
+        </td>
       </tr>
       <tr>
-        <tr
+        <td
           className={undefined}
         >
           col 2 is
-        </tr>
-        <tr
+        </td>
+        <td
           className="text-center"
         >
           centered
-        </tr>
-        <tr
+        </td>
+        <td
           className="text-right"
         >
           $12
-        </tr>
+        </td>
       </tr>
       <tr>
-        <tr
+        <td
           className={undefined}
         >
           zebra stripes
-        </tr>
-        <tr
+        </td>
+        <td
           className="text-center"
         >
           are neat
-        </tr>
-        <tr
+        </td>
+        <td
           className="text-right"
         >
           $1
-        </tr>
+        </td>
       </tr>
     </tbody>
   </table>
@@ -321,3 +321,7 @@ exports[`should produce custom tags 1`] = `
   </div>
 </div>
 `;
+
+exports[`should work with Inferno 1`] = `"<div><div>foo</div></div>"`;
+
+exports[`should work with Preact 1`] = `"<div><div>foo</div></div>"`;
