@@ -12,7 +12,7 @@ export function marksy (options = {}) {
     toc: null
   };
   const renderer = createRenderer(tracker, options, {
-    html (html) {
+    html: function (html) {
       try {
         const code = transform(html, {
           presets: ['react']
@@ -27,7 +27,7 @@ export function marksy (options = {}) {
         }, {key: tracker.nextElementId++}));
       } catch (e) {}
     },
-    code (code, language) {
+    code: !(options.elements && options.elements['code']) ? function (code, language) {
       if (language === 'marksy') {
         return renderer.html(code)
       } else {
@@ -46,7 +46,7 @@ export function marksy (options = {}) {
 
         return `{{${elementId}}}`;
       }
-    }
+    } : undefined
   })
 
   return function compile (content, markedOptions = {}) {

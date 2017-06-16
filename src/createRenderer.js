@@ -49,22 +49,24 @@ export default function createRenderer (tracker, options, overrides = {}) {
     return `{{${elementId}}}`;
   }
 
-  renderer.code = overrides.code || function (code, language) {
-    const elementId = tracker.nextElementId++;
+  renderer.code = overrides.code || ((options.elements && options.elements['code'])
+    ? function (code, language) { return addElement('code', {code, language}) }
+    : function (code, language) {
+        const elementId = tracker.nextElementId++;
 
-    function CodeComponent () {
-      return options.createElement('pre', null, options.createElement('code', {
-        className: `hljs ${language}`,
-        dangerouslySetInnerHTML: {__html: options.highlight ? options.highlight.highlightAuto(code).value : code}
-      }))
-    }
+        function CodeComponent () {
+          return options.createElement('pre', null, options.createElement('code', {
+            className: `hljs ${language}`,
+            dangerouslySetInnerHTML: {__html: options.highlight ? options.highlight.highlightAuto(code).value : code}
+          }))
+        }
 
-    tracker.elements[elementId] = options.createElement(CodeComponent, {key: elementId});
+        tracker.elements[elementId] = options.createElement(CodeComponent, {key: elementId});
 
-    tracker.tree.push(tracker.elements[elementId]);
+        tracker.tree.push(tracker.elements[elementId]);
 
-    return `{{${elementId}}}`;
-  };
+        return `{{${elementId}}}`;
+      });
 
   renderer.html = overrides.html || function (html) {
     const elementId = tracker.nextElementId++;
