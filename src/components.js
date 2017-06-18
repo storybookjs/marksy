@@ -20,7 +20,11 @@ export function marksy (options = {}) {
         const components = Object.keys(options.components).map(function (key) {
           return options.components[key];
         });
-        const mockedReact = {createElement: options.createElement};
+        const mockedReact = {createElement(tag, props = {}, children) {
+          const componentProps = components.indexOf(tag) >= 0 ? Object.assign(props || {}, {context: tracker.context}) : props;
+          
+          return options.createElement(tag, componentProps, children);
+        }};
 
         tracker.tree.push(options.createElement(function () {
           return new Function('React', ...Object.keys(options.components), `return ${code}`)(mockedReact, ...components) || null;
@@ -49,11 +53,12 @@ export function marksy (options = {}) {
     }
   })
 
-  return function compile (content, markedOptions = {}) {
+  return function compile (content, markedOptions = {}, context = {}) {
     tracker.tree = [];
     tracker.elements = {};
     tracker.toc = [];
     tracker.nextElementId = 0;
+    tracker.context = context;
     marked(content, Object.assign({renderer: renderer, smartypants: true}, markedOptions));
 
     return {tree: tracker.tree, toc: tracker.toc};

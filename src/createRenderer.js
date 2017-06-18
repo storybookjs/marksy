@@ -41,8 +41,8 @@ export default function createRenderer (tracker, options, overrides = {}) {
     }
 
     tracker.elements[elementId] = options.createElement((options.elements && options.elements[tag]) || tag, Object.assign({
-      key: elementId
-    }, props), inlineContent);
+      key: elementId,
+    }, props, options.elements && options.elements[tag] ? {context: tracker.context} : {}), inlineContent);
 
     tracker.tree.push(tracker.elements[elementId]);
 

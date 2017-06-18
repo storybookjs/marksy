@@ -87,6 +87,31 @@ const compile = marksy({
 
 This will be converted to the component above. You can pass in any kind of props, as if it was normal code.
 
+## Context
+You might need to pass in general information to your custom elements and components. You can pass in a context to do so:
+
+```js
+import React, {createElement} from 'react'
+import marksy from 'marksy/components'
+
+const compile = marksy({
+  createElement,
+  elements: {
+    h1(props) {
+      return <h1>{props.context.foo}</h1>
+    }
+  },
+  components: {
+    MyCustomComponent (props) {
+      return <h1>{props.context.foo}</h1>
+    }
+  }
+})
+
+compile('<MyCustomComponent/>', null, {
+  foo: 'bar'
+})
+```
 
 ## Code highlighting
 To enable code highlighting the [Highlight.js](https://highlightjs.org/) project needs to be passed in as an option. It can be a good idea to register only necessary languages you need:
