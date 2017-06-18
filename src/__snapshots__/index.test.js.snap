@@ -1,5 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`should allow injecting context to components 1`] = `
+<div>
+  <div>
+    bar
+  </div>
+</div>
+`;
+
+exports[`should allow injecting context to elements 1`] = `
+<div>
+  <div>
+    bar
+  </div>
+</div>
+`;
+
 exports[`should be able to combine in compilation 1`] = `
 <div>
   <h1

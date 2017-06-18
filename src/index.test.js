@@ -295,3 +295,47 @@ it('should work with Inferno', () => {
 
   expect(infernoRenderToString(infernoCreateElement('div', null, compiled.tree))).toMatchSnapshot();
 });
+
+it('should allow injecting context to elements', () => {
+  const compile = marksy({
+    createElement,
+    elements: {
+      h1 (props) {
+        return <div>{props.context.foo}</div>
+      }
+    }
+  });
+  const compiled = compile(`
+# foo
+  `, {}, {
+    foo: 'bar'
+  })
+
+  const tree = renderer.create(
+    <TestComponent>{compiled.tree}</TestComponent>
+  ).toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
+it('should allow injecting context to components', () => {
+  const compile = marksyComponents({
+    createElement,
+    components: {
+      Comp (props) {
+        return <div>{props.context.foo}</div>
+      }
+    }
+  });
+  const compiled = compile(`
+<Comp/>
+  `, {}, {
+    foo: 'bar'
+  })
+
+  const tree = renderer.create(
+    <TestComponent>{compiled.tree}</TestComponent>
+  ).toJSON();
+
+  expect(tree).toMatchSnapshot();
+});

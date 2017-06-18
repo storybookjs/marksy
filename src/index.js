@@ -10,11 +10,12 @@ export function marksy (options = {}) {
   };
   const renderer = createRenderer(tracker, options)
 
-  return function compile (content, markedOptions = {}) {
+  return function compile (content, markedOptions = {}, context = {}) {
     tracker.tree = [];
     tracker.elements = {};
     tracker.toc = [];
     tracker.nextElementId = 0;
+    tracker.context = context;
     marked(content, Object.assign({renderer: renderer, smartypants: true}, markedOptions));
 
     return {tree: tracker.tree, toc: tracker.toc};
