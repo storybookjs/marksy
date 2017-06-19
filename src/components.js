@@ -5,6 +5,17 @@ import {transform} from 'babel-standalone';
 export function marksy (options = {}) {
   options.components = options.components || {};
 
+  function HtmlWrapper(props) {
+    return options.createElement('div', null, props.children);
+  }
+
+  function CodeComponent (props) {
+    return options.createElement('pre', null, options.createElement('code', {
+      className: `hljs ${props.language}`,
+      dangerouslySetInnerHTML: {__html: options.highlight ? options.highlight.highlightAuto(props.code).value : props.code}
+    }))
+  }
+
   const tracker = {
     tree: null,
     elements: null,
@@ -22,13 +33,13 @@ export function marksy (options = {}) {
         });
         const mockedReact = {createElement(tag, props = {}, children) {
           const componentProps = components.indexOf(tag) >= 0 ? Object.assign(props || {}, {context: tracker.context}) : props;
-          
+
           return options.createElement(tag, componentProps, children);
         }};
 
-        tracker.tree.push(options.createElement(function () {
-          return new Function('React', ...Object.keys(options.components), `return ${code}`)(mockedReact, ...components) || null;
-        }, {key: tracker.nextElementId++}));
+        tracker.tree.push(options.createElement(HtmlWrapper, {
+          key: tracker.nextElementId++
+        }, new Function('React', ...Object.keys(options.components), `return ${code}`)(mockedReact, ...components) || null));
       } catch (e) {}
     },
     code (code, language) {
@@ -37,14 +48,7 @@ export function marksy (options = {}) {
       } else {
         const elementId = tracker.nextElementId++;
 
-        function CodeComponent () {
-          return options.createElement('pre', null, options.createElement('code', {
-            className: `hljs ${language}`,
-            dangerouslySetInnerHTML: {__html: options.highlight ? options.highlight.highlightAuto(code).value : code}
-          }))
-        }
-
-        tracker.elements[elementId] = options.createElement(CodeComponent, {key: elementId});
+        tracker.elements[elementId] = options.createElement(CodeComponent, {key: elementId, code, language});
 
         tracker.tree.push(tracker.elements[elementId]);
 

@@ -3,7 +3,9 @@
 exports[`should allow injecting context to components 1`] = `
 <div>
   <div>
-    bar
+    <div>
+      bar
+    </div>
   </div>
 </div>
 `;
@@ -48,7 +50,9 @@ exports[`should be able to compile codespans 1`] = `
 exports[`should be able to compile components 1`] = `
 <div>
   <div>
-    mip
+    <div>
+      mip
+    </div>
   </div>
 </div>
 `;
@@ -56,7 +60,9 @@ exports[`should be able to compile components 1`] = `
 exports[`should be able to compile components using marksy language 1`] = `
 <div>
   <div>
-    mip
+    <div>
+      mip
+    </div>
   </div>
 </div>
 `;
@@ -101,7 +107,9 @@ exports[`should be able to compile html 1`] = `
 exports[`should be able to compile html as components 1`] = `
 <div>
   <div>
-    hello
+    <div>
+      hello
+    </div>
   </div>
 </div>
 `;

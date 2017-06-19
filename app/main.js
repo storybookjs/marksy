@@ -10,6 +10,7 @@ hljs.registerLanguage('javascript', hljsJavascript);
 let id = 0
 
 const compile = marksy({
+  createElement: React.createElement,
   highlight: hljs,
   components: {
     Row ({children}) {
