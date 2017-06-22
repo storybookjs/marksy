@@ -31,8 +31,8 @@ export function marksy (options = {}) {
         const components = Object.keys(options.components).map(function (key) {
           return options.components[key];
         });
-        const mockedReact = {createElement(tag, props = {}, children) {
-          const componentProps = components.indexOf(tag) >= 0 ? Object.assign(props || {}, {context: tracker.context}) : props;
+        const mockedReact = {createElement(tag, props = {}, ...children) {
+          const componentProps = components.indexOf(tag) >= 0 ? Object.assign(props || {}, {key: tracker.nextElementId++, context: tracker.context}) : props;
 
           return options.createElement(tag, componentProps, children);
         }};
