@@ -48,7 +48,7 @@ export function marksy (options = {}) {
       } else {
         const elementId = tracker.nextElementId++;
 
-        tracker.elements[elementId] = options.createElement(CodeComponent, {key: elementId, code, language});
+        tracker.elements[elementId] = options.createElement((options.elements && options.elements.code) || CodeComponent, {key: elementId, code, language});
 
         tracker.tree.push(tracker.elements[elementId]);
 

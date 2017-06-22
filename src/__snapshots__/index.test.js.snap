@@ -18,6 +18,17 @@ exports[`should allow injecting context to elements 1`] = `
 </div>
 `;
 
+exports[`should allow overriding code element with components version 1`] = `
+<div>
+  <p>
+    Hello 
+    <div>
+      code
+    </div>
+  </p>
+</div>
+`;
+
 exports[`should be able to combine in compilation 1`] = `
 <div>
   <h1
