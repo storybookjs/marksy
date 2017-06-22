@@ -313,6 +313,19 @@ exports[`should be able to compile text 1`] = `
 </div>
 `;
 
+exports[`should be able to inline components 1`] = `
+<div>
+  <div>
+    <p>
+      Hello there 
+      <div>
+        Wuuut
+      </div>
+    </p>
+  </div>
+</div>
+`;
+
 exports[`should produce TOC 1`] = `
 "[
   {

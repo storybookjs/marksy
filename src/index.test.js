@@ -339,3 +339,21 @@ it('should allow injecting context to components', () => {
 
   expect(tree).toMatchSnapshot();
 });
+
+it('should be able to inline components', () => {
+  const compile = marksyComponents({
+    createElement,
+    components: {
+      Comp (props) {
+        return <div>Wuuut</div>
+      }
+    }
+  });
+  const compiled = compile(`<p>Hello there <Comp/></p>`)
+
+  const tree = renderer.create(
+    <TestComponent>{compiled.tree}</TestComponent>
+  ).toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
