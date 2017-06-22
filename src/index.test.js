@@ -357,3 +357,21 @@ it('should be able to inline components', () => {
 
   expect(tree).toMatchSnapshot();
 });
+
+it('should allow overriding code element with components version', () => {
+  const compile = marksyComponents({
+    createElement,
+    elements: {
+      code() {
+        return <div>code</div>
+      }
+    }
+  });
+  const compiled = compile('Hello `code`');
+
+  const tree = renderer.create(
+    <TestComponent>{compiled.tree}</TestComponent>
+  ).toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
