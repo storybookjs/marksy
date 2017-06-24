@@ -55,7 +55,7 @@ export default function createRenderer (tracker, options, overrides = {}) {
     function CodeComponent () {
       return options.createElement('pre', null, options.createElement('code', {
         className: `hljs ${language}`,
-        dangerouslySetInnerHTML: {__html: options.highlight ? options.highlight.highlightAuto(code).value : code}
+        dangerouslySetInnerHTML: {__html: options.highlight ? options.highlight.highlight(language, code).value : code}
       }))
     }
 

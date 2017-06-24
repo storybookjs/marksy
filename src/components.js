@@ -12,7 +12,7 @@ export function marksy (options = {}) {
   function CodeComponent (props) {
     return options.createElement('pre', null, options.createElement('code', {
       className: `hljs ${props.language}`,
-      dangerouslySetInnerHTML: {__html: options.highlight ? options.highlight.highlightAuto(props.code).value : props.code}
+      dangerouslySetInnerHTML: {__html: options.highlight ? options.highlight.highlight(props.language, props.code).value : props.code}
     }))
   }
 
