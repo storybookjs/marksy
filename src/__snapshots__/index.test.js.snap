@@ -86,17 +86,17 @@ exports[`should be able to compile headers 1`] = `
     header1
   </h1>
   <h2
-    id="header2"
+    id="header1-header2"
   >
     header2
   </h2>
   <h3
-    id="header3"
+    id="header1-header2-header3"
   >
     header3
   </h3>
   <h4
-    id="header4"
+    id="header1-header2-header3-header4"
   >
     header4
   </h4>
@@ -337,6 +337,31 @@ exports[`should be able to inline components 1`] = `
 </div>
 `;
 
+exports[`should handle same name nested headers 1`] = `
+<div>
+  <h1
+    id="header1"
+  >
+    header1
+  </h1>
+  <h2
+    id="header1-header2"
+  >
+    header2
+  </h2>
+  <h1
+    id="header3"
+  >
+    header3
+  </h1>
+  <h2
+    id="header3-header2"
+  >
+    header2
+  </h2>
+</div>
+`;
+
 exports[`should produce TOC 1`] = `
 "[
   {
@@ -345,12 +370,12 @@ exports[`should produce TOC 1`] = `
     \\"level\\": 1,
     \\"children\\": [
       {
-        \\"id\\": \\"bar\\",
+        \\"id\\": \\"foo-bar\\",
         \\"title\\": \\"bar\\",
         \\"level\\": 2,
         \\"children\\": [
           {
-            \\"id\\": \\"baz\\",
+            \\"id\\": \\"foo-bar-baz\\",
             \\"title\\": \\"baz\\",
             \\"level\\": 3,
             \\"children\\": []

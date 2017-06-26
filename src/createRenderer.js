@@ -110,7 +110,10 @@ export default function createRenderer (tracker, options, overrides = {}) {
   }
 
   renderer.heading = overrides.heading || function (text, level) {
-    const id = text.replace(/\s/g, '-').toLowerCase();
+    tracker.currentId = tracker.currentId.slice(0, level - 1);
+    tracker.currentId.push(text.replace(/\s/g, '-').toLowerCase())
+
+    const id = tracker.currentId.join('-');
     const lastToc = tracker.toc[tracker.toc.length - 1];
 
     if (!lastToc || lastToc.level > level) {
