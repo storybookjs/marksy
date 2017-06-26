@@ -362,6 +362,36 @@ exports[`should handle same name nested headers 1`] = `
 </div>
 `;
 
+exports[`should highlight code with Prism.js 1`] = `
+<div>
+  <pre>
+    <code
+      className="language-js"
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "<span class=\\"token keyword\\">const</span> foo <span class=\\"token operator\\">=</span> <span class=\\"token string\\">\\"bar\\"</span>",
+        }
+      }
+    />
+  </pre>
+</div>
+`;
+
+exports[`should highlight code with highlight.js 1`] = `
+<div>
+  <pre>
+    <code
+      className="language-js"
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "<span class=\\"hljs-keyword\\">const</span> foo = <span class=\\"hljs-string\\">\\"bar\\"</span>",
+        }
+      }
+    />
+  </pre>
+</div>
+`;
+
 exports[`should produce TOC 1`] = `
 "[
   {

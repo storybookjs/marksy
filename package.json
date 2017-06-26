@@ -1,6 +1,6 @@
 {
   "name": "marksy",
-  "version": "3.2.1",
+  "version": "4.0.0",
   "description": "Convert markdown into react components",
   "main": "lib/index.js",
   "scripts": {
@@ -39,6 +39,7 @@
     "node-libs-browser": "^0.5.2",
     "preact": "^8.1.0",
     "preact-render-to-string": "^3.6.3",
+    "prismjs": "^1.6.0",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-test-renderer": "^15.5.4",

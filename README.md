@@ -113,24 +113,36 @@ compile('<MyCustomComponent/>', null, {
 ```
 
 ## Code highlighting
-To enable code highlighting the [Highlight.js](https://highlightjs.org/) project needs to be passed in as an option. It can be a good idea to register only necessary languages you need:
+To enable code highlighting you just need to add a method that does the transformation. Here is an example with [Highlight.js](https://highlightjs.org/), but you could also use [Prism](http://prismjs.com/). Both of them support server side rendering. For example:
 
 ```js
 import {createElement} from 'react'
 import 'highlight.js/styles/github.css';
-import highlight from 'highlight.js/lib/highlight';
+import hljs from 'highlight.js/lib/highlight';
 import hljsJavascript from 'highlight.js/lib/languages/javascript';
 import marksy from 'marksy/components'
 
-highlight.registerLanguage('javascript', hljsJavascript);
+hljs.registerLanguage('javascript', hljsJavascript);
 
 const compile = marksy({
   createElement,
-  highlight
+  highlight(language, code) {
+    return hljs.highlight(language, code).value
+  }
 })
 ```
 
-This can also be used on server side.
+The elements returned is:
+
+```html
+<pre>
+  <code class="language-js">
+    ...code...
+  </code>
+</pre>
+```
+
+Meaning that the `code` element is added a classname based on the language.
 
 ## Developing
 1. Clone repo

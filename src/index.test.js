@@ -6,6 +6,13 @@ import infernoCreateElement from 'inferno-create-element';
 import renderer from 'react-test-renderer';
 import marksy from './'
 import marksyComponents from './components'
+import Prism from 'prismjs'
+import hljs from 'highlight.js/lib/highlight'
+import hljsJs from 'highlight.js/lib/languages/javascript'
+import hljsXml from 'highlight.js/lib/languages/xml'
+
+hljs.registerLanguage('javascript', hljsJs)
+hljs.registerLanguage('xml', hljsXml)
 
 class TestComponent extends Component {
   render () {
@@ -82,7 +89,7 @@ it('should be able to compile headers', () => {
   expect(tree).toMatchSnapshot();
 });
 
-it.only('should handle same name nested headers', () => {
+it('should handle same name nested headers', () => {
   const compile = marksy({createElement});
   const compiled = compile(`
 # header1
@@ -383,6 +390,38 @@ it('should allow overriding code element with components version', () => {
     }
   });
   const compiled = compile('Hello `code`');
+
+  const tree = renderer.create(
+    <TestComponent>{compiled.tree}</TestComponent>
+  ).toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
+it('should highlight code with highlight.js', () => {
+  const compile = marksy({
+    createElement,
+    highlight(language, code) {
+      return hljs.highlight(language, code).value
+    }
+  });
+  const compiled = compile('```js\nconst foo = "bar"\n```');
+
+  const tree = renderer.create(
+    <TestComponent>{compiled.tree}</TestComponent>
+  ).toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
+it('should highlight code with Prism.js', () => {
+  const compile = marksyComponents({
+    createElement,
+    highlight(language, code) {
+      return Prism.highlight(code, Prism.languages[language])
+    }
+  });
+  const compiled = compile('```js\nconst foo = "bar"\n```');
 
   const tree = renderer.create(
     <TestComponent>{compiled.tree}</TestComponent>
