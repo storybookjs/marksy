@@ -20,7 +20,8 @@ export function marksy (options = {}) {
     tree: null,
     elements: null,
     nextElementId: null,
-    toc: null
+    toc: null,
+    currentId: []
   };
   const renderer = createRenderer(tracker, options, {
     html (html) {
@@ -63,6 +64,7 @@ export function marksy (options = {}) {
     tracker.toc = [];
     tracker.nextElementId = 0;
     tracker.context = context;
+    tracker.currentId = [];
     marked(content, Object.assign({renderer: renderer, smartypants: true}, markedOptions));
 
     return {tree: tracker.tree, toc: tracker.toc};
