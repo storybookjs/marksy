@@ -82,6 +82,21 @@ it('should be able to compile headers', () => {
   expect(tree).toMatchSnapshot();
 });
 
+it.only('should handle same name nested headers', () => {
+  const compile = marksy({createElement});
+  const compiled = compile(`
+# header1
+## header2
+# header3
+## header2
+  `)
+  const tree = renderer.create(
+    <TestComponent>{compiled.tree}</TestComponent>
+  ).toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
 it('should be able to compile ordered list', () => {
   const compile = marksy({createElement});
   const compiled = compile(`
