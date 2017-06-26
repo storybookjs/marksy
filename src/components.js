@@ -11,8 +11,8 @@ export function marksy (options = {}) {
 
   function CodeComponent (props) {
     return options.createElement('pre', null, options.createElement('code', {
-      className: `hljs ${props.language}`,
-      dangerouslySetInnerHTML: {__html: options.highlight ? options.highlight.highlight(props.language, props.code).value : props.code}
+      className: `language-${props.language}`,
+      dangerouslySetInnerHTML: {__html: options.highlight ? options.highlight(props.language, props.code) : props.code}
     }))
   }
 
