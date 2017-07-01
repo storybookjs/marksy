@@ -2,3 +2,4 @@ src
 app
 webpack.config.js
 build
+.babelrc
