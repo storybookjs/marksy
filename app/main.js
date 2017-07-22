@@ -11,13 +11,15 @@ let id = 0
 
 const compile = marksy({
   createElement: React.createElement,
-  highlight: hljs,
+  highlight(language, code) {
+    return hljs.highlight(language, code).value;
+  },
   components: {
     Row ({children}) {
-      return <div style={{display: 'flex'}} key={id++}>{children}</div>
+      return <div style={{display: 'flex'}}>{children}</div>
     },
     Col ({children}) {
-      return <div style={{flex: '1', padding: '10px', backgroundColor: '#DADADA', border: '1px solid #333'}} key={id++}>{children}</div>
+      return <div style={{flex: '1', padding: '10px', backgroundColor: '#DADADA', border: '1px solid #333'}}>{children}</div>
     }
   },
   h1 (props) {
@@ -30,7 +32,9 @@ const demo = `
 
 Just need to show you some code first:
 
-${'```js \nconst foo = "bar"\n```'}
+\`\`\`js
+const foo = "bar"
+\`\`\`
 
 <Row>
   <Col>Need to tell you something over here</Col>
