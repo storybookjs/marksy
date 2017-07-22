@@ -5,10 +5,6 @@ import {transform} from 'babel-standalone';
 export function marksy (options = {}) {
   options.components = options.components || {};
 
-  function HtmlWrapper(props) {
-    return options.createElement('div', null, props.children);
-  }
-
   function CodeComponent (props) {
     return options.createElement('pre', null, options.createElement('code', {
       className: `language-${props.language}`,
@@ -38,9 +34,7 @@ export function marksy (options = {}) {
           return options.createElement(tag, componentProps, children);
         }};
 
-        tracker.tree.push(options.createElement(HtmlWrapper, {
-          key: tracker.nextElementId++
-        }, new Function('React', ...Object.keys(options.components), `return ${code}`)(mockedReact, ...components) || null));
+        tracker.tree.push(new Function('React', ...Object.keys(options.components), `return ${code}`)(mockedReact, ...components) || null);
       } catch (e) {}
     },
     code (code, language) {
