@@ -79,7 +79,7 @@ const compile = marksy({
 /* WITH LANGUAGE FOR GENERIC SUPPORT:
   # Just a test
   ```marksy
-  &lt;/MyCustomComponent>some text&lt;/MyCustomComponent>
+  &lt;MyCustomComponent>some text&lt;/MyCustomComponent>
   ```
 */
 </code></pre>
@@ -107,7 +107,7 @@ const compile = marksy({
   }
 })
 
-compile('<MyCustomComponent/>', null, {
+compile('<My custom component />', null, {
   foo: 'bar'
 })
 ```
