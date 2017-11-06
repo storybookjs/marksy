@@ -429,7 +429,7 @@ it('should escape code when no highlighting is supplied', () => {
 });
 
 it('should escape code when no highlighting is supplied with components version', () => {
-  const compile = marksy({
+  const compile = marksyComponents({
     createElement
   });
   const compiled = compile('```js\nconst Foo = () => <div/>\n```');
@@ -441,7 +441,6 @@ it('should escape code when no highlighting is supplied with components version'
   expect(tree).toMatchSnapshot();
 });
 
-it('should ')
 
 it('should highlight code with highlight.js', () => {
   const compile = marksy({
