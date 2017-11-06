@@ -220,6 +220,23 @@ it('should be able to compile components using marksy language', () => {
   expect(tree).toMatchSnapshot();
 });
 
+it('should show source instead of compiling components when using other languages', () => {
+  const compile = marksyComponents({
+    createElement,
+    components: {
+      Test() {
+        return <div>mip</div>
+      }
+    }
+  });
+  const compiled = compile('```js\n<Test />\n```')
+  const tree = renderer.create(
+    <TestComponent>{compiled.tree}</TestComponent>
+  ).toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
 it('should be able to compile nested lists', () => {
   const compile = marksy({createElement});
   const compiled = compile(`
@@ -423,6 +440,8 @@ it('should escape code when no highlighting is supplied with components version'
 
   expect(tree).toMatchSnapshot();
 });
+
+it('should ')
 
 it('should highlight code with highlight.js', () => {
   const compile = marksy({

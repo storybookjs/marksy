@@ -445,6 +445,21 @@ exports[`should produce custom tags 1`] = `
 </div>
 `;
 
+exports[`should show source instead of compiling components when using other languages 1`] = `
+<div>
+  <pre>
+    <code
+      className="language-js"
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "&lt;Test /&gt;",
+        }
+      }
+    />
+  </pre>
+</div>
+`;
+
 exports[`should work with Inferno 1`] = `"<div><div>foo</div></div>"`;
 
 exports[`should work with Preact 1`] = `"<div><div>foo</div></div>"`;
