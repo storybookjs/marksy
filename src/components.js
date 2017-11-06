@@ -1,6 +1,7 @@
 import createRenderer from './createRenderer';
 import marked from 'marked';
 import {transform} from 'babel-standalone';
+import escapeHtml from 'escape-html';
 
 export function marksy (options = {}) {
   options.components = options.components || {};
@@ -8,7 +9,9 @@ export function marksy (options = {}) {
   function CodeComponent (props) {
     return options.createElement('pre', null, options.createElement('code', {
       className: `language-${props.language}`,
-      dangerouslySetInnerHTML: {__html: options.highlight ? options.highlight(props.language, props.code) : props.code}
+      dangerouslySetInnerHTML: {
+        __html: options.highlight ? options.highlight(props.language, props.code) : escapeHtml(props.code)
+      }
     }))
   }
 

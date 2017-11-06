@@ -1,5 +1,6 @@
 import marked from 'marked';
 import he from 'he';
+import escapeHtml from 'escape-html';
 
 export default function createRenderer (tracker, options, overrides = {}) {
   const renderer = new marked.Renderer();
@@ -55,7 +56,7 @@ export default function createRenderer (tracker, options, overrides = {}) {
     function CodeComponent () {
       return options.createElement('pre', null, options.createElement('code', {
         className: `language-${language}`,
-        dangerouslySetInnerHTML: {__html: options.highlight ? options.highlight(language, code) : code}
+        dangerouslySetInnerHTML: {__html: options.highlight ? options.highlight(language, code) : escapeHtml(code)}
       }))
     }
 

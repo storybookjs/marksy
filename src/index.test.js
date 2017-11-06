@@ -398,6 +398,32 @@ it('should allow overriding code element with components version', () => {
   expect(tree).toMatchSnapshot();
 });
 
+it('should escape code when no highlighting is supplied', () => {
+  const compile = marksy({
+    createElement
+  });
+  const compiled = compile('```js\nconst Foo = () => <div/>\n```');
+
+  const tree = renderer.create(
+    <TestComponent>{compiled.tree}</TestComponent>
+  ).toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
+it('should escape code when no highlighting is supplied with components version', () => {
+  const compile = marksy({
+    createElement
+  });
+  const compiled = compile('```js\nconst Foo = () => <div/>\n```');
+
+  const tree = renderer.create(
+    <TestComponent>{compiled.tree}</TestComponent>
+  ).toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
 it('should highlight code with highlight.js', () => {
   const compile = marksy({
     createElement,

@@ -327,6 +327,36 @@ exports[`should be able to inline components 1`] = `
 </div>
 `;
 
+exports[`should escape code when no highlighting is supplied 1`] = `
+<div>
+  <pre>
+    <code
+      className="language-js"
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "const Foo = () =&gt; &lt;div/&gt;",
+        }
+      }
+    />
+  </pre>
+</div>
+`;
+
+exports[`should escape code when no highlighting is supplied with components version 1`] = `
+<div>
+  <pre>
+    <code
+      className="language-js"
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "const Foo = () =&gt; &lt;div/&gt;",
+        }
+      }
+    />
+  </pre>
+</div>
+`;
+
 exports[`should handle same name nested headers 1`] = `
 <div>
   <h1
