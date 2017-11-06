@@ -107,7 +107,7 @@ const compile = marksy({
   }
 })
 
-compile('<My custom component />', null, {
+compile('<MyCustomComponent />', null, {
   foo: 'bar'
 })
 ```
