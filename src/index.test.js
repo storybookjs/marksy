@@ -398,6 +398,24 @@ it('should allow overriding code element with components version', () => {
   expect(tree).toMatchSnapshot();
 });
 
+it('should allow overriding codeblock element with components version', () => {
+    const compile = marksyComponents({
+        createElement,
+        elements: {
+            code() {
+                return <div>code</div>
+            }
+        }
+    });
+    const compiled = compile('```js\nconst foo = "bar"\n```');
+
+    const tree = renderer.create(
+        <TestComponent>{compiled.tree}</TestComponent>
+    ).toJSON();
+
+    expect(tree).toMatchSnapshot();
+});
+
 it('should highlight code with highlight.js', () => {
   const compile = marksy({
     createElement,
