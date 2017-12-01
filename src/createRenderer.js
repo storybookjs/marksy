@@ -59,7 +59,10 @@ export default function createRenderer (tracker, options, overrides = {}) {
       }))
     }
 
-    tracker.elements[elementId] = options.createElement(CodeComponent, {key: elementId});
+    tracker.elements[elementId] = options.createElement(CodeComponent, {
+      key: elementId,
+      context: tracker.context
+    });
 
     tracker.tree.push(tracker.elements[elementId]);
 
