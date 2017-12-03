@@ -220,6 +220,23 @@ it('should be able to compile components using marksy language', () => {
   expect(tree).toMatchSnapshot();
 });
 
+it('should show source instead of compiling components when using other languages', () => {
+  const compile = marksyComponents({
+    createElement,
+    components: {
+      Test() {
+        return <div>mip</div>
+      }
+    }
+  });
+  const compiled = compile('```js\n<Test />\n```')
+  const tree = renderer.create(
+    <TestComponent>{compiled.tree}</TestComponent>
+  ).toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
 it('should be able to compile nested lists', () => {
   const compile = marksy({createElement});
   const compiled = compile(`
@@ -380,12 +397,12 @@ it('should be able to inline components', () => {
   expect(tree).toMatchSnapshot();
 });
 
-it('should allow overriding code element with components version', () => {
-  const compile = marksyComponents({
+it('should allow overriding inline code element', () => {
+  const compile = marksy({
     createElement,
     elements: {
-      code() {
-        return <div>code</div>
+      codespan({children}) {
+        return <div>{children}</div>
       }
     }
   });
@@ -397,6 +414,88 @@ it('should allow overriding code element with components version', () => {
 
   expect(tree).toMatchSnapshot();
 });
+
+it('should allow overriding inline code element with components version', () => {
+  const compile = marksyComponents({
+    createElement,
+    elements: {
+      codespan({children}) {
+        return <div>{children}</div>
+      }
+    }
+  });
+  const compiled = compile('Hello `code`');
+
+  const tree = renderer.create(
+    <TestComponent>{compiled.tree}</TestComponent>
+  ).toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
+it('should allow overriding block code element', () => {
+  const compile = marksy({
+    createElement,
+    elements: {
+      code({language, code}) {
+        console.log(language, code)
+        return <div>{language}: {code}</div>
+      }
+    }
+  });
+  const compiled = compile('```js\ncode\n```');
+
+  const tree = renderer.create(
+    <TestComponent>{compiled.tree}</TestComponent>
+  ).toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
+it('should allow overriding block code element with components version', () => {
+  const compile = marksyComponents({
+    createElement,
+    elements: {
+      code({language, code}) {
+        return <div>{language}: {code}</div>
+      }
+    }
+  });
+  const compiled = compile('```js\ncode\n```');
+
+  const tree = renderer.create(
+    <TestComponent>{compiled.tree}</TestComponent>
+  ).toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
+it('should escape code when no highlighting is supplied', () => {
+  const compile = marksy({
+    createElement
+  });
+  const compiled = compile('```js\nconst Foo = () => <div/>\n```');
+
+  const tree = renderer.create(
+    <TestComponent>{compiled.tree}</TestComponent>
+  ).toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
+it('should escape code when no highlighting is supplied with components version', () => {
+  const compile = marksyComponents({
+    createElement
+  });
+  const compiled = compile('```js\nconst Foo = () => <div/>\n```');
+
+  const tree = renderer.create(
+    <TestComponent>{compiled.tree}</TestComponent>
+  ).toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
 
 it('should highlight code with highlight.js', () => {
   const compile = marksy({

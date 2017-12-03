@@ -3,9 +3,7 @@
 exports[`should allow injecting context to components 1`] = `
 <div>
   <div>
-    <div>
-      bar
-    </div>
+    bar
   </div>
 </div>
 `;
@@ -18,7 +16,38 @@ exports[`should allow injecting context to elements 1`] = `
 </div>
 `;
 
-exports[`should allow overriding code element with components version 1`] = `
+exports[`should allow overriding block code element 1`] = `
+<div>
+  <div>
+    js
+    : 
+    code
+  </div>
+</div>
+`;
+
+exports[`should allow overriding block code element with components version 1`] = `
+<div>
+  <div>
+    js
+    : 
+    code
+  </div>
+</div>
+`;
+
+exports[`should allow overriding inline code element 1`] = `
+<div>
+  <p>
+    Hello 
+    <div>
+      code
+    </div>
+  </p>
+</div>
+`;
+
+exports[`should allow overriding inline code element with components version 1`] = `
 <div>
   <p>
     Hello 
@@ -61,9 +90,7 @@ exports[`should be able to compile codespans 1`] = `
 exports[`should be able to compile components 1`] = `
 <div>
   <div>
-    <div>
-      mip
-    </div>
+    mip
   </div>
 </div>
 `;
@@ -71,9 +98,7 @@ exports[`should be able to compile components 1`] = `
 exports[`should be able to compile components using marksy language 1`] = `
 <div>
   <div>
-    <div>
-      mip
-    </div>
+    mip
   </div>
 </div>
 `;
@@ -118,9 +143,7 @@ exports[`should be able to compile html 1`] = `
 exports[`should be able to compile html as components 1`] = `
 <div>
   <div>
-    <div>
-      hello
-    </div>
+    hello
   </div>
 </div>
 `;
@@ -326,14 +349,38 @@ exports[`should be able to compile text 1`] = `
 
 exports[`should be able to inline components 1`] = `
 <div>
-  <div>
-    <p>
-      Hello there 
-      <div>
-        Wuuut
-      </div>
-    </p>
-  </div>
+  <p>
+    Hello there 
+    <div>
+      Wuuut
+    </div>
+  </p>
+</div>
+`;
+
+exports[`should escape code when no highlighting is supplied 1`] = `
+<div>
+  <pre>
+    <code
+      className="language-js"
+      dangerouslySetInnerHTML={null}
+    >
+      const Foo = () =&gt; &lt;div/&gt;
+    </code>
+  </pre>
+</div>
+`;
+
+exports[`should escape code when no highlighting is supplied with components version 1`] = `
+<div>
+  <pre>
+    <code
+      className="language-js"
+      dangerouslySetInnerHTML={null}
+    >
+      const Foo = () =&gt; &lt;div/&gt;
+    </code>
+  </pre>
 </div>
 `;
 
@@ -422,6 +469,19 @@ exports[`should produce custom tags 1`] = `
   <div>
     foo
   </div>
+</div>
+`;
+
+exports[`should show source instead of compiling components when using other languages 1`] = `
+<div>
+  <pre>
+    <code
+      className="language-js"
+      dangerouslySetInnerHTML={null}
+    >
+      &lt;Test /&gt;
+    </code>
+  </pre>
 </div>
 `;
 
