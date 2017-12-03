@@ -16,7 +16,38 @@ exports[`should allow injecting context to elements 1`] = `
 </div>
 `;
 
-exports[`should allow overriding code element with components version 1`] = `
+exports[`should allow overriding block code element 1`] = `
+<div>
+  <div>
+    js
+    : 
+    code
+  </div>
+</div>
+`;
+
+exports[`should allow overriding block code element with components version 1`] = `
+<div>
+  <div>
+    js
+    : 
+    code
+  </div>
+</div>
+`;
+
+exports[`should allow overriding inline code element 1`] = `
+<div>
+  <p>
+    Hello 
+    <div>
+      code
+    </div>
+  </p>
+</div>
+`;
+
+exports[`should allow overriding inline code element with components version 1`] = `
 <div>
   <p>
     Hello 
