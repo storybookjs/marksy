@@ -6,8 +6,8 @@ export function codeRenderer(tracker, options) {
   function CodeComponent (props) {
     return options.createElement('pre', null, options.createElement('code', {
       className: `language-${props.language}`,
-      dangerouslySetInnerHTML: {__html: options.highlight ? options.highlight(props.language, props.code) : escapeHtml(props.code)}
-    }))
+      dangerouslySetInnerHTML: options.highlight ? {__html: options.highlight(props.language, props.code)} : null
+    }, options.highlight ? null : props.code))
   }
 
   return function(code, language) {

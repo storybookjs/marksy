@@ -363,12 +363,10 @@ exports[`should escape code when no highlighting is supplied 1`] = `
   <pre>
     <code
       className="language-js"
-      dangerouslySetInnerHTML={
-        Object {
-          "__html": "const Foo = () =&gt; &lt;div/&gt;",
-        }
-      }
-    />
+      dangerouslySetInnerHTML={null}
+    >
+      const Foo = () =&gt; &lt;div/&gt;
+    </code>
   </pre>
 </div>
 `;
@@ -378,12 +376,10 @@ exports[`should escape code when no highlighting is supplied with components ver
   <pre>
     <code
       className="language-js"
-      dangerouslySetInnerHTML={
-        Object {
-          "__html": "const Foo = () =&gt; &lt;div/&gt;",
-        }
-      }
-    />
+      dangerouslySetInnerHTML={null}
+    >
+      const Foo = () =&gt; &lt;div/&gt;
+    </code>
   </pre>
 </div>
 `;
@@ -481,12 +477,10 @@ exports[`should show source instead of compiling components when using other lan
   <pre>
     <code
       className="language-js"
-      dangerouslySetInnerHTML={
-        Object {
-          "__html": "&lt;Test /&gt;",
-        }
-      }
-    />
+      dangerouslySetInnerHTML={null}
+    >
+      &lt;Test /&gt;
+    </code>
   </pre>
 </div>
 `;
