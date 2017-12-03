@@ -5,13 +5,6 @@ import {transform} from 'babel-standalone';
 export function marksy (options = {}) {
   options.components = options.components || {};
 
-  function CodeComponent (props) {
-    return options.createElement('pre', null, options.createElement('code', {
-      className: `language-${props.language}`,
-      dangerouslySetInnerHTML: {__html: options.highlight ? options.highlight(props.language, props.code) : props.code}
-    }))
-  }
-
   const tracker = {
     tree: null,
     elements: null,
