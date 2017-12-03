@@ -1,16 +1,9 @@
-import createRenderer from './createRenderer';
+import createRenderer, {codeRenderer} from './createRenderer';
 import marked from 'marked';
 import {transform} from 'babel-standalone';
 
 export function marksy (options = {}) {
   options.components = options.components || {};
-
-  function CodeComponent (props) {
-    return options.createElement('pre', null, options.createElement('code', {
-      className: `language-${props.language}`,
-      dangerouslySetInnerHTML: {__html: options.highlight ? options.highlight(props.language, props.code) : props.code}
-    }))
-  }
 
   const tracker = {
     tree: null,
@@ -41,13 +34,7 @@ export function marksy (options = {}) {
       if (language === 'marksy') {
         return renderer.html(code)
       } else {
-        const elementId = tracker.nextElementId++;
-
-        tracker.elements[elementId] = options.createElement((options.elements && options.elements.code) || CodeComponent, {key: elementId, code, language});
-
-        tracker.tree.push(tracker.elements[elementId]);
-
-        return `{{${elementId}}}`;
+        return codeRenderer(tracker, options)(code, language);
       }
     }
   })

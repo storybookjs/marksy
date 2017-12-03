@@ -1,6 +1,28 @@
 import marked from 'marked';
 import he from 'he';
 
+export function codeRenderer(tracker, options) {
+  function CodeComponent (props) {
+    return options.createElement('pre', null, options.createElement('code', {
+      className: `language-${props.language}`,
+      dangerouslySetInnerHTML: {__html: options.highlight ? options.highlight(props.language, props.code) : props.code}
+    }))
+  }
+
+  return function(code, language) {
+    const elementId = tracker.nextElementId++;
+
+    tracker.elements[elementId] = options.createElement(
+      (options.elements && options.elements.code) || CodeComponent,
+      {key: elementId, code, language}
+    );
+
+    tracker.tree.push(tracker.elements[elementId]);
+
+    return `{{${elementId}}}`;
+  }
+}
+
 export default function createRenderer (tracker, options, overrides = {}) {
   const renderer = new marked.Renderer();
 
@@ -32,39 +54,26 @@ export default function createRenderer (tracker, options, overrides = {}) {
     return extractedElements;
   }
 
-  function addElement (tag, props = {}, children) {
+  function addElement (tag, props = {}, children, type = tag) {
     const elementId = tracker.nextElementId++;
     let inlineContent = null;
+
+    const elementType = options.elements && (options.elements[type] || options.elements[tag])
 
     if (children) {
       inlineContent = Array.isArray(children) ? children.map(populateInlineContent) : populateInlineContent(children)
     }
 
-    tracker.elements[elementId] = options.createElement((options.elements && options.elements[tag]) || tag, Object.assign({
+    tracker.elements[elementId] = options.createElement(elementType || tag, Object.assign({
       key: elementId,
-    }, props, options.elements && options.elements[tag] ? {context: tracker.context} : {}), inlineContent);
+    }, props, elementType ? {context: tracker.context} : {}), inlineContent);
 
     tracker.tree.push(tracker.elements[elementId]);
 
     return `{{${elementId}}}`;
   }
 
-  renderer.code = overrides.code || function (code, language) {
-    const elementId = tracker.nextElementId++;
-
-    function CodeComponent () {
-      return options.createElement('pre', null, options.createElement('code', {
-        className: `language-${language}`,
-        dangerouslySetInnerHTML: {__html: options.highlight ? options.highlight(language, code) : code}
-      }))
-    }
-
-    tracker.elements[elementId] = options.createElement(CodeComponent, {key: elementId});
-
-    tracker.tree.push(tracker.elements[elementId]);
-
-    return `{{${elementId}}}`;
-  };
+  renderer.code = overrides.code || codeRenderer(tracker, options);
 
   renderer.html = overrides.html || function (html) {
     const elementId = tracker.nextElementId++;
@@ -172,7 +181,7 @@ export default function createRenderer (tracker, options, overrides = {}) {
   }
 
   renderer.codespan = overrides.codespan || function (text) {
-    return addElement('code', null, text)
+    return addElement('code', null, text, 'codespan')
   }
 
   renderer.image = overrides.image || function (href, title, text) {
