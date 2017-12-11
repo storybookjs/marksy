@@ -59,7 +59,7 @@ export default function createRenderer (tracker, options, overrides = {}) {
     const elementId = tracker.nextElementId++;
     let inlineContent = null;
 
-    const elementType = options.elements && (options.elements[type] || options.elements[tag])
+    const elementType = options.elements && options.elements[type]
 
     if (children) {
       inlineContent = Array.isArray(children) ? children.map(populateInlineContent) : populateInlineContent(children)
