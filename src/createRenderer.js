@@ -1,6 +1,5 @@
 import marked from 'marked';
 import he from 'he';
-import escapeHtml from 'escape-html';
 
 export function codeRenderer(tracker, options) {
   function CodeComponent (props) {
