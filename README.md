@@ -1,11 +1,13 @@
-# marksy
+# Marksy
 A markdown to custom components library. Supports any virtual DOM library.
 
-## Install
+## Installation
 
-`npm install marksy`
+```sh
+npm install marksy
+```
 
-## API
+## Usage
 ```js
 import React, {createElement} from 'React';
 import marksy from 'marksy'
@@ -43,13 +45,13 @@ const compile = marksy({
     del ({children}) {},
     img ({src, alt}) {},
     code ({language, code}) {},
-    codespan ({children}) {}
-  }
-})
+    codespan ({children}) {},
+  },
+});
 
 const compiled = compile('# hello', {
   // Options passed to "marked" (https://www.npmjs.com/package/marked)
-})
+});
 
 compiled.tree // The React tree of components
 compiled.toc // The table of contents, based on usage of headers
@@ -86,7 +88,7 @@ const compile = marksy({
 
 This will be converted to the component above. You can pass in any kind of props, as if it was normal code.
 
-## Context
+### Context
 You might need to pass in general information to your custom elements and components. You can pass in a context to do so:
 
 ```js
@@ -112,7 +114,7 @@ compile('<MyCustomComponent />', null, {
 })
 ```
 
-## Code highlighting
+### Code highlighting
 To enable code highlighting you just need to add a method that does the transformation. Here is an example with [Highlight.js](https://highlightjs.org/), but you could also use [Prism](http://prismjs.com/). Both of them support server side rendering. For example:
 
 ```js

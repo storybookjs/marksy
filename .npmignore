@@ -3,3 +3,6 @@ app
 webpack.config.js
 build
 .babelrc
+.eslint.js
+node_modules
+yarn.lock
