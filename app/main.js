@@ -1,13 +1,16 @@
+/* eslint-disable import/no-extraneous-dependencies */
+
 import 'highlight.js/styles/github.css';
 import hljs from 'highlight.js/lib/highlight';
 import hljsJavascript from 'highlight.js/lib/languages/javascript';
-import React from 'react'
-import {render} from 'react-dom'
-import marksy from 'marksy/components'
+import React from 'react';
+import { render } from 'react-dom';
+
+// eslint-disable-next-line import/no-unresolved
+import marksy from 'marksy/components';
+import { document } from 'global';
 
 hljs.registerLanguage('javascript', hljsJavascript);
-
-let id = 0
 
 const compile = marksy({
   createElement: React.createElement,
@@ -15,17 +18,28 @@ const compile = marksy({
     return hljs.highlight(language, code).value;
   },
   components: {
-    Row ({children}) {
-      return <div style={{display: 'flex'}}>{children}</div>
+    Row({ children }) {
+      return <div style={{ display: 'flex' }}>{children}</div>;
     },
-    Col ({children}) {
-      return <div style={{flex: '1', padding: '10px', backgroundColor: '#DADADA', border: '1px solid #333'}}>{children}</div>
-    }
+    Col({ children }) {
+      return (
+        <div
+          style={{
+            flex: '1',
+            padding: '10px',
+            backgroundColor: '#DADADA',
+            border: '1px solid #333',
+          }}
+        >
+          {children}
+        </div>
+      );
+    },
   },
-  h1 (props) {
-    return <h1 style={{textDecoration: 'underline'}}>{props.children}</h1>
-  }
-})
+  h1(props) {
+    return <h1 style={{ textDecoration: 'underline' }}>{props.children}</h1>;
+  },
+});
 
 const demo = `
 # Some blog title
@@ -40,39 +54,47 @@ const foo = "bar"
   <Col>Need to tell you something over here</Col>
   <Col>And over here</Col>
 </Row>
-`
+`;
 
 class App extends React.Component {
-  constructor (props) {
-    super(props)
+  constructor(props) {
+    super(props);
     this.state = {
       tree: compile(demo).tree,
-      value: demo
+      value: demo,
     };
   }
-  onTextareaChange (event) {
+  onTextareaChange(event) {
     this.setState({
       tree: compile(event.target.value).tree,
-      value: event.target.value
+      value: event.target.value,
     });
   }
-  render () {
+  render() {
     return (
       <div>
-        <h1 style={{textAlign: 'center'}}>Marksy demo (a blog service)</h1>
-        <div style={{
-          width: '50%',
-          verticalAlign: 'top',
-          display: 'inline-block',
-          padding: '0 20px'
-        }}>
+        <h1 style={{ textAlign: 'center' }}>Marksy demo (a blog service)</h1>
+        <div
+          style={{
+            width: '50%',
+            verticalAlign: 'top',
+            display: 'inline-block',
+            padding: '0 20px',
+          }}
+        >
           {this.state.tree}
         </div>
         <textarea
-          style={{width: 500, height: 500, border: '1px dashed #DADADA', outline: 'none', padding: '10px'}}
-          onChange={(event) => this.onTextareaChange(event)}
+          style={{
+            width: 500,
+            height: 500,
+            border: '1px dashed #DADADA',
+            outline: 'none',
+            padding: '10px',
+          }}
+          onChange={event => this.onTextareaChange(event)}
           value={this.state.value}
-        ></textarea>
+        />
       </div>
     );
   }

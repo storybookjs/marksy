@@ -2,64 +2,81 @@
   "name": "marksy",
   "version": "6.0.0",
   "description": "Convert markdown into react components",
-  "main": "lib/index.js",
-  "scripts": {
-    "start": "webpack-dev-server --devtool eval-source-map --progress --colors --content-base build",
-    "prepare": "npm run build",
-    "build": "BABEL_ENV=production babel src/ --out-dir=lib/ -s",
-    "test": "jest && size-limit",
-    "size": "size-limit"
+  "keywords": [
+    "convert",
+    "markdown",
+    "react"
+  ],
+  "homepage": "https://github.com/storybooks/marksy",
+  "bugs": {
+    "url": "https://github.com/storybooks/marksy/issues"
   },
+  "license": "MIT",
+  "author": "Christian Alfoni",
+  "main": "lib/index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/cerebral/marksy"
+    "url": "https://github.com/storybooks/marksy"
   },
-  "keywords": [
-    "react",
-    "markdown",
-    "convert"
-  ],
-  "author": "Christian Alfoni",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/cerebral/marksy/issues"
-  },
-  "homepage": "https://github.com/cerebral/marksy",
-  "devDependencies": {
-    "babel-cli": "^6.24.1",
-    "babel-core": "^6.24.1",
-    "babel-jest": "^19.0.0",
-    "babel-loader": "^7.0.0",
-    "babel-preset-es2015": "^6.24.1",
-    "babel-preset-react": "^6.24.1",
-    "css-loader": "^0.15.2",
-    "highlight.js": "^9.12.0",
-    "inferno-create-element": "^3.3.1",
-    "inferno-server": "^3.3.1",
-    "jest": "^20.0.1",
-    "json-loader": "^0.5.2",
-    "node-libs-browser": "^0.5.2",
-    "preact": "^8.1.0",
-    "preact-render-to-string": "^3.6.3",
-    "prismjs": "^1.6.0",
-    "react": "^15.5.4",
-    "react-dom": "^15.5.4",
-    "react-test-renderer": "^15.5.4",
-    "regenerator-runtime": "^0.10.3",
-    "size-limit": "^0.13.1",
-    "style-loader": "^0.12.3",
-    "webpack": "^2.4.1",
-    "webpack-dev-server": "^2.4.2"
+  "scripts": {
+    "build": "BABEL_ENV=production babel src/ --out-dir=lib/ -s",
+    "lint": "cross-env NODE_ENV=production eslint --cache --cache-location=.cache/eslint --ext .js,.jsx,.json ./src ./app",
+    "prepare": "npm run build",
+    "size": "size-limit",
+    "start": "webpack-dev-server --devtool eval-source-map --progress --colors --content-base build",
+    "test": "jest && size-limit"
   },
   "dependencies": {
-    "babel-standalone": "^6.24.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-standalone": "^6.26.0",
     "he": "^1.1.1",
     "marked": "^0.3.9"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-eslint": "^8.1.2",
+    "babel-jest": "^22.0.4",
+    "babel-loader": "^7.1.2",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "cross-env": "^5.1.3",
+    "css-loader": "^0.28.7",
+    "eslint": "^4.14.0",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-jest": "^21.5.0",
+    "eslint-plugin-json": "^1.2.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-prettier": "^2.4.0",
+    "eslint-plugin-react": "^7.5.1",
+    "global": "^4.3.2",
+    "highlight.js": "^9.12.0",
+    "inferno-create-element": "^3.10.1",
+    "inferno-server": "^3.10.1",
+    "jest": "^22.0.4",
+    "json-loader": "^0.5.7",
+    "node-libs-browser": "^2.1.0",
+    "preact": "^8.2.7",
+    "preact-render-to-string": "^3.7.0",
+    "prettier": "^1.9.2",
+    "prismjs": "^1.9.0",
+    "prop-types": "^15.6.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-test-renderer": "^16.2.0",
+    "regenerator-runtime": "^0.11.1",
+    "size-limit": "^0.13.2",
+    "style-loader": "^0.19.1",
+    "webpack": "^3.10.0",
+    "webpack-dev-server": "^2.9.7"
   },
   "size-limit": [
     {
       "path": "lib/index.js",
-      "limit": "31 KB"
+      "limit": "33 KB"
     }
   ]
 }

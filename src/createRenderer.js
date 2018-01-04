@@ -1,51 +1,64 @@
 import marked from 'marked';
 import he from 'he';
-import escapeHtml from 'escape-html';
 
 export function codeRenderer(tracker, options) {
-  function CodeComponent (props) {
-    return options.createElement('pre', null, options.createElement('code', {
-      className: `language-${props.language}`,
-      dangerouslySetInnerHTML: options.highlight ? {__html: options.highlight(props.language, props.code)} : null
-    }, options.highlight ? null : props.code))
+  function CodeComponent(props) {
+    return options.createElement(
+      'pre',
+      null,
+      // eslint-disable-next-line react/no-danger-with-children
+      options.createElement(
+        'code',
+        {
+          className: `language-${props.language}`,
+          dangerouslySetInnerHTML: options.highlight
+            ? { __html: options.highlight(props.language, props.code) }
+            : null,
+        },
+        options.highlight ? null : props.code
+      )
+    );
   }
 
-  return function(code, language) {
+  return (code, language) => {
+    // eslint-disable-next-line no-plusplus, no-param-reassign
     const elementId = tracker.nextElementId++;
 
+    // eslint-disable-next-line no-param-reassign
     tracker.elements[elementId] = options.createElement(
       (options.elements && options.elements.code) || CodeComponent,
-      {key: elementId, code, language}
+      { key: elementId, code, language }
     );
 
     tracker.tree.push(tracker.elements[elementId]);
 
     return `{{${elementId}}}`;
-  }
+  };
 }
 
-export default function createRenderer (tracker, options, overrides = {}) {
+export default function createRenderer(tracker, options, overrides = {}) {
   const renderer = new marked.Renderer();
 
-  function getTocPosition (toc, level) {
-    var currentLevel = toc.children;
+  function getTocPosition(toc, level) {
+    let currentLevel = toc.children;
+
+    // eslint-disable-next-line no-constant-condition
     while (true) {
       if (!currentLevel.length || currentLevel[currentLevel.length - 1].level === level) {
         return currentLevel;
-      } else {
-        currentLevel = currentLevel[currentLevel.length - 1].children;
       }
+      currentLevel = currentLevel[currentLevel.length - 1].children;
     }
   }
 
-  function populateInlineContent (content = '') {
+  function populateInlineContent(content = '') {
     const contentArray = content.split(/(\{\{.*?\}\})/);
-    const extractedElements = contentArray.map(function (text) {
+    const extractedElements = contentArray.map(text => {
       const elementIdMatch = text.match(/\{\{(.*)\}\}/);
       if (elementIdMatch) {
-        tracker.tree.splice(tracker.tree.indexOf(tracker.elements[elementIdMatch[1]]), 1)
+        tracker.tree.splice(tracker.tree.indexOf(tracker.elements[elementIdMatch[1]]), 1);
         return tracker.elements[elementIdMatch[1]];
-      } else if (text != '') {
+      } else if (text !== '') {
         return he.decode(text);
       }
 
@@ -55,19 +68,31 @@ export default function createRenderer (tracker, options, overrides = {}) {
     return extractedElements;
   }
 
-  function addElement (tag, props = {}, children, type = tag) {
+  function addElement(tag, props = {}, children, type = tag) {
+    // eslint-disable-next-line no-plusplus, no-param-reassign
     const elementId = tracker.nextElementId++;
     let inlineContent = null;
 
-    const elementType = options.elements && options.elements[type]
+    const elementType = options.elements && options.elements[type];
 
     if (children) {
-      inlineContent = Array.isArray(children) ? children.map(populateInlineContent) : populateInlineContent(children)
+      inlineContent = Array.isArray(children)
+        ? children.map(populateInlineContent)
+        : populateInlineContent(children);
     }
 
-    tracker.elements[elementId] = options.createElement(elementType || tag, Object.assign({
-      key: elementId,
-    }, props, elementType ? {context: tracker.context} : {}), inlineContent);
+    // eslint-disable-next-line no-param-reassign
+    tracker.elements[elementId] = options.createElement(
+      elementType || tag,
+      Object.assign(
+        {
+          key: elementId,
+        },
+        props,
+        elementType ? { context: tracker.context } : {}
+      ),
+      inlineContent
+    );
 
     tracker.tree.push(tracker.elements[elementId]);
 
@@ -76,118 +101,105 @@ export default function createRenderer (tracker, options, overrides = {}) {
 
   renderer.code = overrides.code || codeRenderer(tracker, options);
 
-  renderer.html = overrides.html || function (html) {
-    const elementId = tracker.nextElementId++;
+  renderer.html =
+    overrides.html ||
+    (html => {
+      // eslint-disable-next-line no-plusplus, no-param-reassign
+      const elementId = tracker.nextElementId++;
 
-    tracker.tree.push(options.createElement('div', {
-      key: elementId,
-      dangerouslySetInnerHTML: {
-        __html: html
+      tracker.tree.push(
+        options.createElement('div', {
+          key: elementId,
+          dangerouslySetInnerHTML: {
+            __html: html,
+          },
+        })
+      );
+    });
+
+  renderer.paragraph = overrides.paragraph || (text => addElement('p', null, text));
+
+  renderer.blockquote = overrides.blockquote || (text => addElement('blockquote', null, text));
+
+  renderer.link = overrides.link || ((href, title, text) => addElement('a', { href, title }, text));
+
+  renderer.br = overrides.br || (() => addElement('br'));
+
+  renderer.hr = overrides.hr || (() => addElement('hr'));
+
+  renderer.strong = overrides.strong || (text => addElement('strong', null, text));
+
+  renderer.del = overrides.del || (text => addElement('del', null, text));
+
+  renderer.em = overrides.em || (text => addElement('em', null, text));
+
+  renderer.heading =
+    overrides.heading ||
+    ((text, level) => {
+      // eslint-disable-next-line no-param-reassign
+      tracker.currentId = tracker.currentId.slice(0, level - 1);
+      tracker.currentId.push(text.replace(/\s/g, '-').toLowerCase());
+
+      const id = tracker.currentId.join('-');
+      const lastToc = tracker.toc[tracker.toc.length - 1];
+
+      if (!lastToc || lastToc.level > level) {
+        tracker.toc.push({
+          id,
+          title: text,
+          level,
+          children: [],
+        });
+      } else {
+        const tocPosition = getTocPosition(lastToc, level);
+
+        tocPosition.push({
+          id,
+          title: text,
+          level,
+          children: [],
+        });
       }
-    }))
-  };
 
-  renderer.paragraph = overrides.paragraph || function (text) {
-    return addElement('p', null, text);
-  }
+      return addElement(
+        `h${level}`,
+        {
+          id,
+        },
+        text
+      );
+    });
 
-  renderer.blockquote = overrides.blockquote || function (text) {
-    return addElement('blockquote', null, text);
-  }
+  renderer.list =
+    overrides.list || ((body, ordered) => addElement(ordered ? 'ol' : 'ul', null, body));
 
-  renderer.link = overrides.link || function (href, title, text) {
-    return addElement('a', {href, title}, text);
-  }
+  renderer.listitem = overrides.listitem || (text => addElement('li', null, text));
 
-  renderer.br = overrides.br || function () {
-    return addElement('br');
-  }
+  renderer.table =
+    overrides.table ||
+    ((header, body) =>
+      addElement('table', null, [
+        addElement('thead', null, header),
+        addElement('tbody', null, body),
+      ]));
 
-  renderer.hr = overrides.hr || function () {
-    return addElement('hr');
-  }
+  renderer.thead = overrides.thead || (content => addElement('thead', null, content));
 
-  renderer.strong = overrides.strong || function (text) {
-    return addElement('strong', null, text);
-  }
+  renderer.tbody = overrides.tbody || (content => addElement('tbody', null, content));
 
-  renderer.del = overrides.del || function (text) {
-    return addElement('del', null, text);
-  }
+  renderer.tablerow = overrides.tablerow || (content => addElement('tr', null, content));
 
-  renderer.em = overrides.em || function (text) {
-    return addElement('em', null, text);
-  }
+  renderer.tablecell =
+    overrides.tablecell ||
+    ((content, flag) => {
+      const tag = flag.header ? 'th' : 'td';
+      return addElement(tag, { className: flag.align ? `text-${flag.align}` : undefined }, content);
+    });
 
-  renderer.heading = overrides.heading || function (text, level) {
-    tracker.currentId = tracker.currentId.slice(0, level - 1);
-    tracker.currentId.push(text.replace(/\s/g, '-').toLowerCase())
+  renderer.codespan = overrides.codespan || (text => addElement('code', null, text, 'codespan'));
 
-    const id = tracker.currentId.join('-');
-    const lastToc = tracker.toc[tracker.toc.length - 1];
-
-    if (!lastToc || lastToc.level > level) {
-      tracker.toc.push({
-        id: id,
-        title: text,
-        level: level,
-        children: []
-      });
-    } else {
-      const tocPosition = getTocPosition(lastToc, level);
-
-      tocPosition.push({
-        id: id,
-        title: text,
-        level: level,
-        children: []
-      });
-    }
-
-    return addElement(`h${level}`, {
-      id
-    }, text);
-  }
-
-  renderer.list = overrides.list || function (body, ordered) {
-    return addElement(ordered ? 'ol' : 'ul', null, body);
-  }
-
-  renderer.listitem = overrides.listitem || function (text) {
-    return addElement('li', null, text);
-  }
-
-  renderer.table = overrides.table || function (header, body) {
-    return addElement('table', null, [
-      addElement('thead', null, header),
-      addElement('tbody', null, body)
-    ]);
-  }
-
-  renderer.thead = overrides.thead || function (content) {
-    return addElement('thead', null, content)
-  }
-
-  renderer.tbody = overrides.tbody || function (content) {
-    return addElement('tbody', null, content)
-  }
-
-  renderer.tablerow = overrides.tablerow || function (content) {
-    return addElement('tr', null, content)
-  }
-
-  renderer.tablecell = overrides.tablecell || function (content, flag) {
-    const tag = flag.header ? 'th' : 'td'
-    return addElement(tag, {className: flag.align ? `text-${flag.align}` : undefined}, content)
-  }
-
-  renderer.codespan = overrides.codespan || function (text) {
-    return addElement('code', null, text, 'codespan')
-  }
-
-  renderer.image = overrides.image || function (href, title, text) {
-    return addElement('img', {src: href, alt: text})
-  }
+  renderer.image =
+    overrides.image || ((href, title, text) => addElement('img', { src: href, alt: text }));
 
   return renderer;
 }

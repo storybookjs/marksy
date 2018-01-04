@@ -1,5 +1,5 @@
 {
-  "presets": ["es2015", "react"],
+  "presets": ["env", "stage-2", "react"],
   "env": {
     "production": {
       "ignore": [
