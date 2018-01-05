@@ -21,7 +21,7 @@ jobs:
           key: v1-dependencies-{{ checksum "yarn.lock" }}
       - run: yarn size
 
-  build:
+  test:
     <<: *defaults
     steps:
       - checkout
