@@ -49,3 +49,11 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "yarn.lock.json" }}
       - run: yarn lint
+
+workflows:
+  version: 2
+  build_accept_deploy:
+    jobs:
+      - test
+      - size
+      - lint
