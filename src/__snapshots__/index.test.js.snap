@@ -196,6 +196,43 @@ exports[`should be able to compile list 1`] = `
 </div>
 `;
 
+exports[`should be able to compile list with html tag 1`] = `
+<div>
+  <font
+    color="red"
+  >
+     this is root red text 
+  </font>
+  <ul>
+    <li>
+      list 1
+    </li>
+    <li>
+      list 2
+    </li>
+    <li>
+      <font
+        color="blue"
+      >
+        list blue text
+      </font>
+    </li>
+    <li>
+      list 3
+      <ul>
+        <li>
+          <font
+            color="green"
+          >
+            two depth green text
+          </font>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+`;
+
 exports[`should be able to compile nested lists 1`] = `
 <div>
   <ul>

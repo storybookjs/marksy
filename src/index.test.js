@@ -478,3 +478,24 @@ it('should highlight code with Prism.js', () => {
 
   expect(tree).toMatchSnapshot();
 });
+
+it('should be able to compile list with html tag', () => {
+  const compile = marksyComponents({
+      createElement,
+  });
+
+  const compiled = compile(
+    `
+  <font color="red"> this is root red text </font>
+
+  * list 1
+  * list 2
+  * <font color="blue">list blue text</font>
+  * list 3
+    * <font color="green">two depth green text</font>
+  `);
+
+  const tree = renderer.create(<TestComponent>{compiled.tree}</TestComponent>).toJSON();
+
+  expect(tree).toMatchSnapshot();
+});

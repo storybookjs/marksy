@@ -16,6 +16,9 @@ export function marksy(options = {}) {
   const renderer = createRenderer(tracker, options, {
     html(html) {
       try {
+        // eslint-disable-next-line no-plusplus
+        const elementId = tracker.nextElementId++;
+
         const { code } = transform(html, {
           presets: ['react'],
         });
@@ -35,16 +38,20 @@ export function marksy(options = {}) {
           },
         };
 
-        tracker.tree.push(
-          // eslint-disable-next-line no-new-func
-          new Function('React', ...Object.keys(options.components), `return ${code}`)(
-            mockedReact,
-            ...components
-          ) || null
-        );
+        tracker.elements[elementId] =
+            // eslint-disable-next-line no-new-func
+            new Function('React', ...Object.keys(options.components), `return ${code}`)(
+                mockedReact,
+                ...components
+            ) || null;
+
+        tracker.tree.push(tracker.elements[elementId]);
+
+        return `{{${elementId}}}`;
       } catch (e) {
         //
       }
+      return null;
     },
     code(code, language) {
       if (language === 'marksy') {
