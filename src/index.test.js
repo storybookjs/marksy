@@ -142,7 +142,7 @@ it('should be able to compile image', () => {
 
 it('should be able to compile html', () => {
   const compile = marksy({ createElement });
-  const compiled = compile('<div>hello</div>');
+  const compiled = compile('<div>hello</div>\n<strong>there</strong>\n<em>world</em>');
   const tree = renderer.create(<TestComponent>{compiled.tree}</TestComponent>).toJSON();
 
   expect(tree).toMatchSnapshot();
@@ -150,7 +150,7 @@ it('should be able to compile html', () => {
 
 it('should be able to compile html as components', () => {
   const compile = marksyComponents({ createElement });
-  const compiled = compile('<div>hello</div>');
+  const compiled = compile('<div>hello</div>\n<strong>there</strong>\n<em>world</em>');
   const tree = renderer.create(<TestComponent>{compiled.tree}</TestComponent>).toJSON();
 
   expect(tree).toMatchSnapshot();
