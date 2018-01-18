@@ -199,7 +199,7 @@ export default function createRenderer(tracker, options, overrides = {}) {
   renderer.codespan = overrides.codespan || (text => addElement('code', null, text, 'codespan'));
 
   renderer.image =
-    overrides.image || ((href, title, text) => addElement('img', { src: href, alt: text }));
+    overrides.image || ((href, title, text) => addElement('img', { src: href, alt: text, title }));
 
   return renderer;
 }
