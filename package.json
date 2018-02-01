@@ -24,7 +24,7 @@
     "prepare": "npm run build",
     "size": "size-limit",
     "start": "webpack-dev-server --devtool eval-source-map --progress --colors --content-base build",
-    "test": "jest && size-limit"
+    "test": "jest"
   },
   "dependencies": {
     "babel-standalone": "^6.26.0",
