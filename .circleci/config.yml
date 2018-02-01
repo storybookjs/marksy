@@ -27,13 +27,13 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "yarn.lock.json" }}
+          - v1-dependencies-{{ checksum "yarn.lock" }}
           - v1-dependencies-
       - run: npm install
       - save_cache:
           paths:
             - node_modules
-          key: v1-dependencies-{{ checksum "yarn.lock.json" }}
+          key: v1-dependencies-{{ checksum "yarn.lock" }}
       - run: yarn test
   lint:
     <<: *defaults
@@ -41,13 +41,13 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "yarn.lock.json" }}
+          - v1-dependencies-{{ checksum "yarn.lock" }}
           - v1-dependencies-
       - run: npm install
       - save_cache:
           paths:
             - node_modules
-          key: v1-dependencies-{{ checksum "yarn.lock.json" }}
+          key: v1-dependencies-{{ checksum "yarn.lock" }}
       - run: yarn lint
 
 workflows:
