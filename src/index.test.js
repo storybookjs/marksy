@@ -481,7 +481,7 @@ it('should highlight code with Prism.js', () => {
 
 it('should be able to compile list with html tag', () => {
   const compile = marksyComponents({
-      createElement,
+    createElement,
   });
 
   const compiled = compile(
@@ -493,7 +493,8 @@ it('should be able to compile list with html tag', () => {
   * <font color="blue">list blue text</font>
   * list 3
     * <font color="green">two depth green text</font>
-  `);
+  `
+  );
 
   const tree = renderer.create(<TestComponent>{compiled.tree}</TestComponent>).toJSON();
 
