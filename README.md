@@ -57,8 +57,35 @@ compiled.tree // The React tree of components
 compiled.toc // The table of contents, based on usage of headers
 ```
 
-### Custom components
+### Components
 You can also add your own custom components. You do this by importing `marksy/components`. This build of marksy includes babel transpiler which will convert any HTML to elements and allow for custom components:
+
+<pre lang="js"><code>
+import React, {createElement} from 'react'
+import marksy from 'marksy'
+
+const compile = marksy({
+  createElement,
+  components: {
+    MyCustomComponent (props) {
+      return &lt;h1>{props.children}&lt;/h1>
+    }
+  }
+})
+
+/* CREATE MARKDOWN USING MARKSY LANGUAGE:
+  # Just a test
+  ```marksy
+  h(MyCustomComponent, {}, "Some text")
+  ```
+*/
+</code></pre>
+
+This will be converted to the component above. You can pass in any kind of props, as if it was normal code. If you are not familiar with `h`, this is a convention for creating elements and components in virtual dom implementations.
+
+### Jsx
+
+You can take one step further and create components wherever you want in the markdown, using jsx. You will have to import `marksy/jsx`. This build of marksy includes babel transpiler which will convert any HTML to elements and allow for custom components. Note that this will increase your bundle size sagnificantly:
 
 <pre lang="js"><code>
 import React, {createElement} from 'react'
@@ -85,8 +112,6 @@ const compile = marksy({
   ```
 */
 </code></pre>
-
-This will be converted to the component above. You can pass in any kind of props, as if it was normal code.
 
 ### Context
 You might need to pass in general information to your custom elements and components. You can pass in a context to do so:
