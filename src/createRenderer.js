@@ -3,11 +3,10 @@ import he from 'he';
 
 export function codeRenderer(tracker, options) {
   function CodeComponent(props) {
-    return options.createElement(
-      'pre',
-      null,
+    let children;
+    try {
       // eslint-disable-next-line react/no-danger-with-children
-      options.createElement(
+      children = options.createElement(
         'code',
         {
           className: `language-${props.language}`,
@@ -16,8 +15,14 @@ export function codeRenderer(tracker, options) {
             : null,
         },
         options.highlight ? null : props.code
-      )
-    );
+      );
+    } catch (e) {
+      // eslint-disable-next-line
+      console.warn(`${props.language} is not highlight support language.`);
+      children = options.createElement('code', null, props.code);
+    }
+
+    return options.createElement('pre', null, children);
   }
 
   return (code, language) => {
