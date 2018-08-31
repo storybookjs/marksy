@@ -18,7 +18,7 @@ export function codeRenderer(tracker, options) {
       );
     } catch (e) {
       // eslint-disable-next-line
-      console.warn(`${props.language} is not highlight support language.`);
+      console.warn(`${props.language} is not supported by your defined highlighter.`);
       children = options.createElement('code', null, props.code);
     }
 
