@@ -465,6 +465,16 @@ exports[`should highlight code with highlight.js 1`] = `
 </div>
 `;
 
+exports[`should not crash highlight.js with unsupported language 1`] = `
+<div>
+  <pre>
+    <code>
+      const foo = "bar"
+    </code>
+  </pre>
+</div>
+`;
+
 exports[`should produce TOC 1`] = `
 "[
   {

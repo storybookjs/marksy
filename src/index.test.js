@@ -480,6 +480,21 @@ it('should highlight code with highlight.js', () => {
   expect(tree).toMatchSnapshot();
 });
 
+it('should not crash highlight.js with unsupported language', () => {
+  const compile = marksy({
+    createElement,
+    highlight(language, code) {
+      return hljs.highlight(language, code).value;
+    },
+  });
+
+  const compiled = compile('```unsuppoted_language\nconst foo = "bar"\n```');
+
+  const tree = renderer.create(<TestComponent>{compiled.tree}</TestComponent>).toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
 it('should highlight code with Prism.js', () => {
   const compile = marksyComponents({
     createElement,
