@@ -12,7 +12,7 @@ import hljsXml from 'highlight.js/lib/languages/xml';
 
 // eslint-disable-next-line
 import marksy from './';
-import marksyComponents from './components';
+import marksyComponents from './jsx';
 
 hljs.registerLanguage('javascript', hljsJs);
 hljs.registerLanguage('xml', hljsXml);
@@ -166,6 +166,21 @@ it('should be able to compile components', () => {
     },
   });
   const compiled = compile('<Test />');
+  const tree = renderer.create(<TestComponent>{compiled.tree}</TestComponent>).toJSON();
+
+  expect(tree).toMatchSnapshot();
+});
+
+it('should be able to compile components using H and marksy language', () => {
+  const compile = marksy({
+    createElement,
+    components: {
+      Test() {
+        return <div>mip</div>;
+      },
+    },
+  });
+  const compiled = compile('```marksy\nh(Test)\n```');
   const tree = renderer.create(<TestComponent>{compiled.tree}</TestComponent>).toJSON();
 
   expect(tree).toMatchSnapshot();

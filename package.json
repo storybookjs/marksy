@@ -55,7 +55,7 @@
     "highlight.js": "^9.12.0",
     "inferno-create-element": "^3.10.1",
     "inferno-server": "^3.10.1",
-    "jest": "^22.1.4",
+    "jest": "^23.5.0",
     "json-loader": "^0.5.7",
     "node-libs-browser": "^2.1.0",
     "preact": "^8.2.7",
