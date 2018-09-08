@@ -95,6 +95,14 @@ exports[`should be able to compile components 1`] = `
 </div>
 `;
 
+exports[`should be able to compile components using H and marksy language 1`] = `
+<div>
+  <div>
+    mip
+  </div>
+</div>
+`;
+
 exports[`should be able to compile components using marksy language 1`] = `
 <div>
   <div>
@@ -291,9 +299,7 @@ exports[`should be able to compile tables 1`] = `
   <table>
     <thead>
       <tr>
-        <th
-          className={undefined}
-        >
+        <th>
           Tables
         </th>
         <th
@@ -310,9 +316,7 @@ exports[`should be able to compile tables 1`] = `
     </thead>
     <tbody>
       <tr>
-        <td
-          className={undefined}
-        >
+        <td>
           col 3 is
         </td>
         <td
@@ -327,9 +331,7 @@ exports[`should be able to compile tables 1`] = `
         </td>
       </tr>
       <tr>
-        <td
-          className={undefined}
-        >
+        <td>
           col 2 is
         </td>
         <td
@@ -344,9 +346,7 @@ exports[`should be able to compile tables 1`] = `
         </td>
       </tr>
       <tr>
-        <td
-          className={undefined}
-        >
+        <td>
           zebra stripes
         </td>
         <td
@@ -461,6 +461,16 @@ exports[`should highlight code with highlight.js 1`] = `
         }
       }
     />
+  </pre>
+</div>
+`;
+
+exports[`should not crash highlight.js with unsupported language 1`] = `
+<div>
+  <pre>
+    <code>
+      const foo = "bar"
+    </code>
   </pre>
 </div>
 `;

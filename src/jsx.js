@@ -39,11 +39,11 @@ export function marksy(options = {}) {
         };
 
         tracker.elements[elementId] =
-            // eslint-disable-next-line no-new-func
-            new Function('React', ...Object.keys(options.components), `return ${code}`)(
-                mockedReact,
-                ...components
-            ) || null;
+          // eslint-disable-next-line no-new-func
+          new Function('React', ...Object.keys(options.components), `return ${code}`)(
+            mockedReact,
+            ...components
+          ) || null;
 
         tracker.tree.push(tracker.elements[elementId]);
 
