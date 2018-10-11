@@ -89,7 +89,7 @@ You can take one step further and create components wherever you want in the mar
 
 <pre lang="js"><code>
 import React, {createElement} from 'react'
-import marksy from 'marksy/components'
+import marksy from 'marksy/jsx'
 
 const compile = marksy({
   createElement,
