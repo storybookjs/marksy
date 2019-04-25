@@ -32,7 +32,10 @@ export function marksy(options = {}) {
                     key: tracker.nextElementId++,
                     context: tracker.context,
                   })
-                : props;
+                : Object.assign(props || {}, {
+                    // eslint-disable-next-line no-plusplus
+                    key: tracker.nextElementId++,
+                  });
 
             return options.createElement(tag, componentProps, children);
           },

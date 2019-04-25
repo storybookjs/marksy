@@ -206,11 +206,9 @@ exports[`should be able to compile list 1`] = `
 
 exports[`should be able to compile list with html tag 1`] = `
 <div>
-  <font
-    color="red"
-  >
-     this is root red text 
-  </font>
+  <p>
+      &lt;font color="red"&gt; this is root red text &lt;/font&gt;
+  </p>
   <ul>
     <li>
       list 1
@@ -219,21 +217,13 @@ exports[`should be able to compile list with html tag 1`] = `
       list 2
     </li>
     <li>
-      <font
-        color="blue"
-      >
-        list blue text
-      </font>
+      &lt;font color="blue"&gt;list blue text&lt;/font&gt;
     </li>
     <li>
       list 3
       <ul>
         <li>
-          <font
-            color="green"
-          >
-            two depth green text
-          </font>
+          &lt;font color="green"&gt;two depth green text&lt;/font&gt;
         </li>
       </ul>
     </li>
