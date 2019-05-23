@@ -1,5 +1,5 @@
 import marked from 'marked';
-import { transform } from 'babel-standalone';
+import { transform } from '@babel/standalone';
 import createRenderer, { codeRenderer } from './createRenderer';
 
 export function marksy(options = {}) {

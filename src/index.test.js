@@ -22,9 +22,11 @@ class TestComponent extends Component {
   static propTypes = {
     children: PropTypes.node,
   };
+
   static defaultProps = {
     children: null,
   };
+
   render() {
     return <div>{this.props.children}</div>;
   }
@@ -411,7 +413,8 @@ it('should allow overriding block code element', () => {
       code({ language, code }) {
         return (
           <div>
-            {language}: {code}
+            {language}:
+{code}
           </div>
         );
       },
@@ -431,7 +434,8 @@ it('should allow overriding block code element with components version', () => {
       code({ language, code }) {
         return (
           <div>
-            {language}: {code}
+            {language}:
+{code}
           </div>
         );
       },
