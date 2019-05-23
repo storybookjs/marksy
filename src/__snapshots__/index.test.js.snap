@@ -20,7 +20,7 @@ exports[`should allow overriding block code element 1`] = `
 <div>
   <div>
     js
-    : 
+    :
     code
   </div>
 </div>
@@ -30,7 +30,7 @@ exports[`should allow overriding block code element with components version 1`] 
 <div>
   <div>
     js
-    : 
+    :
     code
   </div>
 </div>

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Preact from 'preact';
 import preactRenderToString from 'preact-render-to-string';
 import { renderToString as infernoRenderToString } from 'inferno-server';
-import infernoCreateElement from 'inferno-create-element';
+import { createElement as infernoCreateElement } from 'inferno-create-element';
 import renderer from 'react-test-renderer';
 import Prism from 'prismjs';
 import hljs from 'highlight.js/lib/highlight';
@@ -22,9 +22,11 @@ class TestComponent extends Component {
   static propTypes = {
     children: PropTypes.node,
   };
+
   static defaultProps = {
     children: null,
   };
+
   render() {
     return <div>{this.props.children}</div>;
   }
@@ -411,7 +413,7 @@ it('should allow overriding block code element', () => {
       code({ language, code }) {
         return (
           <div>
-            {language}: {code}
+            {language}:{code}
           </div>
         );
       },
@@ -431,7 +433,7 @@ it('should allow overriding block code element with components version', () => {
       code({ language, code }) {
         return (
           <div>
-            {language}: {code}
+            {language}:{code}
           </div>
         );
       },

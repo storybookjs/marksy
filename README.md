@@ -173,5 +173,5 @@ Meaning that the `code` element is added a classname based on the language.
 
 ## Developing
 1. Clone repo
-2. `npm install`
-3. `npm start` -> localhost:8080 (development app)
+2. `yarn install`
+3. `yarn start` -> localhost:8080 (development app)

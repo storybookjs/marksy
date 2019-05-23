@@ -19,14 +19,7 @@ module.exports = {
       {
         test: /\.js/,
         include: [path.resolve('app')],
-        use: [
-          {
-            loader: require.resolve('babel-loader'),
-            options: {
-              presets: [require.resolve('babel-preset-react')],
-            },
-          },
-        ],
+        loader: 'babel-loader',
       },
       {
         test: /\.json$/,
