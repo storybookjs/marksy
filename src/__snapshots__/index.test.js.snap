@@ -270,6 +270,20 @@ exports[`should be able to compile ordered list 1`] = `
 </div>
 `;
 
+exports[`should be able to compile self-closing tag 1`] = `
+<div>
+  <p>
+      
+    <img
+      alt="test"
+      src="http://some.com/image.png"
+    />
+    
+  &lt;div&gt;&lt;br /&gt;&lt;/div&gt;
+  </p>
+</div>
+`;
+
 exports[`should be able to compile strong text 1`] = `
 <div>
   <p>

@@ -1,3 +1,5 @@
+/* eslint-disable react/destructuring-assignment */
+/* eslint-disable react/jsx-one-expression-per-line */
 import React, { createElement, Component } from 'react';
 import PropTypes from 'prop-types';
 import Preact from 'preact';
@@ -414,9 +416,7 @@ it('should allow overriding block code element', () => {
       code({ language, code }) {
         return (
           <div>
-            {language}
-:
-{code}
+            {language}:{code}
           </div>
         );
       },
@@ -436,9 +436,7 @@ it('should allow overriding block code element with components version', () => {
       code({ language, code }) {
         return (
           <div>
-            {language}
-:
-{code}
+            {language}:{code}
           </div>
         );
       },
@@ -533,6 +531,17 @@ it('should be able to compile list with html tag', () => {
   `
   );
 
+  const { container } = render(<TestComponent>{compiled.tree}</TestComponent>);
+
+  expect(container.firstChild).toMatchSnapshot();
+});
+
+it('should be able to compile self-closing tag', () => {
+  const compile = marksy({ createElement });
+  const compiled = compile(`
+  ![test](http://some.com/image.png)
+  <div><br /></div>
+  `);
   const { container } = render(<TestComponent>{compiled.tree}</TestComponent>);
 
   expect(container.firstChild).toMatchSnapshot();
