@@ -7,8 +7,8 @@ import React from 'react';
 import { render } from 'react-dom';
 
 // eslint-disable-next-line import/no-unresolved
-import marksy from 'marksy/components';
 import { document } from 'global';
+import marksy from '../components';
 
 hljs.registerLanguage('javascript', hljsJavascript);
 
