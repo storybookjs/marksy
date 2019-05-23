@@ -40,9 +40,9 @@ exports[`should allow overriding inline code element 1`] = `
 <div>
   <p>
     Hello 
-    <div>
+    <span>
       code
-    </div>
+    </span>
   </p>
 </div>
 `;
@@ -51,9 +51,9 @@ exports[`should allow overriding inline code element with components version 1`]
 <div>
   <p>
     Hello 
-    <div>
+    <span>
       code
-    </div>
+    </span>
   </p>
 </div>
 `;
@@ -138,13 +138,11 @@ exports[`should be able to compile headers 1`] = `
 
 exports[`should be able to compile html 1`] = `
 <div>
-  <div
-    dangerouslySetInnerHTML={
-      Object {
-        "__html": "<div>hello</div>",
-      }
-    }
-  />
+  <div>
+    <div>
+      hello
+    </div>
+  </div>
 </div>
 `;
 
@@ -183,7 +181,6 @@ exports[`should be able to compile links 1`] = `
   <p>
     <a
       href="http://example.com"
-      title={null}
     >
       my link
     </a>
@@ -293,12 +290,12 @@ exports[`should be able to compile tables 1`] = `
           Tables
         </th>
         <th
-          className="text-center"
+          class="text-center"
         >
           Are
         </th>
         <th
-          className="text-right"
+          class="text-right"
         >
           Cool
         </th>
@@ -310,12 +307,12 @@ exports[`should be able to compile tables 1`] = `
           col 3 is
         </td>
         <td
-          className="text-center"
+          class="text-center"
         >
           right-aligned
         </td>
         <td
-          className="text-right"
+          class="text-right"
         >
           $1600
         </td>
@@ -325,12 +322,12 @@ exports[`should be able to compile tables 1`] = `
           col 2 is
         </td>
         <td
-          className="text-center"
+          class="text-center"
         >
           centered
         </td>
         <td
-          className="text-right"
+          class="text-right"
         >
           $12
         </td>
@@ -340,12 +337,12 @@ exports[`should be able to compile tables 1`] = `
           zebra stripes
         </td>
         <td
-          className="text-center"
+          class="text-center"
         >
           are neat
         </td>
         <td
-          className="text-right"
+          class="text-right"
         >
           $1
         </td>
@@ -367,9 +364,9 @@ exports[`should be able to inline components 1`] = `
 <div>
   <p>
     Hello there 
-    <div>
+    <span>
       Wuuut
-    </div>
+    </span>
   </p>
 </div>
 `;
@@ -378,8 +375,7 @@ exports[`should escape code when no highlighting is supplied 1`] = `
 <div>
   <pre>
     <code
-      className="language-js"
-      dangerouslySetInnerHTML={null}
+      class="language-js"
     >
       const Foo = () =&gt; &lt;div/&gt;
     </code>
@@ -391,8 +387,7 @@ exports[`should escape code when no highlighting is supplied with components ver
 <div>
   <pre>
     <code
-      className="language-js"
-      dangerouslySetInnerHTML={null}
+      class="language-js"
     >
       const Foo = () =&gt; &lt;div/&gt;
     </code>
@@ -429,13 +424,26 @@ exports[`should highlight code with Prism.js 1`] = `
 <div>
   <pre>
     <code
-      className="language-js"
-      dangerouslySetInnerHTML={
-        Object {
-          "__html": "<span class=\\"token keyword\\">const</span> foo <span class=\\"token operator\\">=</span> <span class=\\"token string\\">\\"bar\\"</span>",
-        }
-      }
-    />
+      class="language-js"
+    >
+      <span
+        class="token keyword"
+      >
+        const
+      </span>
+       foo 
+      <span
+        class="token operator"
+      >
+        =
+      </span>
+       
+      <span
+        class="token string"
+      >
+        "bar"
+      </span>
+    </code>
   </pre>
 </div>
 `;
@@ -444,13 +452,20 @@ exports[`should highlight code with highlight.js 1`] = `
 <div>
   <pre>
     <code
-      className="language-js"
-      dangerouslySetInnerHTML={
-        Object {
-          "__html": "<span class=\\"hljs-keyword\\">const</span> foo = <span class=\\"hljs-string\\">\\"bar\\"</span>",
-        }
-      }
-    />
+      class="language-js"
+    >
+      <span
+        class="hljs-keyword"
+      >
+        const
+      </span>
+       foo = 
+      <span
+        class="hljs-string"
+      >
+        "bar"
+      </span>
+    </code>
   </pre>
 </div>
 `;
@@ -502,8 +517,7 @@ exports[`should show source instead of compiling components when using other lan
 <div>
   <pre>
     <code
-      className="language-js"
-      dangerouslySetInnerHTML={null}
+      class="language-js"
     >
       &lt;Test /&gt;
     </code>
