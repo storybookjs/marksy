@@ -238,6 +238,26 @@ exports[`should be able to compile list with html tag 1`] = `
 </div>
 `;
 
+exports[`should be able to compile multiple html 1`] = `
+<div>
+  <p>
+    &lt;div&gt;hello&lt;/div&gt;
+&lt;strong&gt;there&lt;/strong&gt;
+&lt;em&gt;world&lt;/em&gt;
+  </p>
+</div>
+`;
+
+exports[`should be able to compile multiple html as components 1`] = `
+<div>
+  <p>
+    &lt;div&gt;hello&lt;/div&gt;
+&lt;strong&gt;there&lt;/strong&gt;
+&lt;em&gt;world&lt;/em&gt;
+  </p>
+</div>
+`;
+
 exports[`should be able to compile nested lists 1`] = `
 <div>
   <ul>

@@ -153,9 +153,25 @@ it('should be able to compile html', () => {
   expect(container.firstChild).toMatchSnapshot();
 });
 
+it('should be able to compile multiple html', () => {
+  const compile = marksy({ createElement });
+  const compiled = compile('<div>hello</div>\n<strong>there</strong>\n<em>world</em>');
+  const { container } = render(<TestComponent>{compiled.tree}</TestComponent>);
+
+  expect(container.firstChild).toMatchSnapshot();
+});
+
 it('should be able to compile html as components', () => {
   const compile = marksyComponents({ createElement });
   const compiled = compile('<div>hello</div>');
+  const { container } = render(<TestComponent>{compiled.tree}</TestComponent>);
+
+  expect(container.firstChild).toMatchSnapshot();
+});
+
+it('should be able to compile multiple html as components', () => {
+  const compile = marksyComponents({ createElement });
+  const compiled = compile('<div>hello</div>\n<strong>there</strong>\n<em>world</em>');
   const { container } = render(<TestComponent>{compiled.tree}</TestComponent>);
 
   expect(container.firstChild).toMatchSnapshot();
