@@ -1,3 +1,4 @@
+/* eslint-disable react/destructuring-assignment */
 /* eslint-disable import/no-extraneous-dependencies */
 
 import 'highlight.js/styles/github.css';
