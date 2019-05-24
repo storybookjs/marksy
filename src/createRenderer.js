@@ -63,7 +63,8 @@ export default function createRenderer(tracker, options, overrides = {}) {
       if (elementIdMatch) {
         tracker.tree.splice(tracker.tree.indexOf(tracker.elements[elementIdMatch[1]]), 1);
         return tracker.elements[elementIdMatch[1]];
-      } else if (text !== '') {
+      }
+      if (text !== '') {
         return he.decode(text);
       }
 

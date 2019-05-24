@@ -6,21 +6,6 @@ defaults: &defaults
 version: 2
 
 jobs:
-  size:
-    <<: *defaults
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-          - v1-dependencies-{{ checksum "yarn.lock" }}
-          - v1-dependencies-
-      - run: yarn install
-      - save_cache:
-          paths:
-            - node_modules
-          key: v1-dependencies-{{ checksum "yarn.lock" }}
-      - run: yarn size
-
   test:
     <<: *defaults
     steps:
@@ -55,5 +40,4 @@ workflows:
   build_accept_deploy:
     jobs:
       - test
-      - size
       - lint

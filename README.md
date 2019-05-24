@@ -58,7 +58,7 @@ compiled.toc // The table of contents, based on usage of headers
 ```
 
 ### Components
-You can also add your own custom components. You do this by importing `marksy/components`. This build of marksy includes babel transpiler which will convert any HTML to elements and allow for custom components:
+You can also add your own custom components. You do this by importing `marksy/jsx`. This build of marksy includes babel transpiler which will convert any HTML to elements and allow for custom components:
 
 <pre lang="js"><code>
 import React, {createElement} from 'react'
@@ -89,7 +89,7 @@ You can take one step further and create components wherever you want in the mar
 
 <pre lang="js"><code>
 import React, {createElement} from 'react'
-import marksy from 'marksy/components'
+import marksy from 'marksy/jsx'
 
 const compile = marksy({
   createElement,
@@ -118,7 +118,7 @@ You might need to pass in general information to your custom elements and compon
 
 ```js
 import React, {createElement} from 'react'
-import marksy from 'marksy/components'
+import marksy from 'marksy/jsx'
 
 const compile = marksy({
   createElement,
@@ -147,7 +147,7 @@ import {createElement} from 'react'
 import 'highlight.js/styles/github.css';
 import hljs from 'highlight.js/lib/highlight';
 import hljsJavascript from 'highlight.js/lib/languages/javascript';
-import marksy from 'marksy/components'
+import marksy from 'marksy/jsx'
 
 hljs.registerLanguage('javascript', hljsJavascript);
 
@@ -173,5 +173,5 @@ Meaning that the `code` element is added a classname based on the language.
 
 ## Developing
 1. Clone repo
-2. `npm install`
-3. `npm start` -> localhost:8080 (development app)
+2. `yarn install`
+3. `yarn start` -> localhost:8080 (development app)
