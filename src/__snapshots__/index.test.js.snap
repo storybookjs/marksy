@@ -288,9 +288,22 @@ exports[`should be able to compile self-closing tag 1`] = `
       alt="test"
       src="http://some.com/image.png"
     />
-    
-  &lt;div&gt;&lt;br /&gt;&lt;/div&gt;
   </p>
+  <div>
+      
+    <div>
+      <br />
+    </div>
+    
+
+
+  </div>
+  <div>
+      
+    <hr />
+    
+
+  </div>
 </div>
 `;
 
