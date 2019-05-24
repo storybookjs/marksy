@@ -7,8 +7,8 @@ import React from 'react';
 import { render } from 'react-dom';
 
 // eslint-disable-next-line import/no-unresolved
-import marksy from 'marksy/components';
 import { document } from 'global';
+import marksy from '../components';
 
 hljs.registerLanguage('javascript', hljsJavascript);
 
@@ -64,12 +64,14 @@ class App extends React.Component {
       value: demo,
     };
   }
+
   onTextareaChange(event) {
     this.setState({
       tree: compile(event.target.value).tree,
       value: event.target.value,
     });
   }
+
   render() {
     return (
       <div>

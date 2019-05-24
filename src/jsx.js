@@ -1,5 +1,5 @@
 import marked from 'marked';
-import { transform } from 'babel-standalone';
+import { transform } from '@babel/standalone';
 import createRenderer, { codeRenderer } from './createRenderer';
 
 const voidElements = [
@@ -16,7 +16,7 @@ const voidElements = [
   'param',
   'source',
   'track',
-  'wbr'
+  'wbr',
 ];
 
 export function marksy(options = {}) {
@@ -49,8 +49,11 @@ export function marksy(options = {}) {
                     key: tracker.nextElementId++,
                     context: tracker.context,
                   })
-                : props;
-            
+                : Object.assign(props || {}, {
+                    // eslint-disable-next-line no-plusplus
+                    key: tracker.nextElementId++,
+                  });
+
             const isElementVoid = voidElements.indexOf(tag) > -1;
 
             return options.createElement(tag, componentProps, isElementVoid ? null : children);
@@ -87,7 +90,13 @@ export function marksy(options = {}) {
     tracker.nextElementId = 0;
     tracker.context = context;
     tracker.currentId = [];
-    marked(content, Object.assign({ renderer, smartypants: true }, markedOptions));
+    marked(
+      content,
+      Object.assign(
+        { renderer, smartypants: true, sanitize: false, smartLists: true },
+        markedOptions
+      )
+    );
 
     return { tree: tracker.tree, toc: tracker.toc };
   };
