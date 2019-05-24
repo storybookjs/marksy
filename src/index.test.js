@@ -540,7 +540,12 @@ it('should be able to compile self-closing tag', () => {
   const compile = marksy({ createElement });
   const compiled = compile(`
   ![test](http://some.com/image.png)
+  
   <div><br /></div>
+  
+  <hr/>
+
+  <input type="text" />
   `);
   const { container } = render(<TestComponent>{compiled.tree}</TestComponent>);
 
