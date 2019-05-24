@@ -2,23 +2,6 @@ import marked from 'marked';
 import { transform } from '@babel/standalone';
 import createRenderer, { codeRenderer } from './createRenderer';
 
-const voidElements = [
-  'area',
-  'base',
-  'br',
-  'col',
-  'embed',
-  'hr',
-  'img',
-  'input',
-  'link',
-  'meta',
-  'param',
-  'source',
-  'track',
-  'wbr',
-];
-
 export function marksy(options = {}) {
   // eslint-disable-next-line no-param-reassign
   options.components = options.components || {};
@@ -54,9 +37,7 @@ export function marksy(options = {}) {
                     key: tracker.nextElementId++,
                   });
 
-            const isElementVoid = voidElements.indexOf(tag) > -1;
-
-            return options.createElement(tag, componentProps, isElementVoid ? null : children);
+            return options.createElement(tag, componentProps, children);
           },
         };
 

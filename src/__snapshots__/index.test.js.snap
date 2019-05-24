@@ -303,6 +303,15 @@ exports[`should be able to compile self-closing tag 1`] = `
     <hr />
     
 
+
+  </div>
+  <div>
+      
+    <input
+      type="text"
+    />
+    
+
   </div>
 </div>
 `;

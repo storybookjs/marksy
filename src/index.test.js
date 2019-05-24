@@ -544,6 +544,8 @@ it('should be able to compile self-closing tag', () => {
   <div><br /></div>
   
   <hr/>
+
+  <input type="text" />
   `);
   const { container } = render(<TestComponent>{compiled.tree}</TestComponent>);
 
