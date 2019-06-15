@@ -58,7 +58,7 @@ compiled.toc // The table of contents, based on usage of headers
 ```
 
 ### Components
-You can also add your own custom components. You do this by importing `marksy/jsx`. This build of marksy includes babel transpiler which will convert any HTML to elements and allow for custom components:
+You can also add your own custom components:
 
 <pre lang="js"><code>
 import React, {createElement} from 'react'
