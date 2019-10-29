@@ -22,18 +22,18 @@ hljs.registerLanguage('xml', hljsXml);
 
 // eslint-disable-next-line
 class TestComponent extends Component {
-  static propTypes = {
-    children: PropTypes.node,
-  };
-
-  static defaultProps = {
-    children: null,
-  };
-
   render() {
     return <div>{this.props.children}</div>;
   }
 }
+
+TestComponent.propTypes = {
+  children: PropTypes.node,
+};
+
+TestComponent.defaultProps = {
+  children: null,
+};
 
 it('should be able to compile text', () => {
   const compile = marksy({ createElement });
