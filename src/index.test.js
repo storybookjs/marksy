@@ -6,7 +6,7 @@ import Preact from 'preact';
 import preactRenderToString from 'preact-render-to-string';
 import { renderToString as infernoRenderToString } from 'inferno-server';
 import { createElement as infernoCreateElement } from 'inferno-create-element';
-import { render } from 'react-testing-library';
+import { render } from '@testing-library/react';
 
 import Prism from 'prismjs';
 import hljs from 'highlight.js/lib/highlight';
