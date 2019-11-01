@@ -90,13 +90,11 @@ export default function createRenderer(tracker, options, overrides = {}) {
     // eslint-disable-next-line no-param-reassign
     tracker.elements[elementId] = options.createElement(
       elementType || tag,
-      Object.assign(
-        {
-          key: elementId,
-        },
-        props,
-        elementType ? { context: tracker.context } : {}
-      ),
+      {
+        key: elementId,
+        ...props,
+        ...(elementType ? { context: tracker.context } : {}),
+      },
       inlineContent
     );
 

@@ -6,7 +6,7 @@ import Preact from 'preact';
 import preactRenderToString from 'preact-render-to-string';
 import { renderToString as infernoRenderToString } from 'inferno-server';
 import { createElement as infernoCreateElement } from 'inferno-create-element';
-import { render } from 'react-testing-library';
+import { render } from '@testing-library/react';
 
 import Prism from 'prismjs';
 import hljs from 'highlight.js/lib/highlight';
@@ -22,18 +22,18 @@ hljs.registerLanguage('xml', hljsXml);
 
 // eslint-disable-next-line
 class TestComponent extends Component {
-  static propTypes = {
-    children: PropTypes.node,
-  };
-
-  static defaultProps = {
-    children: null,
-  };
-
   render() {
     return <div>{this.props.children}</div>;
   }
 }
+
+TestComponent.propTypes = {
+  children: PropTypes.node,
+};
+
+TestComponent.defaultProps = {
+  children: null,
+};
 
 it('should be able to compile text', () => {
   const compile = marksy({ createElement });

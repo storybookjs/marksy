@@ -71,13 +71,13 @@ export function marksy(options = {}) {
     tracker.nextElementId = 0;
     tracker.context = context;
     tracker.currentId = [];
-    marked(
-      content,
-      Object.assign(
-        { renderer, smartypants: true, sanitize: false, smartLists: true },
-        markedOptions
-      )
-    );
+    marked(content, {
+      renderer,
+      smartypants: true,
+      sanitize: false,
+      smartLists: true,
+      ...markedOptions,
+    });
 
     return { tree: tracker.tree, toc: tracker.toc };
   };
