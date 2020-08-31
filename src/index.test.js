@@ -8,14 +8,12 @@ import { renderToString as infernoRenderToString } from 'inferno-server';
 import { createElement as infernoCreateElement } from 'inferno-create-element';
 import { render } from '@testing-library/react';
 
-import Prism from 'prismjs';
 import hljs from 'highlight.js/lib/highlight';
 import hljsJs from 'highlight.js/lib/languages/javascript';
 import hljsXml from 'highlight.js/lib/languages/xml';
 
 // eslint-disable-next-line
 import marksy from './';
-import marksyComponents from './jsx';
 
 hljs.registerLanguage('javascript', hljsJs);
 hljs.registerLanguage('xml', hljsXml);
@@ -161,37 +159,6 @@ it('should be able to compile multiple html', () => {
   expect(container.firstChild).toMatchSnapshot();
 });
 
-it('should be able to compile html as components', () => {
-  const compile = marksyComponents({ createElement });
-  const compiled = compile('<div>hello</div>');
-  const { container } = render(<TestComponent>{compiled.tree}</TestComponent>);
-
-  expect(container.firstChild).toMatchSnapshot();
-});
-
-it('should be able to compile multiple html as components', () => {
-  const compile = marksyComponents({ createElement });
-  const compiled = compile('<div>hello</div>\n<strong>there</strong>\n<em>world</em>');
-  const { container } = render(<TestComponent>{compiled.tree}</TestComponent>);
-
-  expect(container.firstChild).toMatchSnapshot();
-});
-
-it('should be able to compile components', () => {
-  const compile = marksyComponents({
-    createElement,
-    components: {
-      Test() {
-        return <div>mip</div>;
-      },
-    },
-  });
-  const compiled = compile('<Test />');
-  const { container } = render(<TestComponent>{compiled.tree}</TestComponent>);
-
-  expect(container.firstChild).toMatchSnapshot();
-});
-
 it('should be able to compile components using H and marksy language', () => {
   const compile = marksy({
     createElement,
@@ -202,36 +169,6 @@ it('should be able to compile components using H and marksy language', () => {
     },
   });
   const compiled = compile('```marksy\nh(Test)\n```');
-  const { container } = render(<TestComponent>{compiled.tree}</TestComponent>);
-
-  expect(container.firstChild).toMatchSnapshot();
-});
-
-it('should be able to compile components using marksy language', () => {
-  const compile = marksyComponents({
-    createElement,
-    components: {
-      Test() {
-        return <div>mip</div>;
-      },
-    },
-  });
-  const compiled = compile('```marksy\n<Test />\n```');
-  const { container } = render(<TestComponent>{compiled.tree}</TestComponent>);
-
-  expect(container.firstChild).toMatchSnapshot();
-});
-
-it('should show source instead of compiling components when using other languages', () => {
-  const compile = marksyComponents({
-    createElement,
-    components: {
-      Test() {
-        return <div>mip</div>;
-      },
-    },
-  });
-  const compiled = compile('```js\n<Test />\n```');
   const { container } = render(<TestComponent>{compiled.tree}</TestComponent>);
 
   expect(container.firstChild).toMatchSnapshot();
@@ -353,64 +290,8 @@ it('should allow injecting context to elements', () => {
   expect(container.firstChild).toMatchSnapshot();
 });
 
-it('should allow injecting context to components', () => {
-  const compile = marksyComponents({
-    createElement,
-    components: {
-      Comp(props) {
-        return <div>{props.context.foo}</div>;
-      },
-    },
-  });
-  const compiled = compile(
-    `
-<Comp/>
-  `,
-    {},
-    {
-      foo: 'bar',
-    }
-  );
-
-  const { container } = render(<TestComponent>{compiled.tree}</TestComponent>);
-
-  expect(container.firstChild).toMatchSnapshot();
-});
-
-it('should be able to inline components', () => {
-  const compile = marksyComponents({
-    createElement,
-    components: {
-      Comp() {
-        return <span>Wuuut</span>;
-      },
-    },
-  });
-  const compiled = compile('<p>Hello there <Comp/></p>');
-
-  const { container } = render(<TestComponent>{compiled.tree}</TestComponent>);
-
-  expect(container.firstChild).toMatchSnapshot();
-});
-
 it('should allow overriding inline code element', () => {
   const compile = marksy({
-    createElement,
-    elements: {
-      codespan({ children }) {
-        return <span>{children}</span>;
-      },
-    },
-  });
-  const compiled = compile('Hello `code`');
-
-  const { container } = render(<TestComponent>{compiled.tree}</TestComponent>);
-
-  expect(container.firstChild).toMatchSnapshot();
-});
-
-it('should allow overriding inline code element with components version', () => {
-  const compile = marksyComponents({
     createElement,
     elements: {
       codespan({ children }) {
@@ -445,39 +326,8 @@ it('should allow overriding block code element', () => {
   expect(container.firstChild).toMatchSnapshot();
 });
 
-it('should allow overriding block code element with components version', () => {
-  const compile = marksyComponents({
-    createElement,
-    elements: {
-      code({ language, code }) {
-        return (
-          <div>
-            {language}:{code}
-          </div>
-        );
-      },
-    },
-  });
-  const compiled = compile('```js\ncode\n```');
-
-  const { container } = render(<TestComponent>{compiled.tree}</TestComponent>);
-
-  expect(container.firstChild).toMatchSnapshot();
-});
-
 it('should escape code when no highlighting is supplied', () => {
   const compile = marksy({
-    createElement,
-  });
-  const compiled = compile('```js\nconst Foo = () => <div/>\n```');
-
-  const { container } = render(<TestComponent>{compiled.tree}</TestComponent>);
-
-  expect(container.firstChild).toMatchSnapshot();
-});
-
-it('should escape code when no highlighting is supplied with components version', () => {
-  const compile = marksyComponents({
     createElement,
   });
   const compiled = compile('```js\nconst Foo = () => <div/>\n```');
@@ -510,42 +360,6 @@ it('should not crash highlight.js with unsupported language', () => {
   });
 
   const compiled = compile('```unsuppoted_language\nconst foo = "bar"\n```');
-
-  const { container } = render(<TestComponent>{compiled.tree}</TestComponent>);
-
-  expect(container.firstChild).toMatchSnapshot();
-});
-
-it('should highlight code with Prism.js', () => {
-  const compile = marksyComponents({
-    createElement,
-    highlight(language, code) {
-      return Prism.highlight(code, Prism.languages[language]);
-    },
-  });
-  const compiled = compile('```js\nconst foo = "bar"\n```');
-
-  const { container } = render(<TestComponent>{compiled.tree}</TestComponent>);
-
-  expect(container.firstChild).toMatchSnapshot();
-});
-
-it('should be able to compile list with html tag', () => {
-  const compile = marksyComponents({
-    createElement,
-  });
-
-  const compiled = compile(
-    `
-  <font color="red"> this is root red text </font>
-
-  * list 1
-  * list 2
-  * <font color="blue">list blue text</font>
-  * list 3
-    * <font color="green">two depth green text</font>
-  `
-  );
 
   const { container } = render(<TestComponent>{compiled.tree}</TestComponent>);
 
