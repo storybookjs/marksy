@@ -6431,9 +6431,9 @@ postcss@^7.0.14, postcss@^7.0.16, postcss@^7.0.17, postcss@^7.0.5, postcss@^7.0.
     supports-color "^6.1.0"
 
 preact-render-to-string@^5.1.0:
-  version "5.1.0"
-  resolved "https://registry.yarnpkg.com/preact-render-to-string/-/preact-render-to-string-5.1.0.tgz#e810575aa1a0981836c48458d72c84976f9b1f7e"
-  integrity sha512-BrZeeppt4mLyI7fkO6P7pPBKVL9CjA/ckWMu3KlYOJilvqjAkvP2p9yF0YrEeMvsvpbWmJqpDbaEmkEoTtoJsA==
+  version "5.1.11"
+  resolved "https://registry.yarnpkg.com/preact-render-to-string/-/preact-render-to-string-5.1.11.tgz#7d8d77c23ef40ae6abc3d390b7430b3cb6206020"
+  integrity sha512-8DXkx8WzeUexYyh9ZjlBSsqcJVOndidw10t1MK1gLx6at4QxQE3RfqaObPgy5WOnw2piyh9kanNB7w7+dmaq4g==
   dependencies:
     pretty-format "^3.8.0"
 
