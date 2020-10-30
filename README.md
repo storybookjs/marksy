@@ -85,7 +85,7 @@ This will be converted to the component above. You can pass in any kind of props
 
 ### Jsx
 
-You can take one step further and create components wherever you want in the markdown, using jsx. You will have to import `marksy/jsx`. This build of marksy includes babel transpiler which will convert any HTML to elements and allow for custom components. Note that this will increase your bundle size sagnificantly:
+You can take one step further and create components wherever you want in the markdown, using jsx. You will have to import `marksy/jsx`. This build of marksy includes babel transpiler which will convert any HTML to elements and allow for custom components. Note that this will increase your bundle size significantly:
 
 <pre lang="js"><code>
 import React, {createElement} from 'react'
