@@ -78,7 +78,7 @@
     "react-dom": "^16.8.6",
     "react-test-renderer": "^16.8.6",
     "regenerator-runtime": "^0.13.3",
-    "size-limit": "^2.1.6",
+    "size-limit": "^4.7.0",
     "style-loader": "^1.0.0",
     "webpack": "^4.32.2",
     "webpack-cli": "^4.1.0",
