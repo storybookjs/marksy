@@ -509,7 +509,7 @@ it('should not crash highlight.js with unsupported language', () => {
     },
   });
 
-  const compiled = compile('```unsuppoted_language\nconst foo = "bar"\n```');
+  const compiled = compile('```unsupported_language\nconst foo = "bar"\n```');
 
   const { container } = render(<TestComponent>{compiled.tree}</TestComponent>);
 
