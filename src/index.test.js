@@ -158,7 +158,7 @@ it('should be able to compile multiple html', () => {
   const compiled = compile('<div>hello</div>\n<strong>there</strong>\n<em>world</em>');
   const { container } = render(<TestComponent>{compiled.tree}</TestComponent>);
 
-  expect(container.firstChild).toMatchSnapshot();
+  expect(container.childNodes).toMatchSnapshot();
 });
 
 it('should be able to compile html as components', () => {
