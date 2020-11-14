@@ -61,7 +61,7 @@
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-prettier": "^3.1.0",
     "eslint-plugin-react": "^7.13.0",
-    "eslint-plugin-react-hooks": "^1.7.0",
+    "eslint-plugin-react-hooks": "^2.5.1",
     "global": "^4.3.2",
     "highlight.js": "^9.15.6",
     "inferno-create-element": "^7.1.12",
