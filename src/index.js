@@ -1,5 +1,8 @@
 import marked from 'marked';
-import createRenderer, { codeRenderer } from './createRenderer';
+import createRenderer from './createRenderer';
+import { compileToIntermediateTree } from './compileToIntermediateTree';
+import { codeRenderer } from './codeRenderer';
+import { renderIntermediateTree } from './renderIntermediateTree';
 
 export function marksy(options = {}) {
   const tracker = {
@@ -66,3 +69,6 @@ export function marksy(options = {}) {
 export default function(options) {
   return marksy(options);
 }
+
+export { compileToIntermediateTree };
+export { renderIntermediateTree };

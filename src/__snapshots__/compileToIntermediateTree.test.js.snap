@@ -1,0 +1,750 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should allow injecting context to elements 1`] = `
+Object {
+  "tree": Array [
+    Array [
+      "heading",
+      Object {
+        "level": 1,
+        "text": "foo",
+      },
+      null,
+    ],
+  ],
+}
+`;
+
+exports[`should allow overriding block code element 1`] = `
+Object {
+  "tree": Array [
+    Array [
+      "code",
+      Object {
+        "code": "code",
+        "language": "js",
+      },
+      null,
+    ],
+  ],
+}
+`;
+
+exports[`should be able to combine in compilation 1`] = `
+Object {
+  "tree": Array [
+    Array [
+      "heading",
+      Object {
+        "level": 1,
+        "text": "hey",
+      },
+      null,
+    ],
+    Array [
+      "ul",
+      null,
+      Array [
+        null,
+        Array [
+          "li",
+          null,
+          Array [
+            "foo",
+          ],
+        ],
+        null,
+      ],
+    ],
+    Array [
+      "p",
+      null,
+      Array [
+        "-bar",
+      ],
+    ],
+  ],
+}
+`;
+
+exports[`should be able to compile components using H and marksy language 1`] = `
+Object {
+  "tree": Array [
+    Array [
+      "code",
+      Object {
+        "code": "h(Test)",
+        "language": "marksy",
+      },
+      null,
+    ],
+  ],
+}
+`;
+
+exports[`should be able to compile headers 1`] = `
+Object {
+  "tree": Array [
+    Array [
+      "heading",
+      Object {
+        "level": 1,
+        "text": "header1",
+      },
+      null,
+    ],
+    Array [
+      "heading",
+      Object {
+        "level": 2,
+        "text": "header2",
+      },
+      null,
+    ],
+    Array [
+      "heading",
+      Object {
+        "level": 3,
+        "text": "header3",
+      },
+      null,
+    ],
+    Array [
+      "heading",
+      Object {
+        "level": 4,
+        "text": "header4",
+      },
+      null,
+    ],
+  ],
+}
+`;
+
+exports[`should be able to compile html 1`] = `
+Object {
+  "tree": Array [
+    Array [
+      "div",
+      Object {
+        "dangerouslySetInnerHTML": Object {
+          "__html": "<div>hello</div>",
+        },
+        "key": "md_0",
+      },
+      null,
+    ],
+  ],
+}
+`;
+
+exports[`should be able to compile image 1`] = `
+Object {
+  "tree": Array [
+    Array [
+      "p",
+      null,
+      Array [
+        null,
+        Array [
+          "img",
+          Object {
+            "alt": "test",
+            "src": "http://some.com/image.png",
+          },
+          null,
+        ],
+        null,
+      ],
+    ],
+  ],
+}
+`;
+
+exports[`should be able to compile italic text 1`] = `
+Object {
+  "tree": Array [
+    Array [
+      "p",
+      null,
+      Array [
+        "hello ",
+        Array [
+          "em",
+          null,
+          Array [
+            "there",
+          ],
+        ],
+        null,
+      ],
+    ],
+  ],
+}
+`;
+
+exports[`should be able to compile links 1`] = `
+Object {
+  "tree": Array [
+    Array [
+      "p",
+      null,
+      Array [
+        null,
+        Array [
+          "a",
+          Object {
+            "href": "http://example.com",
+            "title": null,
+          },
+          Array [
+            "my link",
+          ],
+        ],
+        null,
+      ],
+    ],
+  ],
+}
+`;
+
+exports[`should be able to compile list 1`] = `
+Object {
+  "tree": Array [
+    Array [
+      "ul",
+      null,
+      Array [
+        null,
+        Array [
+          "li",
+          null,
+          Array [
+            "foo",
+          ],
+        ],
+        null,
+        Array [
+          "li",
+          null,
+          Array [
+            "bar",
+          ],
+        ],
+        null,
+      ],
+    ],
+  ],
+}
+`;
+
+exports[`should be able to compile multiple html 1`] = `
+Object {
+  "tree": Array [
+    Array [
+      "div",
+      Object {
+        "dangerouslySetInnerHTML": Object {
+          "__html": "<div>hello</div>
+<strong>there</strong>
+<em>world</em>",
+        },
+        "key": "md_0",
+      },
+      null,
+    ],
+  ],
+}
+`;
+
+exports[`should be able to compile nested lists 1`] = `
+Object {
+  "tree": Array [
+    Array [
+      "ul",
+      null,
+      Array [
+        null,
+        Array [
+          "li",
+          null,
+          Array [
+            "Colors",
+            Array [
+              "ul",
+              null,
+              Array [
+                null,
+                Array [
+                  "li",
+                  null,
+                  Array [
+                    "Red",
+                  ],
+                ],
+                null,
+                Array [
+                  "li",
+                  null,
+                  Array [
+                    "Blue",
+                  ],
+                ],
+                null,
+              ],
+            ],
+            null,
+          ],
+        ],
+        null,
+        Array [
+          "li",
+          null,
+          Array [
+            "Shape",
+            Array [
+              "ul",
+              null,
+              Array [
+                null,
+                Array [
+                  "li",
+                  null,
+                  Array [
+                    "Triangle",
+                  ],
+                ],
+                null,
+                Array [
+                  "li",
+                  null,
+                  Array [
+                    "Rectangle",
+                  ],
+                ],
+                null,
+              ],
+            ],
+            null,
+          ],
+        ],
+        null,
+      ],
+    ],
+  ],
+}
+`;
+
+exports[`should be able to compile ordered list 1`] = `
+Object {
+  "tree": Array [
+    Array [
+      "ol",
+      null,
+      Array [
+        null,
+        Array [
+          "li",
+          null,
+          Array [
+            "foo",
+          ],
+        ],
+        null,
+        Array [
+          "li",
+          null,
+          Array [
+            "bar",
+          ],
+        ],
+        null,
+      ],
+    ],
+  ],
+}
+`;
+
+exports[`should be able to compile self-closing tag 1`] = `
+Object {
+  "tree": Array [
+    Array [
+      "p",
+      null,
+      Array [
+        "  ",
+        Array [
+          "img",
+          Object {
+            "alt": "test",
+            "src": "http://some.com/image.png",
+          },
+          null,
+        ],
+        null,
+      ],
+    ],
+    Array [
+      "div",
+      Object {
+        "dangerouslySetInnerHTML": Object {
+          "__html": "  <div><br /></div>
+
+",
+        },
+        "key": "md_2",
+      },
+      null,
+    ],
+    Array [
+      "div",
+      Object {
+        "dangerouslySetInnerHTML": Object {
+          "__html": "  <hr/>
+
+",
+        },
+        "key": "md_3",
+      },
+      null,
+    ],
+    Array [
+      "div",
+      Object {
+        "dangerouslySetInnerHTML": Object {
+          "__html": "  <input type='text' />
+",
+        },
+        "key": "md_4",
+      },
+      null,
+    ],
+  ],
+}
+`;
+
+exports[`should be able to compile strong text 1`] = `
+Object {
+  "tree": Array [
+    Array [
+      "p",
+      null,
+      Array [
+        "hello ",
+        Array [
+          "strong",
+          null,
+          Array [
+            "there",
+          ],
+        ],
+        null,
+      ],
+    ],
+  ],
+}
+`;
+
+exports[`should be able to compile tables 1`] = `
+Object {
+  "tree": Array [
+    Array [
+      "table",
+      null,
+      Array [
+        Array [
+          null,
+          Array [
+            "thead",
+            null,
+            Array [
+              null,
+              Array [
+                "tr",
+                null,
+                Array [
+                  null,
+                  Array [
+                    "th",
+                    Object {
+                      "className": undefined,
+                    },
+                    Array [
+                      "Tables",
+                    ],
+                  ],
+                  null,
+                  Array [
+                    "th",
+                    Object {
+                      "className": "text-center",
+                    },
+                    Array [
+                      "Are",
+                    ],
+                  ],
+                  null,
+                  Array [
+                    "th",
+                    Object {
+                      "className": "text-right",
+                    },
+                    Array [
+                      "Cool",
+                    ],
+                  ],
+                  null,
+                ],
+              ],
+              null,
+            ],
+          ],
+          null,
+        ],
+        Array [
+          null,
+          Array [
+            "tbody",
+            null,
+            Array [
+              null,
+              Array [
+                "tr",
+                null,
+                Array [
+                  null,
+                  Array [
+                    "td",
+                    Object {
+                      "className": undefined,
+                    },
+                    Array [
+                      "col 3 is",
+                    ],
+                  ],
+                  null,
+                  Array [
+                    "td",
+                    Object {
+                      "className": "text-center",
+                    },
+                    Array [
+                      "right-aligned",
+                    ],
+                  ],
+                  null,
+                  Array [
+                    "td",
+                    Object {
+                      "className": "text-right",
+                    },
+                    Array [
+                      "$1600",
+                    ],
+                  ],
+                  null,
+                ],
+              ],
+              null,
+              Array [
+                "tr",
+                null,
+                Array [
+                  null,
+                  Array [
+                    "td",
+                    Object {
+                      "className": undefined,
+                    },
+                    Array [
+                      "col 2 is",
+                    ],
+                  ],
+                  null,
+                  Array [
+                    "td",
+                    Object {
+                      "className": "text-center",
+                    },
+                    Array [
+                      "centered",
+                    ],
+                  ],
+                  null,
+                  Array [
+                    "td",
+                    Object {
+                      "className": "text-right",
+                    },
+                    Array [
+                      "$12",
+                    ],
+                  ],
+                  null,
+                ],
+              ],
+              null,
+              Array [
+                "tr",
+                null,
+                Array [
+                  null,
+                  Array [
+                    "td",
+                    Object {
+                      "className": undefined,
+                    },
+                    Array [
+                      "zebra stripes",
+                    ],
+                  ],
+                  null,
+                  Array [
+                    "td",
+                    Object {
+                      "className": "text-center",
+                    },
+                    Array [
+                      "are neat",
+                    ],
+                  ],
+                  null,
+                  Array [
+                    "td",
+                    Object {
+                      "className": "text-right",
+                    },
+                    Array [
+                      "$1",
+                    ],
+                  ],
+                  null,
+                ],
+              ],
+              null,
+            ],
+          ],
+          null,
+        ],
+      ],
+    ],
+  ],
+}
+`;
+
+exports[`should be able to compile text 1`] = `
+Object {
+  "tree": Array [
+    Array [
+      "p",
+      null,
+      Array [
+        "hello",
+      ],
+    ],
+  ],
+}
+`;
+
+exports[`should escape code when no highlighting is supplied 1`] = `
+Object {
+  "tree": Array [
+    Array [
+      "code",
+      Object {
+        "code": "const Foo = () => <div/>",
+        "language": "js",
+      },
+      null,
+    ],
+  ],
+}
+`;
+
+exports[`should handle same name nested headers 1`] = `
+Object {
+  "tree": Array [
+    Array [
+      "heading",
+      Object {
+        "level": 1,
+        "text": "header1",
+      },
+      null,
+    ],
+    Array [
+      "heading",
+      Object {
+        "level": 2,
+        "text": "header2",
+      },
+      null,
+    ],
+    Array [
+      "heading",
+      Object {
+        "level": 1,
+        "text": "header3",
+      },
+      null,
+    ],
+    Array [
+      "heading",
+      Object {
+        "level": 2,
+        "text": "header2",
+      },
+      null,
+    ],
+  ],
+}
+`;
+
+exports[`should highlight code with highlight.js 1`] = `
+Object {
+  "tree": Array [
+    Array [
+      "code",
+      Object {
+        "code": "const foo = \\"bar\\"",
+        "language": "js",
+      },
+      null,
+    ],
+  ],
+}
+`;
+
+exports[`should not crash highlight.js with unsupported language 1`] = `
+Object {
+  "tree": Array [
+    Array [
+      "code",
+      Object {
+        "code": "const foo = \\"bar\\"",
+        "language": "unsuppoted_language",
+      },
+      null,
+    ],
+  ],
+}
+`;
+
+exports[`should produce TOC 1`] = `undefined`;
+
+exports[`should produce custom tags 1`] = `
+Object {
+  "tree": Array [
+    Array [
+      "heading",
+      Object {
+        "level": 1,
+        "text": "foo",
+      },
+      null,
+    ],
+  ],
+}
+`;
+
+exports[`should work with Preact 1`] = `"<div>heading<undefined></undefined></div>"`;
