@@ -105,7 +105,7 @@ export function renderIntermediateTree(treeWrap = { tree: [] }, options = {}) {
       const type = astNode[0];
       let customTagRenderer = null;
       if (!type) {
-        throw new Error(`no type for node: ${astNode}`);
+        throw new Error(`no type for node: ${JSON.stringify(astNode, 0, 4)}`);
       }
       const props = astNode[1] || {};
       let children = null;

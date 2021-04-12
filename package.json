@@ -1,6 +1,6 @@
 {
   "name": "marksy-lite",
-  "version": "8.0.1",
+  "version": "8.0.2-beta",
   "description": "Convert markdown into react components",
   "keywords": [
     "convert",
@@ -14,6 +14,7 @@
   "license": "MIT",
   "author": "Christian Alfoni",
   "main": "lib/index.js",
+  "types": "./index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/storybooks/marksy"
@@ -23,6 +24,7 @@
     "lint": "cross-env NODE_ENV=production eslint --cache --cache-location=.cache/eslint --ext .js,.jsx,.json ./src ./app",
     "prepare": "npm run build",
     "prepublish": "npm run build",
+    "release-github": "release-it --no-npm  --preRelease=beta",
     "size": "size-limit",
     "start": "webpack-dev-server --devtool eval-source-map --progress --colors --content-base build",
     "test": "jest"
@@ -78,6 +80,7 @@
     "react-dom": ">=16 <18",
     "react-test-renderer": ">=16 <18",
     "regenerator-runtime": "^0.13.3",
+    "release-it": "^14.6.1",
     "size-limit": "^2.1.6",
     "style-loader": "^1.0.0",
     "webpack": "^4.32.2",
