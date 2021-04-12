@@ -24,7 +24,7 @@
     "lint": "cross-env NODE_ENV=production eslint --cache --cache-location=.cache/eslint --ext .js,.jsx,.json ./src ./app",
     "prepare": "npm run build",
     "prepublish": "npm run build",
-    "release-github": "release-it --no-npm  --preRelease=beta",
+    "release-github": "release-it --no-git --no-npm --preRelease=beta",
     "size": "size-limit",
     "start": "webpack-dev-server --devtool eval-source-map --progress --colors --content-base build",
     "test": "jest"
