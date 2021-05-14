@@ -71,7 +71,7 @@
     "node-libs-browser": "^2.2.0",
     "preact": "^10.0.3",
     "preact-render-to-string": "^5.1.0",
-    "prettier": "^1.17.1",
+    "prettier": "^2.3.0",
     "prismjs": "^1.16.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
