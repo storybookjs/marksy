@@ -4514,11 +4514,11 @@ indexes-of@^1.0.1:
   integrity sha1-8w9xbI4r00bHtn0985FVZqfAVgc=
 
 inferno-create-element@^7.1.12:
-  version "7.4.6"
-  resolved "https://registry.yarnpkg.com/inferno-create-element/-/inferno-create-element-7.4.6.tgz#2c48198eb2de45521cf2dcd27449c081ae9655fc"
-  integrity sha512-xy6s3XK1dGLMKvQ3/qUWZzOdZFQia8w8FhJV6pmhEYQDO3OBsX1khmmchShml6nD/Eft4A5Csxr9BRyi9sP+zg==
+  version "7.4.8"
+  resolved "https://registry.yarnpkg.com/inferno-create-element/-/inferno-create-element-7.4.8.tgz#77bbf24288645c359cf65b4821a3938c6537eb5e"
+  integrity sha512-hCkA+RAiqoeWlmmCrb3VIUDV+4lEeLDCI98RcB4HqzAJwjH8dMR4ZeDQO3f9crygPnmSW7r1L0Ykjf0O2oHYFQ==
   dependencies:
-    inferno "7.4.6"
+    inferno "7.4.8"
 
 inferno-server@^7.1.12:
   version "7.4.8"
