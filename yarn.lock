@@ -4534,21 +4534,31 @@ inferno-create-element@^7.1.12:
     inferno "7.4.6"
 
 inferno-server@^7.1.12:
-  version "7.4.6"
-  resolved "https://registry.yarnpkg.com/inferno-server/-/inferno-server-7.4.6.tgz#aabfd3ed789dd2adc2c98f783aebf684974c9f99"
-  integrity sha512-6XQ0zzicPJyTbu64VfEq1bqjq1zQcOZnN3zdBGKjmQddFBj5YrrxI7PA/dng5ZRqZhz4D3grvgmfZX/yfAD47Q==
+  version "7.4.8"
+  resolved "https://registry.yarnpkg.com/inferno-server/-/inferno-server-7.4.8.tgz#31ad7c2092aba16e4234a102cc4ac3f346d17ee4"
+  integrity sha512-EdNWdY1HOpIgb5Vsj4ANhOINKvkmXGFAz3V3zYrB081yYKTOU3/0fc/JCT16Ss9/f8fX0SbGgfrEqGeeYVuPWA==
   dependencies:
-    inferno "7.4.6"
+    inferno "7.4.8"
 
 inferno-shared@7.4.6:
   version "7.4.6"
   resolved "https://registry.yarnpkg.com/inferno-shared/-/inferno-shared-7.4.6.tgz#49433c46614733104ccda8d978234148d0eea758"
   integrity sha512-CRC9ST4WUiRnClKsnMy0h60BzwErYdAGHyRxHeF5VxfqDKZOy0SDb3Jxn+EugQljXW1tJwzHUvWMI7i0tjDtww==
 
+inferno-shared@7.4.8:
+  version "7.4.8"
+  resolved "https://registry.yarnpkg.com/inferno-shared/-/inferno-shared-7.4.8.tgz#2b554a36683b770339008749096d9704846dd337"
+  integrity sha512-I0jnqsBcQvGJ7hqZF3vEzspQ80evViCe8joP3snWkPXPElk9WBVGLBHX5tHwuFuXv6wW4zeVVA4kBRAs47B+NQ==
+
 inferno-vnode-flags@7.4.6:
   version "7.4.6"
   resolved "https://registry.yarnpkg.com/inferno-vnode-flags/-/inferno-vnode-flags-7.4.6.tgz#c183843b7a3a9e9c48e9c6cc2b92960d522bf088"
   integrity sha512-VZlAjY57hOYel1cGI7HYfir+K9X8NAlIrkOfX/WyEVUs8oFwS8W197r1wZSMzKeGATEqQ+zu4zGnZhjrM5g3Ng==
+
+inferno-vnode-flags@7.4.8:
+  version "7.4.8"
+  resolved "https://registry.yarnpkg.com/inferno-vnode-flags/-/inferno-vnode-flags-7.4.8.tgz#275d70e3c8b2b3f4eb56041cc9b8c832ce1fb26d"
+  integrity sha512-wOUeO7Aho8VH+s2V2K/53KwS0DtQFgT7TdzPE/s6P26ZIxQj+vt7oTJqzXn+xjRIjnfkTLm2eQ8qfInOWCu1rw==
 
 inferno@7.4.6:
   version "7.4.6"
@@ -4558,6 +4568,15 @@ inferno@7.4.6:
     inferno-shared "7.4.6"
     inferno-vnode-flags "7.4.6"
     opencollective-postinstall "^2.0.2"
+
+inferno@7.4.8:
+  version "7.4.8"
+  resolved "https://registry.yarnpkg.com/inferno/-/inferno-7.4.8.tgz#0d5504753e79903b0e4bbeff76fc11fd0b9ffe92"
+  integrity sha512-4XwGe5Kd0QkSaM/jqAQWjM0GfDLv+KujcWm5zbIow80G1tOEnZurQqhyF8u6m/HX3SnrCi+njlVdtPKDJXQiDw==
+  dependencies:
+    inferno-shared "7.4.8"
+    inferno-vnode-flags "7.4.8"
+    opencollective-postinstall "^2.0.3"
 
 inflight@^1.0.4:
   version "1.0.6"
@@ -6199,6 +6218,11 @@ opencollective-postinstall@^2.0.2:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/opencollective-postinstall/-/opencollective-postinstall-2.0.2.tgz#5657f1bede69b6e33a45939b061eb53d3c6c3a89"
   integrity sha512-pVOEP16TrAO2/fjej1IdOyupJY8KDUM1CvsaScRbw6oddvpQoOfGk4ywha0HKKVAD6RkW4x6Q+tNBwhf3Bgpuw==
+
+opencollective-postinstall@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/opencollective-postinstall/-/opencollective-postinstall-2.0.3.tgz#7a0fff978f6dbfa4d006238fbac98ed4198c3259"
+  integrity sha512-8AV/sCtuzUeTo8gQK5qDZzARrulB3egtLzFgteqB2tcT4Mw7B8Kt7JcDHmltjz6FOAHsvTevk70gZEbhM4ZS9Q==
 
 opn@^5.5.0:
   version "5.5.0"
