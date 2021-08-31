@@ -1,7 +1,7 @@
 defaults: &defaults
   working_directory: /tmp/marksy
   docker:
-    - image: circleci/node:10
+    - image: circleci/node:12
 
 version: 2
 
