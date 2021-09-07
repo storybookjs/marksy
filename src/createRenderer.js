@@ -58,7 +58,7 @@ export default function createRenderer(tracker, options, overrides = {}) {
 
   function populateInlineContent(content = '') {
     const contentArray = content.split(/(\{\{.*?\}\})/);
-    const extractedElements = contentArray.map(text => {
+    const extractedElements = contentArray.map((text) => {
       const elementIdMatch = text.match(/\{\{(.*)\}\}/);
       if (elementIdMatch) {
         tracker.tree.splice(tracker.tree.indexOf(tracker.elements[elementIdMatch[1]]), 1);
@@ -107,7 +107,7 @@ export default function createRenderer(tracker, options, overrides = {}) {
 
   renderer.html =
     overrides.html ||
-    (html => {
+    ((html) => {
       // eslint-disable-next-line no-plusplus, no-param-reassign
       const elementId = tracker.nextElementId++;
 
@@ -121,9 +121,9 @@ export default function createRenderer(tracker, options, overrides = {}) {
       );
     });
 
-  renderer.paragraph = overrides.paragraph || (text => addElement('p', null, text));
+  renderer.paragraph = overrides.paragraph || ((text) => addElement('p', null, text));
 
-  renderer.blockquote = overrides.blockquote || (text => addElement('blockquote', null, text));
+  renderer.blockquote = overrides.blockquote || ((text) => addElement('blockquote', null, text));
 
   renderer.link = overrides.link || ((href, title, text) => addElement('a', { href, title }, text));
 
@@ -131,11 +131,11 @@ export default function createRenderer(tracker, options, overrides = {}) {
 
   renderer.hr = overrides.hr || (() => addElement('hr'));
 
-  renderer.strong = overrides.strong || (text => addElement('strong', null, text));
+  renderer.strong = overrides.strong || ((text) => addElement('strong', null, text));
 
-  renderer.del = overrides.del || (text => addElement('del', null, text));
+  renderer.del = overrides.del || ((text) => addElement('del', null, text));
 
-  renderer.em = overrides.em || (text => addElement('em', null, text));
+  renderer.em = overrides.em || ((text) => addElement('em', null, text));
 
   renderer.heading =
     overrides.heading ||
@@ -177,7 +177,7 @@ export default function createRenderer(tracker, options, overrides = {}) {
   renderer.list =
     overrides.list || ((body, ordered) => addElement(ordered ? 'ol' : 'ul', null, body));
 
-  renderer.listitem = overrides.listitem || (text => addElement('li', null, text));
+  renderer.listitem = overrides.listitem || ((text) => addElement('li', null, text));
 
   renderer.table =
     overrides.table ||
@@ -187,11 +187,11 @@ export default function createRenderer(tracker, options, overrides = {}) {
         addElement('tbody', null, body),
       ]));
 
-  renderer.thead = overrides.thead || (content => addElement('thead', null, content));
+  renderer.thead = overrides.thead || ((content) => addElement('thead', null, content));
 
-  renderer.tbody = overrides.tbody || (content => addElement('tbody', null, content));
+  renderer.tbody = overrides.tbody || ((content) => addElement('tbody', null, content));
 
-  renderer.tablerow = overrides.tablerow || (content => addElement('tr', null, content));
+  renderer.tablerow = overrides.tablerow || ((content) => addElement('tr', null, content));
 
   renderer.tablecell =
     overrides.tablecell ||
@@ -200,7 +200,7 @@ export default function createRenderer(tracker, options, overrides = {}) {
       return addElement(tag, { className: flag.align ? `text-${flag.align}` : undefined }, content);
     });
 
-  renderer.codespan = overrides.codespan || (text => addElement('code', null, text, 'codespan'));
+  renderer.codespan = overrides.codespan || ((text) => addElement('code', null, text, 'codespan'));
 
   renderer.image =
     overrides.image || ((href, title, text) => addElement('img', { src: href, alt: text }));

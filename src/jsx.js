@@ -22,7 +22,7 @@ export function marksy(options = {}) {
         const { code } = transform(html, {
           presets: ['react'],
         });
-        const components = Object.keys(options.components).map(key => options.components[key]);
+        const components = Object.keys(options.components).map((key) => options.components[key]);
         const mockedReact = {
           createElement(tag, props = {}, ...children) {
             const componentProps =
@@ -83,6 +83,7 @@ export function marksy(options = {}) {
   };
 }
 
-export default function(options) {
+// eslint-disable-next-line func-names
+export default function (options) {
   return marksy(options);
 }

@@ -34,7 +34,7 @@ module.exports = {
     'no-debugger': process.env.NODE_ENV === 'production' ? error : ignore,
     quotes: [warn, 'single', { avoidEscape: true }],
     'class-methods-use-this': ignore,
-    'arrow-parens': [warn, 'as-needed'],
+    'arrow-parens': 'off',
     'space-before-function-paren': ignore,
     'import/no-unresolved': error,
     'import/extensions': [
