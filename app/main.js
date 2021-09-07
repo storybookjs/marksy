@@ -2,7 +2,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 
 import 'highlight.js/styles/github.css';
-import hljs from 'highlight.js/lib/highlight';
+import hljs from 'highlight.js/lib';
 import hljsJavascript from 'highlight.js/lib/languages/javascript';
 import React from 'react';
 import { render } from 'react-dom';
@@ -95,7 +95,7 @@ class App extends React.Component {
             outline: 'none',
             padding: '10px',
           }}
-          onChange={event => this.onTextareaChange(event)}
+          onChange={(event) => this.onTextareaChange(event)}
           value={this.state.value}
         />
       </div>
