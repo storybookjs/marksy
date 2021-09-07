@@ -9,16 +9,16 @@ import { createElement as infernoCreateElement } from 'inferno-create-element';
 import { render } from '@testing-library/react';
 
 import Prism from 'prismjs';
-import hljs from 'highlight.js/lib/highlight';
-import hljsJs from 'highlight.js/lib/languages/javascript';
-import hljsXml from 'highlight.js/lib/languages/xml';
+import hljs from 'highlight.js/lib';
+import javascript from 'highlight.js/lib/languages/javascript';
+import xml from 'highlight.js/lib/languages/xml';
 
 // eslint-disable-next-line
 import marksy from './';
 import marksyComponents from './jsx';
 
-hljs.registerLanguage('javascript', hljsJs);
-hljs.registerLanguage('xml', hljsXml);
+hljs.registerLanguage('javascript', javascript);
+hljs.registerLanguage('xml', xml);
 
 // eslint-disable-next-line
 class TestComponent extends Component {
