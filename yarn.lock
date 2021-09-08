@@ -4666,40 +4666,21 @@ inferno-create-element@^7.1.12:
     inferno "7.4.9"
 
 inferno-server@^7.1.12:
-  version "7.4.8"
-  resolved "https://registry.yarnpkg.com/inferno-server/-/inferno-server-7.4.8.tgz#31ad7c2092aba16e4234a102cc4ac3f346d17ee4"
-  integrity sha512-EdNWdY1HOpIgb5Vsj4ANhOINKvkmXGFAz3V3zYrB081yYKTOU3/0fc/JCT16Ss9/f8fX0SbGgfrEqGeeYVuPWA==
+  version "7.4.9"
+  resolved "https://registry.yarnpkg.com/inferno-server/-/inferno-server-7.4.9.tgz#05e73aa14512f492d9eec30698c55f30c39493bb"
+  integrity sha512-x9kE+Tk34QfRM1OL4+KSWY86t7dLVanRhDWikBs3jsHuFU+bQ9VGuEp4cf4wEBnv0DbPQiH+/XY5aoaQ6S8zFQ==
   dependencies:
-    inferno "7.4.8"
-
-inferno-shared@7.4.8:
-  version "7.4.8"
-  resolved "https://registry.yarnpkg.com/inferno-shared/-/inferno-shared-7.4.8.tgz#2b554a36683b770339008749096d9704846dd337"
-  integrity sha512-I0jnqsBcQvGJ7hqZF3vEzspQ80evViCe8joP3snWkPXPElk9WBVGLBHX5tHwuFuXv6wW4zeVVA4kBRAs47B+NQ==
+    inferno "7.4.9"
 
 inferno-shared@7.4.9:
   version "7.4.9"
   resolved "https://registry.yarnpkg.com/inferno-shared/-/inferno-shared-7.4.9.tgz#f3cc5e85adadd7471a5e1c72da7df93a0bb98340"
   integrity sha512-WNBz7OJ1DiVN+NeHgflwBHqvD589B9xMPkFGTj6mNs1cQCxYIZtslp5cqpkEo5TnA8O3FgEF00LMaLfc/i8fyw==
 
-inferno-vnode-flags@7.4.8:
-  version "7.4.8"
-  resolved "https://registry.yarnpkg.com/inferno-vnode-flags/-/inferno-vnode-flags-7.4.8.tgz#275d70e3c8b2b3f4eb56041cc9b8c832ce1fb26d"
-  integrity sha512-wOUeO7Aho8VH+s2V2K/53KwS0DtQFgT7TdzPE/s6P26ZIxQj+vt7oTJqzXn+xjRIjnfkTLm2eQ8qfInOWCu1rw==
-
 inferno-vnode-flags@7.4.9:
   version "7.4.9"
   resolved "https://registry.yarnpkg.com/inferno-vnode-flags/-/inferno-vnode-flags-7.4.9.tgz#26fe1a40f00de2ebc05b9e7543c8577c674c074b"
   integrity sha512-pIGvc1MRSRrvjAOpARRz9OCyGrODKYfhw02ctWTIt3Jtn8dyqsjV0ZIaXOQEjpCi5ii7yfE5xwI+ZRI/g3pviQ==
-
-inferno@7.4.8:
-  version "7.4.8"
-  resolved "https://registry.yarnpkg.com/inferno/-/inferno-7.4.8.tgz#0d5504753e79903b0e4bbeff76fc11fd0b9ffe92"
-  integrity sha512-4XwGe5Kd0QkSaM/jqAQWjM0GfDLv+KujcWm5zbIow80G1tOEnZurQqhyF8u6m/HX3SnrCi+njlVdtPKDJXQiDw==
-  dependencies:
-    inferno-shared "7.4.8"
-    inferno-vnode-flags "7.4.8"
-    opencollective-postinstall "^2.0.3"
 
 inferno@7.4.9:
   version "7.4.9"
