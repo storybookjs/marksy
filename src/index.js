@@ -17,7 +17,7 @@ export function marksy(options = {}) {
           // eslint-disable-next-line no-plusplus
           const elementId = tracker.nextElementId++;
 
-          const components = Object.keys(options.components).map(key => options.components[key]);
+          const components = Object.keys(options.components).map((key) => options.components[key]);
           const mockedReact = (tag, props = {}, ...children) => {
             const componentProps =
               components.indexOf(tag) >= 0
@@ -63,6 +63,7 @@ export function marksy(options = {}) {
   };
 }
 
-export default function(options) {
+// eslint-disable-next-line func-names
+export default function (options) {
   return marksy(options);
 }
