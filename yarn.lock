@@ -4511,9 +4511,9 @@ he@^1.2.0:
   integrity sha512-F/1DnUGPopORZi0ni+CvrCgHQ5FyEAHRLSApuYWMmrbSwoN2Mn/7k+Gl38gJnR7yyDZk6WLXwiGod1JOWNDKGw==
 
 highlight.js@^11.0.0:
-  version "11.0.0"
-  resolved "https://registry.yarnpkg.com/highlight.js/-/highlight.js-11.0.0.tgz#e22ac9ca45edc4f87a2187685d591a108ceb8449"
-  integrity sha512-ByaTMfsSuoqerTwemOgpIhfULEIaK52JJYhky/sK7/Yqc0+t7Uh5DHay9vIC94YXSupnQ1Vqfc9VXrYP4eXW3Q==
+  version "11.7.0"
+  resolved "https://registry.yarnpkg.com/highlight.js/-/highlight.js-11.7.0.tgz#3ff0165bc843f8c9bce1fd89e2fda9143d24b11e"
+  integrity sha512-1rRqesRFhMO/PRF+G86evnyJkCgaZFOI+Z6kdj15TA18funfoqJXvgPCLSf0SWq3SRfg1j3HlDs8o4s3EGq1oQ==
 
 hmac-drbg@^1.0.1:
   version "1.0.1"
