@@ -1,4 +1,4 @@
-import marked from 'marked';
+import { marked } from 'marked';
 import createRenderer, { codeRenderer } from './createRenderer';
 
 export function marksy(options = {}) {

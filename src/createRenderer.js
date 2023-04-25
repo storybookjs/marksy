@@ -1,4 +1,4 @@
-import marked from 'marked';
+import { Renderer } from 'marked';
 import he from 'he';
 
 export function codeRenderer(tracker, options) {
@@ -42,7 +42,7 @@ export function codeRenderer(tracker, options) {
 }
 
 export default function createRenderer(tracker, options, overrides = {}) {
-  const renderer = new marked.Renderer();
+  const renderer = new Renderer();
 
   function getTocPosition(toc, level) {
     let currentLevel = toc.children;
