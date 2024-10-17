@@ -72,6 +72,7 @@ exports[`should be able to combine in compilation 1`] = `
   </ul>
   <p>
     -bar
+  
   </p>
 </div>
 `;
@@ -309,7 +310,7 @@ exports[`should be able to compile self-closing tag 1`] = `
       <br />
     </div>
     
-
+  
 
   </div>
   <div>
@@ -325,7 +326,7 @@ exports[`should be able to compile self-closing tag 1`] = `
       type="text"
     />
     
-
+  
   </div>
 </div>
 `;

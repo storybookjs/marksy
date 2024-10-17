@@ -1,4 +1,4 @@
-import marked from 'marked';
+import { marked } from 'marked';
 import { transform } from '@babel/standalone';
 import createRenderer, { codeRenderer } from './createRenderer';
 
